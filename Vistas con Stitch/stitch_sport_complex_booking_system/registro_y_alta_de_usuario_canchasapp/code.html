@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Registrarse | CanchasApp - Gestión Deportiva</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#198754",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#d9dadb",
+            "on-surface": "#191c1d",
+            "on-primary-container": "#ffffff",
+            "surface-tint": "#006d41",
+            "inverse-on-surface": "#f0f1f2",
+            "primary-fixed": "#93f7ba",
+            "surface-bright": "#f8f9fa",
+            "on-surface-variant": "#3e4941",
+            "outline": "#6e7a70",
+            "secondary-fixed": "#b0f1c7",
+            "on-primary-fixed": "#002110",
+            "tertiary": "#0056cc",
+            "inverse-surface": "#2e3132",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "inverse-primary": "#77da9f",
+            "surface-variant": "#e1e3e4",
+            "secondary": "#2d6a48",
+            "secondary-container": "#b0f1c7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0a6dfc",
+            "on-tertiary-container": "#ffffff",
+            "surface-container-highest": "#e1e3e4",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "primary-fixed-dim": "#77da9f",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-fixed-variant": "#0f5132",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#33704e",
+            "primary": "#006c40",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container-low": "#f3f4f5",
+            "on-tertiary-fixed-variant": "#00419e",
+            "tertiary-fixed": "#dae2ff",
+            "error": "#ba1a1a",
+            "on-background": "#191c1d",
+            "on-tertiary-fixed": "#001946",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#002111",
+            "background": "#f8f9fa",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xxl": "3rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "slot-time": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-hero": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-full flex flex-col antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-container-low shadow-sm dark:shadow-none border-b border-outline-variant dark:border-outline sticky top-0 z-40">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<!-- Brand & Main Links -->
+<div class="flex items-center gap-space-xl">
+<a class="flex items-center gap-space-xs text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed focus:outline-none focus:ring-2 focus:ring-primary-container rounded" href="#">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-headline-sm" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<!-- Navigation Links Desktop -->
+<nav aria-label="Navegación principal" class="hidden md:flex items-center space-x-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 py-1" href="#">Inicio</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 py-1" href="#">Canchas</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 py-1" href="#">Mis Reservas</a>
+</nav>
+</div>
+<!-- Trailing Action Buttons -->
+<div class="flex items-center gap-space-sm">
+<a class="text-on-surface-variant hover:text-primary text-label-md font-label-md px-space-md py-space-xs transition-colors duration-150" href="#">Iniciar Sesión</a>
+<a class="bg-primary-container text-on-primary-container hover:opacity-95 text-label-md font-label-md px-space-md py-1.5 rounded transition-all duration-150 shadow-sm inline-flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-label-md" data-icon="person_add">person_add</span>
+<span>Registrarse</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow py-space-xl px-gutter-sm md:px-gutter">
+<div class="max-w-4xl mx-auto">
+<!-- Breadcrumb Navigation -->
+<nav aria-label="Ruta de exploración" class="flex items-center text-label-sm font-label-sm text-outline mb-space-md">
+<a class="hover:text-primary transition-colors" href="#">Inicio</a>
+<span class="material-symbols-outlined mx-1 text-sm text-outline-variant" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Seguridad &amp; Cuentas</a>
+<span class="material-symbols-outlined mx-1 text-sm text-outline-variant" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-semibold">Alta de Usuario</span>
+</nav>
+<!-- Main Bootstrap Card Container -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant shadow-sm overflow-hidden">
+<!-- Card Header Banner -->
+<div class="p-space-lg md:p-space-xl border-b border-outline-variant bg-gradient-to-r from-surface-container-low to-surface-container-lowest">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div>
+<div class="inline-flex items-center gap-space-xs text-primary text-label-sm font-label-sm uppercase bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full mb-space-xs">
+<span class="material-symbols-outlined text-xs" data-icon="verified_user">verified_user</span>
+<span>ASP.NET Core Identity &amp; Seguridad</span>
+</div>
+<h1 class="text-headline-md font-headline-md text-on-surface text-balance">
+                Crear Nueva Cuenta / Alta de Usuario
+              </h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-1 max-w-2xl">
+                Completá los datos para registrarte como cliente o asignar un nuevo usuario del complejo.
+              </p>
+</div>
+<div class="hidden sm:flex items-center justify-center w-12 h-12 rounded-full bg-secondary-container text-secondary shrink-0">
+<span class="material-symbols-outlined text-headline-sm" data-icon="how_to_reg">how_to_reg</span>
+</div>
+</div>
+</div>
+<!-- Form Content -->
+<form class="p-space-lg md:p-space-xl space-y-space-xl" id="registerForm" novalidate="">
+<!-- SECTION 1: Datos Personales -->
+<section aria-labelledby="section-personal">
+<div class="flex items-center gap-space-xs pb-space-xs border-b border-outline-variant mb-space-md">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="badge">badge</span>
+<h2 class="text-title-md font-title-md text-on-surface" id="section-personal">1. Datos Personales</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Nombre Completo -->
+<div class="md:col-span-12">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="fullName">
+                  Nombre completo <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="person">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline transition-colors" id="fullName" name="fullName" placeholder="Ej. Martín Alejandro Gómez" required="" type="text"/>
+</div>
+<p class="text-label-sm font-label-sm text-outline mt-1">Tal como figura en el documento oficial de identidad.</p>
+</div>
+<!-- DNI / Identificación Fiscal -->
+<div class="md:col-span-6">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="govId">
+                  DNI / Identificación fiscal <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="pin">pin</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline transition-colors" id="govId" name="govId" placeholder="Ej. 38.450.912" required="" type="text"/>
+</div>
+</div>
+<!-- Teléfono / WhatsApp -->
+<div class="md:col-span-6">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="phone">
+                  Teléfono / WhatsApp <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="phone_iphone">phone_iphone</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline transition-colors" id="phone" name="phone" placeholder="Ej. +54 9 11 5421-9988" required="" type="tel"/>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Datos de Cuenta -->
+<section aria-labelledby="section-account">
+<div class="flex items-center gap-space-xs pb-space-xs border-b border-outline-variant mb-space-md">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="lock">lock</span>
+<h2 class="text-title-md font-title-md text-on-surface" id="section-account">2. Datos de Cuenta y Credenciales</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md">
+<!-- Correo Electrónico -->
+<div class="md:col-span-12">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="email">
+                  Correo electrónico institucional o personal <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline transition-colors" id="email" name="email" placeholder="usuario@complejocanchas.com" required="" type="email"/>
+</div>
+<span class="text-label-sm font-label-sm text-outline mt-1 block">Será el nombre de usuario único en el sistema de reservas y control de accesos.</span>
+</div>
+<!-- Contraseña -->
+<div class="md:col-span-6">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="password">
+                  Contraseña <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="key">key</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface transition-colors" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+<button aria-label="Mostrar contraseña" class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface transition-colors" onclick="togglePassVisibility('password', this)" type="button">
+<span class="material-symbols-outlined text-title-md" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Confirmar Contraseña -->
+<div class="md:col-span-6">
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="confirmPassword">
+                  Confirmar Contraseña <span class="text-error">*</span>
+</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-title-md" data-icon="password">password</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-2 text-body-md font-body-md rounded border border-outline-variant bg-surface-container-lowest focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface transition-colors" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required="" type="password"/>
+<button aria-label="Mostrar confirmación" class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface transition-colors" onclick="togglePassVisibility('confirmPassword', this)" type="button">
+<span class="material-symbols-outlined text-title-md" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<!-- Requisitos de ASP.NET Core Identity -->
+<div class="md:col-span-12">
+<div class="bg-surface-container-low rounded p-space-sm border border-outline-variant/60">
+<span class="text-label-sm font-label-sm text-on-surface-variant font-semibold flex items-center gap-1 mb-1">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="info">info</span>
+                    Requerimientos de seguridad (Identity):
+                  </span>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-label-sm font-label-sm text-on-surface-variant">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span>Mínimo 6 caracteres</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span>Al menos una mayúscula (A-Z)</span>
+</div>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span>Al menos un número (0-9)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Perfil y Membresía / Rol en el Sistema -->
+<section aria-labelledby="section-role">
+<div class="flex items-center gap-space-xs pb-space-xs border-b border-outline-variant mb-space-md">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="admin_panel_settings">admin_panel_settings</span>
+<div>
+<h2 class="text-title-md font-title-md text-on-surface" id="section-role">3. Perfil y Membresía / Rol en el Sistema</h2>
+<p class="text-label-sm font-label-sm text-outline">Seleccioná el perfil correspondiente para asignar permisos de acceso e interacción.</p>
+</div>
+</div>
+<!-- Radio Cards Grid -->
+<div aria-labelledby="section-role" class="grid grid-cols-1 md:grid-cols-2 gap-space-md" role="radiogroup">
+<!-- Option 1: Cliente / Jugador habitual (Default) -->
+<label class="relative flex p-space-md rounded-lg border-2 border-primary-container bg-surface-container-lowest cursor-pointer shadow-sm transition-all duration-150 hover:bg-surface-container-low group">
+<input checked="" class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline" name="systemRole" type="radio" value="player"/>
+<div class="ml-space-sm flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-md font-title-md text-on-surface group-hover:text-primary transition-colors">Cliente / Jugador habitual</span>
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="sports_tennis">sports_tennis</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                    Acceso a reservas de canchas y beneficios estándar. Consulta de disponibilidad y alquiler online.
+                  </p>
+<span class="mt-2 text-label-sm font-label-sm text-secondary font-semibold">Tarifa estándar</span>
+</div>
+</label>
+<!-- Option 2: Socio del Club -->
+<label class="relative flex p-space-md rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer transition-all duration-150 hover:border-primary hover:bg-surface-container-low group">
+<input class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline" name="systemRole" type="radio" value="member"/>
+<div class="ml-space-sm flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-md font-title-md text-on-surface group-hover:text-primary transition-colors">Socio del Club</span>
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="card_membership">card_membership</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                    10% de descuento en todos los turnos, prioridad de reserva anticipada y cuota social vinculada.
+                  </p>
+<span class="mt-2 text-label-sm font-label-sm text-primary font-semibold">Beneficio de Socio activo</span>
+</div>
+</label>
+<!-- Option 3: Empleado / Recepción -->
+<label class="relative flex p-space-md rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer transition-all duration-150 hover:border-primary hover:bg-surface-container-low group">
+<input class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline" name="systemRole" type="radio" value="reception"/>
+<div class="ml-space-sm flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-md font-title-md text-on-surface group-hover:text-primary transition-colors">Empleado / Recepción</span>
+<span class="material-symbols-outlined text-tertiary text-headline-sm" data-icon="support_agent">support_agent</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                    Gestión de turnos de mostrador, control de cobros de caja diaria y asignación directa de canchas.
+                  </p>
+<span class="mt-2 text-label-sm font-label-sm text-tertiary font-semibold">Operaciones del Complejo</span>
+</div>
+</label>
+<!-- Option 4: Administrador / Dueño -->
+<label class="relative flex p-space-md rounded-lg border border-outline-variant bg-surface-container-lowest cursor-pointer transition-all duration-150 hover:border-primary hover:bg-surface-container-low group">
+<input class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline" name="systemRole" type="radio" value="admin"/>
+<div class="ml-space-sm flex flex-col flex-1">
+<div class="flex items-center justify-between">
+<span class="text-title-md font-title-md text-on-surface group-hover:text-primary transition-colors">Administrador / Dueño</span>
+<span class="material-symbols-outlined text-secondary text-headline-sm" data-icon="shield">shield</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-1">
+                    Control total del complejo: tarifas, apertura/cierre de predios, reportes contables y gestión de usuarios.
+                  </p>
+<span class="mt-2 text-label-sm font-label-sm text-on-surface-variant font-semibold">Acceso Master Complejo</span>
+</div>
+</label>
+</div>
+</section>
+<!-- SECTION 4: Términos y Condiciones -->
+<section class="bg-surface-container-low rounded-lg p-space-md border border-outline-variant">
+<div class="flex items-start">
+<div class="flex items-center h-5">
+<input class="h-4 w-4 text-primary-container focus:ring-primary-container border-outline rounded" id="terms" name="terms" required="" type="checkbox"/>
+</div>
+<div class="ml-space-sm text-body-sm font-body-sm text-on-surface-variant">
+<label class="cursor-pointer select-none" for="terms">
+                  Acepto el <a class="text-primary font-semibold hover:underline" href="#">Reglamento Interno Deportivo</a> y las condiciones de convivencia del complejo, incluyendo las políticas de cancelación y pago en término.
+                </label>
+</div>
+</div>
+</section>
+<!-- Action Buttons & Feedback -->
+<div class="pt-space-sm flex flex-col gap-space-md">
+<button class="w-full py-3 px-space-xl bg-primary-container hover:bg-primary text-on-primary-container text-title-md font-title-md rounded-lg shadow-sm hover:shadow transition-all duration-150 flex items-center justify-center gap-space-xs font-semibold" type="submit">
+<span class="material-symbols-outlined text-headline-sm" data-icon="how_to_reg">how_to_reg</span>
+<span>Crear Cuenta y Registrar</span>
+</button>
+<!-- Redirección Iniciar Sesión -->
+<div class="text-center py-2 border-t border-outline-variant">
+<p class="text-body-md font-body-md text-on-surface-variant">
+                ¿Ya tenés cuenta? 
+                <a class="text-primary font-semibold hover:underline ml-1 inline-flex items-center gap-0.5" href="#">
+<span>Iniciar sesión</span>
+<span class="material-symbols-outlined text-body-md" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</p>
+</div>
+</div>
+</form>
+</div>
+<!-- Quick Trust Indicators / Operational Badge -->
+<div class="mt-space-lg grid grid-cols-1 sm:grid-cols-3 gap-space-md text-center">
+<div class="bg-surface-container-lowest p-space-md rounded border border-outline-variant flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-primary" data-icon="lock_clock">lock_clock</span>
+<span class="text-label-sm font-label-sm text-on-surface">Cifrado SSL de 256 bits</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded border border-outline-variant flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-primary" data-icon="bolt">bolt</span>
+<span class="text-label-sm font-label-sm text-on-surface">Confirmación Inmediata</span>
+</div>
+<div class="bg-surface-container-lowest p-space-md rounded border border-outline-variant flex items-center justify-center gap-space-xs">
+<span class="material-symbols-outlined text-primary" data-icon="verified">verified</span>
+<span class="text-label-sm font-label-sm text-on-surface">Cumple Normas Deportivas</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline mt-space-xxl">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col items-center md:items-start text-center md:text-left">
+<div class="flex items-center gap-space-xs mb-1">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed text-title-md" data-icon="sports_soccer">sports_soccer</span>
+<span class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed">CanchasApp</span>
+</div>
+<p class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links List -->
+<nav aria-label="Enlaces institucionales" class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Términos de Servicio</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Política de Privacidad</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Reglamento Interno</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Contacto y Ubicación</a>
+</nav>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+    function togglePassVisibility(inputId, btn) {
+      const input = document.getElementById(inputId);
+      const icon = btn.querySelector('.material-symbols-outlined');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    // Interactive card borders on radio select
+    const roleRadios = document.querySelectorAll('input[name="systemRole"]');
+    roleRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.querySelectorAll('label:has(input[name="systemRole"])').forEach(label => {
+          label.classList.remove('border-2', 'border-primary-container');
+          label.classList.add('border', 'border-outline-variant');
+        });
+        const activeLabel = radio.closest('label');
+        if (activeLabel) {
+          activeLabel.classList.remove('border', 'border-outline-variant');
+          activeLabel.classList.add('border-2', 'border-primary-container');
+        }
+      });
+    });
+  </script>
+</body></html>

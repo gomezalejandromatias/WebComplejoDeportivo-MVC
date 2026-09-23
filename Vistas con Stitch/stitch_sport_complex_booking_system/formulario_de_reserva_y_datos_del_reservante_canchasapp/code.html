@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CanchasApp - Confirmar Reserva y Carga de Datos</title>
+<!-- Inter Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Config -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-fixed": "#b0f1c7",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "surface-container-highest": "#e1e3e4",
+            "primary-container": "#198754",
+            "on-secondary-container": "#33704e",
+            "on-primary-fixed": "#002110",
+            "outline-variant": "#bdcabe",
+            "tertiary-container": "#0a6dfc",
+            "on-primary-fixed-variant": "#00522f",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed": "#001946",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#93f7ba",
+            "on-primary": "#ffffff",
+            "outline": "#6e7a70",
+            "secondary-container": "#b0f1c7",
+            "on-surface-variant": "#3e4941",
+            "background": "#f8f9fa",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#95d4ac",
+            "tertiary-fixed": "#dae2ff",
+            "surface-tint": "#006d41",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#002111",
+            "surface-variant": "#e1e3e4",
+            "on-tertiary-fixed-variant": "#00419e",
+            "inverse-on-surface": "#f0f1f2",
+            "on-secondary-fixed-variant": "#0f5132",
+            "inverse-primary": "#77da9f",
+            "surface-container-high": "#e7e8e9",
+            "secondary": "#2d6a48",
+            "primary": "#006c40",
+            "on-surface": "#191c1d",
+            "on-background": "#191c1d",
+            "error": "#ba1a1a",
+            "tertiary": "#0056cc",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#77da9f",
+            "inverse-surface": "#2e3132",
+            "surface-dim": "#d9dadb",
+            "on-tertiary-container": "#ffffff",
+            "on-error": "#ffffff",
+            "surface-container-low": "#f3f4f5",
+            "surface": "#f8f9fa",
+            "surface-bright": "#f8f9fa",
+            "on-primary-container": "#ffffff",
+            "surface-container": "#edeeef"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "margin": "1.5rem",
+            "space-xl": "2rem",
+            "space-md": "1rem",
+            "space-xxl": "3rem",
+            "gutter-sm": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-sm": "0.5rem",
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-lg-mobile": ["Inter"],
+            "display-hero": ["Inter"],
+            "headline-sm": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "slot-time": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          "fontSize": {
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-full flex flex-col antialiased">
+<!-- SHARED COMPONENT: TopNavBar -->
+<header class="bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none sticky top-0 z-40">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<!-- Brand Logo / Product Name -->
+<a class="flex items-center gap-2 text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed decoration-0" href="#">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<!-- Navigation Links (Active mapping: 'Canchas' is active as part of the booking funnel) -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 px-2 py-1 rounded" href="#">
+          Inicio
+        </a>
+<a class="text-primary dark:text-primary-fixed font-title-md text-title-md border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">
+          Canchas
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 px-2 py-1 rounded" href="#">
+          Mis Reservas
+        </a>
+</nav>
+<!-- Trailing Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-block text-label-md font-label-md text-on-surface-variant hover:text-primary px-3 py-1.5 rounded transition-colors duration-150" href="#">
+          Iniciar Sesión
+        </a>
+<a class="bg-primary-container hover:bg-secondary text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg shadow-sm hover:shadow transition-all duration-150 flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-base" data-icon="person_add">person_add</span>
+<span>Registrarse</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS CONTAINER -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-margin-mobile md:px-gutter py-space-lg">
+<!-- 2. BREADCRUMBS (Bootstrap 5 Standard) -->
+<nav aria-label="breadcrumb" class="mb-4">
+<ol class="flex items-center gap-2 text-body-sm font-body-sm text-on-surface-variant">
+<li>
+<a class="text-primary hover:underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="home">home</span>
+<span>Inicio</span>
+</a>
+</li>
+<li class="flex items-center text-outline-variant">/</li>
+<li>
+<a class="text-primary hover:underline" href="#">Canchas</a>
+</li>
+<li class="flex items-center text-outline-variant">/</li>
+<li>
+<a class="text-primary hover:underline" href="#">Cancha 1: La Bombonerita</a>
+</li>
+<li class="flex items-center text-outline-variant">/</li>
+<li aria-current="page" class="text-on-surface font-semibold">Confirmar Datos y Reserva</li>
+</ol>
+</nav>
+<!-- 3. STEPPER / STEP PROGRESS INDICATOR -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md mb-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Paso 1: Completado -->
+<div class="flex items-center gap-3 p-2 bg-secondary-fixed/30 rounded-lg border border-secondary-fixed-dim">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm shrink-0">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+</div>
+<div class="min-w-0">
+<span class="block text-label-sm font-label-sm uppercase tracking-wider text-secondary">Paso 1 · Completado</span>
+<span class="block text-body-sm font-title-md font-semibold text-on-surface truncate">Selección de Cancha y Turno</span>
+</div>
+</div>
+<!-- Paso 2: Activo (Actual) -->
+<div class="flex items-center gap-3 p-2 bg-primary-container/10 rounded-lg border-2 border-primary-container">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-sm shrink-0 shadow-sm">
+<span>2</span>
+</div>
+<div class="min-w-0">
+<span class="block text-label-sm font-label-sm uppercase tracking-wider text-primary font-bold">Paso 2 · En Proceso</span>
+<span class="block text-body-sm font-title-md font-bold text-on-surface truncate">Datos del Reservante y Pago</span>
+</div>
+</div>
+<!-- Paso 3: Próximo -->
+<div class="flex items-center gap-3 p-2 rounded-lg opacity-70 bg-surface-container-low border border-outline-variant">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center font-bold text-sm shrink-0">
+<span>3</span>
+</div>
+<div class="min-w-0">
+<span class="block text-label-sm font-label-sm uppercase tracking-wider text-outline">Paso 3 · Próximo</span>
+<span class="block text-body-sm font-title-md text-on-surface-variant truncate">Confirmación y Voucher</span>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. LAYOUT 2 COLUMNAS (12-Col Grid: 7 cols Formulario + 5 cols Summary) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg items-start">
+<!-- COLUMNA IZQUIERDA: FORMULARIO RAZOR (col-lg-7) -->
+<div class="lg:col-span-7 space-y-space-lg">
+<form action="/Reservas/Confirmar" class="space-y-space-lg" id="checkoutReservationForm" method="post">
+<!-- SECCIÓN 1: DATOS DEL RESERVANTE -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center gap-2 pb-3 mb-4 border-b border-surface-container-highest">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="badge">badge</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">1. Datos del Reservante</h2>
+</div>
+<!-- Alerta informativa de login -->
+<div class="bg-tertiary-fixed/30 border border-tertiary-fixed-dim text-on-surface-variant rounded-lg p-3 mb-space-md flex items-start gap-2.5">
+<span class="material-symbols-outlined text-tertiary shrink-0 mt-0.5 text-lg" data-icon="info">info</span>
+<p class="text-body-sm font-body-sm">
+<strong>¿Ya tienes cuenta?</strong> Si <a class="text-tertiary underline font-semibold" href="#">iniciaste sesión</a> tus datos se completan automáticamente desde tu perfil universitario.
+              </p>
+</div>
+<!-- Campos de Entrada -->
+<div class="space-y-4">
+<!-- Nombre Completo (asp-for="Nombre") -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="Nombre">
+                  Nombre Completo <span class="text-error">*</span>
+</label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="person">person</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container text-body-md text-on-surface bg-surface-container-lowest" id="Nombre" name="Nombre" placeholder="Ej. Juan Pérez" required="" type="text" value="Ignacio Ariel Pereyra"/>
+</div>
+</div>
+<!-- DNI / Identificación Fiscal (asp-for="Dni") -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="Dni">
+                  DNI / Documento de Identidad <span class="text-error">*</span>
+</label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="credit_card">credit_card</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container text-body-md text-on-surface bg-surface-container-lowest" id="Dni" name="Dni" placeholder="Sin puntos ni espacios" required="" type="text" value="38.942.105"/>
+</div>
+<p class="text-label-sm font-label-sm text-outline mt-1">Requerido por seguro deportivo de la institución.</p>
+</div>
+<!-- Fila 2 columnas: Teléfono móvil & Correo -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="Telefono">
+                    Móvil / WhatsApp <span class="text-error">*</span>
+</label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline font-semibold text-xs">
+                      +54 9
+                    </div>
+<input class="block w-full pl-14 pr-3 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container text-body-md text-on-surface bg-surface-container-lowest" id="Telefono" name="Telefono" placeholder="11 1234-5678" required="" type="tel" value="11 5489-3201"/>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Recibirás el recordatorio por WhatsApp.</span>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="Email">
+                    Correo Electrónico <span class="text-error">*</span>
+</label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container text-body-md text-on-surface bg-surface-container-lowest" id="Email" name="Email" placeholder="nombre@correo.com" required="" type="email" value="ignacio.pereyra@deportes.edu.ar"/>
+</div>
+<span class="text-label-sm font-label-sm text-outline">Enviaremos el voucher PDF para el ingreso.</span>
+</div>
+</div>
+<!-- Checkbox Socio del Club -->
+<div class="pt-2">
+<label class="flex items-start gap-3 p-3 bg-secondary-fixed/20 border border-secondary-fixed-dim rounded-lg cursor-pointer">
+<input checked="" class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline-variant rounded" id="EsSocio" name="EsSocio" type="checkbox"/>
+<div>
+<span class="block text-title-md font-title-md text-on-surface font-semibold">Soy socio del club</span>
+<span class="block text-body-sm font-body-sm text-on-surface-variant">Aplica 10% de descuento automático en la tarifa con DNI registrado y cuota al día.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 2: INFORMACIÓN DEL PARTIDO & NOTAS -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center gap-2 pb-3 mb-4 border-b border-surface-container-highest">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="sports">sports</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">2. Información del Partido &amp; Requerimientos</h2>
+</div>
+<div class="space-y-4">
+<!-- Tipo de Encuentro -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-2">Modalidad del Partido</label>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<label class="border border-primary-container bg-primary-container/10 p-3 rounded-lg flex items-center gap-2 cursor-pointer text-sm font-semibold text-primary">
+<input checked="" class="text-primary-container focus:ring-primary-container" name="TipoPartido" type="radio" value="Amistoso"/>
+<span>Amistoso / Amigos</span>
+</label>
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low p-3 rounded-lg flex items-center gap-2 cursor-pointer text-sm text-on-surface">
+<input class="text-primary-container focus:ring-primary-container" name="TipoPartido" type="radio" value="Torneo"/>
+<span>Torneo / Desafío</span>
+</label>
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low p-3 rounded-lg flex items-center gap-2 cursor-pointer text-sm text-on-surface">
+<input class="text-primary-container focus:ring-primary-container" name="TipoPartido" type="radio" value="Evento"/>
+<span>Cumpleaños / Evento</span>
+</label>
+</div>
+</div>
+<!-- Requerimientos adicionales -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1" for="Notas">
+                  Comentarios o requerimientos especiales (Opcional)
+                </label>
+<textarea class="block w-full p-3 border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container focus:border-primary-container text-body-md text-on-surface bg-surface-container-lowest" id="Notas" name="Notas" placeholder="Ej: Necesitamos 14 pecheras (7 rojas / 7 verdes), pelota N°5 para sintético y apertura de vestuario local." rows="3"></textarea>
+<span class="text-label-sm font-label-sm text-outline">El personal de maestranza preparará los accesorios con 15 minutos de anticipación.</span>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 3: MEDIO DE PAGO & MODALIDAD -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-lg shadow-sm">
+<div class="flex items-center gap-2 pb-3 mb-4 border-b border-surface-container-highest">
+<span class="material-symbols-outlined text-primary-container text-2xl" data-icon="payments">payments</span>
+<h2 class="text-headline-sm font-headline-sm text-on-surface font-semibold">3. Selección de Medio de Pago y Modalidad</h2>
+</div>
+<!-- Selector de Modalidad (Seña vs Total) -->
+<div class="mb-space-md">
+<label class="block text-label-md font-label-md text-on-surface mb-2">Modalidad de Reserva</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Opción 1: Seña 50% -->
+<label class="border-2 border-primary-container bg-secondary-fixed/20 p-4 rounded-lg cursor-pointer flex flex-col justify-between relative shadow-sm">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input checked="" class="text-primary-container focus:ring-primary-container mt-0.5" name="ModalidadPago" type="radio" value="Sena"/>
+<span class="font-title-md text-title-md font-bold text-on-surface">Pagar Seña (50%)</span>
+</div>
+<span class="bg-primary-container text-on-primary text-label-sm font-label-sm px-2 py-0.5 rounded-full">Recomendado</span>
+</div>
+<div class="mt-3">
+<div class="text-headline-sm font-headline-sm font-extrabold text-primary">$6.750 ARS</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Asegura tu turno ahora. Saldo restante ($6.750) se abona en la administración del club.</p>
+</div>
+</label>
+<!-- Opción 2: Total 100% -->
+<label class="border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low p-4 rounded-lg cursor-pointer flex flex-col justify-between">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<input class="text-primary-container focus:ring-primary-container mt-0.5" name="ModalidadPago" type="radio" value="Total"/>
+<span class="font-title-md text-title-md font-bold text-on-surface">Pagar Total (100%)</span>
+</div>
+</div>
+<div class="mt-3">
+<div class="text-headline-sm font-headline-sm font-bold text-on-surface">$13.500 ARS</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mt-0.5">Turno 100% cancelado. Acceso directo a cancha sin pasar por caja.</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Pasarelas de Pago -->
+<div class="space-y-3 mb-space-lg">
+<label class="block text-label-md font-label-md text-on-surface mb-1">Elige cómo abonar la reserva:</label>
+<!-- Pasarela 1: Mercado Pago -->
+<label class="flex items-center justify-between p-3.5 border-2 border-primary-container/70 bg-surface-container-low rounded-lg cursor-pointer">
+<div class="flex items-center gap-3">
+<input checked="" class="text-primary-container focus:ring-primary-container" name="MetodoPago" type="radio" value="MercadoPago"/>
+<div>
+<span class="block font-title-md text-title-md font-semibold text-on-surface">Mercado Pago</span>
+<span class="block text-body-sm font-body-sm text-on-surface-variant">Tarjetas de Débito, Crédito o Dinero en cuenta con acreditación instantánea</span>
+</div>
+</div>
+<div class="hidden sm:flex items-center gap-1.5 text-xs font-bold text-tertiary bg-tertiary-fixed px-2.5 py-1 rounded">
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+                  Inmediato
+                </div>
+</label>
+<!-- Pasarela 2: Transferencia Bancaria -->
+<label class="flex items-center justify-between p-3.5 border border-outline-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<div class="flex items-center gap-3">
+<input class="text-primary-container focus:ring-primary-container" name="MetodoPago" type="radio" value="Transferencia"/>
+<div>
+<span class="block font-title-md text-title-md font-semibold text-on-surface">Transferencia Bancaria Directa</span>
+<span class="block text-body-sm font-body-sm text-on-surface-variant">Alias: CANCHAS.APP.OFICIAL (Adjuntar comprobante en el paso siguiente)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="account_balance">account_balance</span>
+</label>
+<!-- Pasarela 3: Efectivo -->
+<label class="flex items-center justify-between p-3.5 border border-outline-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<div class="flex items-center gap-3">
+<input class="text-primary-container focus:ring-primary-container" name="MetodoPago" type="radio" value="Efectivo"/>
+<div>
+<span class="block font-title-md text-title-md font-semibold text-on-surface">Pago en Efectivo en Recepción</span>
+<span class="block text-body-sm font-body-sm text-on-surface-variant">Sujeto a confirmación telefónica 2 horas antes del inicio del turno</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="storefront">storefront</span>
+</label>
+</div>
+<!-- Términos y Condiciones -->
+<div class="pt-3 border-t border-surface-container-highest mb-space-md">
+<label class="flex items-start gap-2.5 cursor-pointer">
+<input class="mt-1 h-4 w-4 text-primary-container focus:ring-primary-container border-outline-variant rounded" id="AceptaTerminos" name="AceptaTerminos" required="" type="checkbox"/>
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+                  He leído y acepto el <a class="text-primary font-semibold underline" href="#">Reglamento Interno</a> del complejo deportivo y la <a class="text-primary font-semibold underline" href="#">política de cancelación</a> (reembolso total hasta 6 horas previas al turno).
+                </span>
+</label>
+</div>
+<!-- BOTÓN PRINCIPAL DE CONFIRMACIÓN (Bootstrap btn-success btn-lg) -->
+<button class="w-full bg-primary-container hover:bg-secondary text-on-primary font-headline-sm text-headline-sm font-bold py-3.5 px-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2" type="submit">
+<span class="material-symbols-outlined text-xl" data-icon="lock">lock</span>
+<span>Confirmar y Reservar Cancha</span>
+</button>
+<p class="text-center text-label-sm font-label-sm text-outline mt-2 flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="verified_user">verified_user</span>
+              Transacción protegida con cifrado SSL de 256 bits
+            </p>
+</div>
+</form>
+</div>
+<!-- COLUMNA DERECHA: STICKY SUMMARY CARD (col-lg-5) -->
+<aside class="lg:col-span-5 lg:sticky lg:top-20 space-y-4">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm">
+<!-- Imagen de la Cancha -->
+<div class="relative h-44 w-full bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A pristine modern indoor artificial turf football court illuminated by vibrant overhead floodlights within a high-ceiling collegiate sports arena. Crisp white boundary lines and clean green synthetic grass showcase institutional dependability and athletic vitality under bright balanced lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8IVoDt1csbp0jxuOOQPAoA88sHGnYx6sOCB3_pfGbS6qafdsJVruXGvYGTBXXT6kbfVtk0SjEmykyapbxU2PcShbXlVvlKgsibqnzvUVnO6jON7l3zOLv5P3_PCj6r4gOSF0Fi5jANJ1dfmvY_D5xBdlw6SPQRSnD7jVJoXQEgB36ah3uEP_Z4ai-aYW8xlIdYfVcpEGxzxJhvUVuUmBif_Tu6KeRjCG7M2FbVJTqYxL9_CGPh2_m"/>
+<span class="absolute top-3 right-3 bg-primary-container text-on-primary text-label-sm font-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+              Fútbol 7 Techada
+            </span>
+</div>
+<!-- Cabecera de la Tarjeta -->
+<div class="p-space-md border-b border-surface-container-highest">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-secondary-fixed text-on-secondary-fixed-variant text-label-sm font-label-sm px-2 py-0.5 rounded font-semibold">Cancha #1</span>
+<span class="text-label-sm font-label-sm text-outline">Complejo Sede Central</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm font-bold text-on-surface">La Bombonerita</h3>
+<!-- Badges Deportivos -->
+<div class="flex flex-wrap gap-1.5 mt-2.5">
+<span class="bg-surface-container text-on-surface-variant text-label-sm font-label-sm px-2 py-0.5 rounded">Techada</span>
+<span class="bg-surface-container text-on-surface-variant text-label-sm font-label-sm px-2 py-0.5 rounded">Sintético Forbex 60mm</span>
+<span class="bg-surface-container text-on-surface-variant text-label-sm font-label-sm px-2 py-0.5 rounded">Luz LED 500 Lux</span>
+</div>
+</div>
+<!-- Detalles del Turno -->
+<div class="p-space-md bg-surface-container-low/50 border-b border-surface-container-highest space-y-3">
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5" data-icon="calendar_month">calendar_month</span>
+<div>
+<span class="block text-label-sm font-label-sm text-outline">Fecha Seleccionada</span>
+<span class="block text-body-md font-title-md font-bold text-on-surface">Viernes 24 de Octubre, 2025</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5" data-icon="schedule">schedule</span>
+<div>
+<span class="block text-label-sm font-label-sm text-outline">Horario de Juego</span>
+<span class="block text-body-md font-title-md font-bold text-on-surface">19:00 hs - 20:00 hs (60 minutos)</span>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary text-xl shrink-0 mt-0.5" data-icon="pin_drop">pin_drop</span>
+<div>
+<span class="block text-label-sm font-label-sm text-outline">Ubicación y Cancha</span>
+<span class="block text-body-sm font-body-sm text-on-surface">Av. Libertador 4520, Pista Cubierta Sector A</span>
+</div>
+</div>
+</div>
+<!-- Desglose de Precios (Pricing Breakdown) -->
+<div class="p-space-md space-y-2.5">
+<h4 class="text-label-md font-label-md font-semibold text-on-surface uppercase tracking-wider text-xs">Resumen de Liquidación</h4>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span>Alquiler de Cancha (1 hr):</span>
+<span class="font-semibold text-on-surface">$15.000 ARS</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-on-surface-variant">
+<span class="flex items-center gap-1">
+                Iluminación nocturna LED:
+                <span class="text-primary font-semibold text-xs">(Bonificada)</span>
+</span>
+<span class="font-semibold text-primary">$0 ARS</span>
+</div>
+<div class="flex justify-between items-center text-body-sm font-body-sm text-primary">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+                Descuento Socio Club (10%):
+              </span>
+<span class="font-bold">-$1.500 ARS</span>
+</div>
+<div class="pt-3 border-t border-surface-container-highest flex justify-between items-baseline">
+<div>
+<span class="block text-label-sm font-label-sm text-outline">Total del Alquiler</span>
+<span class="text-body-md font-bold text-on-surface-variant">$13.500 ARS</span>
+</div>
+<div class="text-right">
+<span class="block text-label-sm font-label-sm text-primary font-bold">Seña a abonar hoy (50%):</span>
+<span class="text-headline-md font-headline-md font-extrabold text-primary">$6.750 ARS</span>
+</div>
+</div>
+</div>
+<!-- Caja de Política de Cancelación y Modificación -->
+<div class="p-space-md bg-surface-container-low border-t border-surface-container-highest space-y-3">
+<div class="flex items-start gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-base shrink-0 mt-0.5" data-icon="schedule_send">schedule_send</span>
+<p class="text-label-sm font-label-sm">
+<strong>Cancelación gratuita:</strong> Puedes reprogramar o solicitar el reembolso total de la seña hasta 6 horas antes del partido desde tu panel de reservas.
+              </p>
+</div>
+<div class="text-center pt-1">
+<a class="text-body-sm font-body-sm text-tertiary hover:underline font-semibold flex items-center justify-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="edit_calendar">edit_calendar</span>
+<span>¿Deseas cambiar de cancha u horario? Modificar</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Asistencia al Reservante -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-3.5 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-base" data-icon="support_agent">support_agent</span>
+</div>
+<div>
+<span class="block text-label-sm font-label-sm font-bold text-on-surface">¿Dudas con la reserva?</span>
+<span class="block text-label-sm font-label-sm text-outline">Mesa de ayuda: +54 11 4455-8899</span>
+</div>
+</div>
+<a class="text-label-sm font-label-sm font-semibold text-primary hover:underline" href="#">Chatear</a>
+</div>
+</aside>
+</div>
+</main>
+<!-- SHARED COMPONENT: Footer -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline mt-auto">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+<a class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<span class="hidden md:inline text-outline-variant">|</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant dark:text-outline-variant">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links de Navegación del Footer -->
+<nav class="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Términos de Servicio
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Política de Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Reglamento Interno
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Contacto y Ubicación
+        </a>
+</nav>
+</div>
+</footer>
+</body></html>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using WebComplejoDeportivo_MCV.Models.Enum;
 
 namespace WebComplejoDeportivo_MCV.Models
 {

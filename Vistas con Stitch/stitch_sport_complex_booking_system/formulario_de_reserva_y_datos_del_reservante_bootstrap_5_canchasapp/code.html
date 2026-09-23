@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+
+<html class="h-100" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CanchasApp - Confirmar Reserva y Carga de Datos</title>
+<!-- Google Fonts Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Bootstrap 5.3 CSS -->
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+<!-- Bootstrap Icons CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<!-- Tailwind CSS CDN para compatibilidad de utilidades secundarias -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style>
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+<!-- 1. NAVBAR BOOTSTRAP 5 -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm sticky-top">
+<div class="container">
+<a class="navbar-brand fw-bold d-flex align-items-center" href="#">
+<i class="bi bi-dribbble me-2 fs-4"></i>
+<span>CanchasApp</span>
+</a>
+<button aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarMain" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarMain">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a class="nav-link" href="#">Inicio</a>
+</li>
+<li class="nav-item">
+<a aria-current="page" class="nav-link active fw-semibold" href="#">Canchas</a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">Mis Reservas</a>
+</li>
+</ul>
+<div class="d-flex align-items-center">
+<a class="btn btn-outline-light me-2" href="#">Iniciar Sesión</a>
+<a class="btn btn-light text-success fw-bold d-flex align-items-center shadow-sm" href="#">
+<i class="bi bi-person-plus-fill me-1"></i> Registrarse
+          </a>
+</div>
+</div>
+</div>
+</nav>
+<!-- MAIN CONTAINER -->
+<main class="flex-grow-1 container py-4">
+<!-- 2. BREADCRUMB NATIVO BOOTSTRAP 5 -->
+<nav aria-label="breadcrumb" class="mb-3">
+<ol class="breadcrumb bg-white p-2.5 px-3 rounded shadow-sm border mb-0">
+<li class="breadcrumb-item">
+<a class="text-decoration-none text-success" href="#">
+<i class="bi bi-house-door-fill me-1"></i>Inicio
+          </a>
+</li>
+<li class="breadcrumb-item">
+<a class="text-decoration-none text-success" href="#">Canchas</a>
+</li>
+<li class="breadcrumb-item">
+<a class="text-decoration-none text-success" href="#">Cancha 1: La Bombonerita</a>
+</li>
+<li aria-current="page" class="breadcrumb-item active text-dark fw-semibold">Confirmar Datos y Reserva</li>
+</ol>
+</nav>
+<!-- 3. STEPPER BOOTSTRAP PROGRESS -->
+<div class="card shadow-sm border mb-4">
+<div class="card-body p-3">
+<div class="row g-2">
+<!-- Paso 1 -->
+<div class="col-12 col-md-4">
+<div class="d-flex align-items-center p-2 rounded bg-success-subtle border border-success-subtle">
+<span class="badge rounded-circle bg-success p-2 me-2 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px;">
+<i class="bi bi-check-lg fs-6"></i>
+</span>
+<div>
+<small class="text-success fw-bold d-block text-uppercase" style="font-size: 0.72rem;">Paso 1 · Completado</small>
+<span class="fw-semibold text-dark small">Cancha y Turno</span>
+</div>
+</div>
+</div>
+<!-- Paso 2 -->
+<div class="col-12 col-md-4">
+<div class="d-flex align-items-center p-2 rounded bg-white border border-success border-2 shadow-sm">
+<span class="badge rounded-circle bg-success p-2 me-2 d-flex align-items-center justify-content-center fs-6" style="width: 32px; height: 32px;">
+                2
+              </span>
+<div>
+<small class="text-success fw-bold d-block text-uppercase" style="font-size: 0.72rem;">Paso 2 · En Proceso</small>
+<span class="fw-bold text-dark small">Datos del Reservante y Pago</span>
+</div>
+</div>
+</div>
+<!-- Paso 3 -->
+<div class="col-12 col-md-4">
+<div class="d-flex align-items-center p-2 rounded bg-light border opacity-75">
+<span class="badge rounded-circle bg-secondary p-2 me-2 d-flex align-items-center justify-content-center fs-6" style="width: 32px; height: 32px;">
+                3
+              </span>
+<div>
+<small class="text-muted fw-bold d-block text-uppercase" style="font-size: 0.72rem;">Paso 3 · Próximo</small>
+<span class="text-muted small">Confirmación y Voucher</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. LAYOUT 2 COLUMNAS (12 cols: 7 Formulario + 5 Resumen) -->
+<div class="row g-4">
+<!-- COLUMNA IZQUIERDA: FORMULARIO RAZOR ASP.NET (col-lg-7) -->
+<div class="col-lg-7">
+<form action="/Reservas/Confirmar" id="checkoutReservationForm" method="post">
+<!-- SECCIÓN 1: DATOS DEL RESERVANTE -->
+<div class="card shadow-sm border mb-4">
+<div class="card-header bg-white py-3 border-bottom d-flex align-items-center">
+<i class="bi bi-person-badge text-success fs-5 me-2"></i>
+<h5 class="card-title mb-0 fw-bold text-dark">1. Datos del Reservante</h5>
+</div>
+<div class="card-body p-3 p-md-4">
+<!-- Alerta Bootstrap Info -->
+<div class="alert alert-info d-flex align-items-center py-2 px-3 mb-3" role="alert">
+<i class="bi bi-info-circle-fill fs-5 me-2 flex-shrink-0 text-info"></i>
+<div class="small">
+<strong>¿Ya tienes cuenta?</strong> Si <a class="alert-link" href="#">iniciaste sesión</a> tus datos se completan automáticamente desde tu perfil universitario.
+                </div>
+</div>
+<!-- Nombre Completo -->
+<div class="mb-3">
+<label class="form-label fw-semibold" for="Nombre">
+                  Nombre Completo <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<span class="input-group-text bg-light text-muted">
+<i class="bi bi-person"></i>
+</span>
+<input class="form-control" id="Nombre" name="Nombre" placeholder="Ej. Juan Pérez" required="" type="text" value="Ignacio Ariel Pereyra"/>
+</div>
+</div>
+<!-- DNI -->
+<div class="mb-3">
+<label class="form-label fw-semibold" for="Dni">
+                  DNI / Documento de Identidad <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<span class="input-group-text bg-light text-muted">
+<i class="bi bi-card-heading"></i>
+</span>
+<input class="form-control" id="Dni" name="Dni" placeholder="Sin puntos ni espacios" required="" type="text" value="38.942.105"/>
+</div>
+<div class="form-text text-muted small">Requerido por seguro deportivo de la institución.</div>
+</div>
+<!-- Fila Teléfono y Correo -->
+<div class="row g-3 mb-3">
+<div class="col-md-6">
+<label class="form-label fw-semibold" for="Telefono">
+                    Móvil / WhatsApp <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<span class="input-group-text bg-light text-muted fw-semibold small">+54 9</span>
+<input class="form-control" id="Telefono" name="Telefono" placeholder="11 1234-5678" required="" type="tel" value="11 5489-3201"/>
+</div>
+<div class="form-text small">Recibirás el recordatorio por WhatsApp.</div>
+</div>
+<div class="col-md-6">
+<label class="form-label fw-semibold" for="Email">
+                    Correo Electrónico <span class="text-danger">*</span>
+</label>
+<div class="input-group">
+<span class="input-group-text bg-light text-muted">
+<i class="bi bi-envelope"></i>
+</span>
+<input class="form-control" id="Email" name="Email" placeholder="nombre@correo.com" required="" type="email" value="ignacio.pereyra@deportes.edu.ar"/>
+</div>
+<div class="form-text small">Enviaremos el voucher PDF para el ingreso.</div>
+</div>
+</div>
+<!-- Checkbox Socio del Club -->
+<div class="card bg-success-subtle border border-success-subtle p-3 mt-2">
+<div class="form-check">
+<input checked="" class="form-check-input" id="EsSocio" name="EsSocio" type="checkbox"/>
+<label class="form-check-label fw-bold text-dark" for="EsSocio">
+                    Soy socio del club
+                  </label>
+<div class="text-muted small">Aplica 10% de descuento automático en la tarifa con DNI registrado y cuota al día.</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 2: INFORMACIÓN DEL PARTIDO & REQUERIMIENTOS -->
+<div class="card shadow-sm border mb-4">
+<div class="card-header bg-white py-3 border-bottom d-flex align-items-center">
+<i class="bi bi-trophy text-success fs-5 me-2"></i>
+<h5 class="card-title mb-0 fw-bold text-dark">2. Información del Partido &amp; Requerimientos</h5>
+</div>
+<div class="card-body p-3 p-md-4">
+<!-- Tipo de Encuentro (btn-group) -->
+<div class="mb-3">
+<label class="form-label fw-semibold d-block">Modalidad del Partido</label>
+<div aria-label="Modalidad del Partido" class="btn-group w-100" role="group">
+<input autocomplete="off" checked="" class="btn-check" id="tipoAmistoso" name="TipoPartido" type="radio" value="Amistoso"/>
+<label class="btn btn-outline-success py-2" for="tipoAmistoso">
+<i class="bi bi-people-fill me-1"></i> Amistoso
+                  </label>
+<input autocomplete="off" class="btn-check" id="tipoTorneo" name="TipoPartido" type="radio" value="Torneo"/>
+<label class="btn btn-outline-success py-2" for="tipoTorneo">
+<i class="bi bi-award-fill me-1"></i> Torneo / Desafío
+                  </label>
+<input autocomplete="off" class="btn-check" id="tipoEvento" name="TipoPartido" type="radio" value="Evento"/>
+<label class="btn btn-outline-success py-2" for="tipoEvento">
+<i class="bi bi-balloon-fill me-1"></i> Cumpleaños / Evento
+                  </label>
+</div>
+</div>
+<!-- Requerimientos adicionales -->
+<div class="mb-2">
+<label class="form-label fw-semibold" for="Notas">
+                  Comentarios o requerimientos especiales (Opcional)
+                </label>
+<textarea class="form-control" id="Notas" name="Notas" placeholder="Ej: Necesitamos 14 pecheras (7 rojas / 7 verdes), pelota N°5 para sintético y apertura de vestuario local." rows="3"></textarea>
+<div class="form-text small">El personal de maestranza preparará los accesorios con 15 minutos de anticipación.</div>
+</div>
+</div>
+</div>
+<!-- SECCIÓN 3: MEDIO DE PAGO & MODALIDAD -->
+<div class="card shadow-sm border mb-4">
+<div class="card-header bg-white py-3 border-bottom d-flex align-items-center">
+<i class="bi bi-credit-card-2-front text-success fs-5 me-2"></i>
+<h5 class="card-title mb-0 fw-bold text-dark">3. Selección de Medio de Pago y Modalidad</h5>
+</div>
+<div class="card-body p-3 p-md-4">
+<!-- Selector Modalidad Seña vs Total -->
+<label class="form-label fw-semibold d-block mb-2">Modalidad de Reserva</label>
+<div class="row g-3 mb-4">
+<div class="col-md-6">
+<label class="card h-100 border-2 border-success bg-success-subtle p-3 position-relative cursor-pointer shadow-sm d-block text-start">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<div class="form-check mb-0">
+<input checked="" class="form-check-input" id="modalidadSena" name="ModalidadPago" type="radio" value="Sena"/>
+<span class="form-check-label fw-bold text-dark ms-1">Pagar Seña (50%)</span>
+</div>
+<span class="badge bg-success">Recomendado</span>
+</div>
+<div class="fs-4 fw-bold text-success">$6.750 ARS</div>
+<small class="text-muted d-block mt-1">Asegura tu turno ahora. Saldo restante ($6.750) se abona en administración.</small>
+</label>
+</div>
+<div class="col-md-6">
+<label class="card h-100 border p-3 cursor-pointer shadow-sm d-block text-start bg-white">
+<div class="form-check mb-2">
+<input class="form-check-input" id="modalidadTotal" name="ModalidadPago" type="radio" value="Total"/>
+<span class="form-check-label fw-bold text-dark ms-1">Pagar Total (100%)</span>
+</div>
+<div class="fs-4 fw-bold text-dark">$13.500 ARS</div>
+<small class="text-muted d-block mt-1">Turno 100% cancelado. Acceso directo a cancha sin pasar por caja.</small>
+</label>
+</div>
+</div>
+<!-- List-group para Medios de Pago -->
+<label class="form-label fw-semibold d-block mb-2">Elige cómo abonar la reserva:</label>
+<div class="list-group mb-4">
+<!-- Mercado Pago -->
+<label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 border-success border-2 bg-light">
+<div class="d-flex align-items-center">
+<input checked="" class="form-check-input me-3 mt-0" id="pagoMP" name="MetodoPago" type="radio" value="MercadoPago"/>
+<div>
+<span class="fw-bold text-dark d-block">Mercado Pago</span>
+<small class="text-muted">Tarjetas de Débito, Crédito o Dinero en cuenta con acreditación instantánea</small>
+</div>
+</div>
+<span class="badge bg-primary text-uppercase px-2 py-1 ms-2 d-none d-sm-inline-flex align-items-center">
+<i class="bi bi-lightning-charge-fill me-1"></i> Inmediato
+                  </span>
+</label>
+<!-- Transferencia Bancaria -->
+<label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+<div class="d-flex align-items-center">
+<input class="form-check-input me-3 mt-0" id="pagoTransf" name="MetodoPago" type="radio" value="Transferencia"/>
+<div>
+<span class="fw-bold text-dark d-block">Transferencia Bancaria Directa</span>
+<small class="text-muted">Alias: CANCHAS.APP.OFICIAL (Adjuntar comprobante en el paso siguiente)</small>
+</div>
+</div>
+<i class="bi bi-bank fs-4 text-muted ms-2"></i>
+</label>
+<!-- Efectivo en Recepción -->
+<label class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3">
+<div class="d-flex align-items-center">
+<input class="form-check-input me-3 mt-0" id="pagoEfectivo" name="MetodoPago" type="radio" value="Efectivo"/>
+<div>
+<span class="fw-bold text-dark d-block">Pago en Efectivo en Recepción</span>
+<small class="text-muted">Sujeto a confirmación telefónica 2 horas antes del inicio del turno</small>
+</div>
+</div>
+<i class="bi bi-shop fs-4 text-muted ms-2"></i>
+</label>
+</div>
+<!-- Términos y Condiciones -->
+<div class="form-check mb-4">
+<input class="form-check-input" id="AceptaTerminos" name="AceptaTerminos" required="" type="checkbox"/>
+<label class="form-check-label text-muted small" for="AceptaTerminos">
+                  He leído y acepto el <a class="text-success fw-semibold text-decoration-underline" href="#">Reglamento Interno</a> del complejo deportivo y la <a class="text-success fw-semibold text-decoration-underline" href="#">política de cancelación</a> (reembolso total hasta 6 horas previas al turno).
+                </label>
+</div>
+<!-- Botón Submit -->
+<button class="btn btn-success btn-lg w-100 py-3 fw-bold shadow-sm d-flex align-items-center justify-content-center" type="submit">
+<i class="bi bi-shield-lock-fill me-2 fs-5"></i> Confirmar y Reservar Cancha
+              </button>
+<div class="text-center text-muted small mt-2">
+<i class="bi bi-patch-check-fill text-success me-1"></i> Transacción protegida con cifrado SSL de 256 bits
+              </div>
+</div>
+</div>
+</form>
+</div>
+<!-- COLUMNA DERECHA: FICHA Y RESUMEN STICKY (col-lg-5) -->
+<aside class="col-lg-5">
+<div class="card shadow-sm sticky-top border" style="top: 5rem;">
+<!-- Imagen de la cancha -->
+<div class="position-relative">
+<img alt="Cancha 1 La Bombonerita" class="card-img-top object-fit-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8IVoDt1csbp0jxuOOQPAoA88sHGnYx6sOCB3_pfGbS6qafdsJVruXGvYGTBXXT6kbfVtk0SjEmykyapbxU2PcShbXlVvlKgsibqnzvUVnO6jON7l3zOLv5P3_PCj6r4gOSF0Fi5jANJ1dfmvY_D5xBdlw6SPQRSnD7jVJoXQEgB36ah3uEP_Z4ai-aYW8xlIdYfVcpEGxzxJhvUVuUmBif_Tu6KeRjCG7M2FbVJTqYxL9_CGPh2_m" style="height: 180px;"/>
+<span class="badge bg-success position-absolute top-0 end-0 m-3 px-3 py-2 shadow-sm fs-6">
+              Fútbol 7 Techada
+            </span>
+</div>
+<!-- Cabecera de la Tarjeta -->
+<div class="card-body border-bottom p-3">
+<div class="d-flex align-items-center gap-2 mb-1">
+<span class="badge bg-success-subtle text-success-emphasis border border-success-subtle">Cancha #1</span>
+<small class="text-muted">Complejo Sede Central</small>
+</div>
+<h4 class="card-title fw-bold text-dark mb-2">La Bombonerita</h4>
+<div>
+<span class="badge bg-secondary me-1">Techada</span>
+<span class="badge bg-secondary me-1">Sintético Forbex 60mm</span>
+<span class="badge bg-secondary">Luz LED 500 Lux</span>
+</div>
+</div>
+<!-- Detalles del Turno -->
+<div class="card-body bg-light border-bottom p-3">
+<div class="d-flex align-items-start mb-2">
+<i class="bi bi-calendar-event text-success fs-5 me-3 mt-1"></i>
+<div>
+<small class="text-muted d-block">Fecha Seleccionada</small>
+<span class="fw-bold text-dark">Viernes 24 de Octubre, 2025</span>
+</div>
+</div>
+<div class="d-flex align-items-start mb-2">
+<i class="bi bi-clock text-success fs-5 me-3 mt-1"></i>
+<div>
+<small class="text-muted d-block">Horario de Juego</small>
+<span class="fw-bold text-dark">19:00 hs - 20:00 hs (60 minutos)</span>
+</div>
+</div>
+<div class="d-flex align-items-start">
+<i class="bi bi-geo-alt text-success fs-5 me-3 mt-1"></i>
+<div>
+<small class="text-muted d-block">Ubicación y Cancha</small>
+<span class="small text-dark">Av. Libertador 4520, Pista Cubierta Sector A</span>
+</div>
+</div>
+</div>
+<!-- Resumen de Liquidación -->
+<div class="card-body p-3">
+<h6 class="fw-bold text-uppercase text-muted small mb-3">Resumen de Liquidación</h6>
+<ul class="list-group list-group-flush mb-3">
+<li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 small">
+<span>Alquiler de Cancha (1 hr):</span>
+<span class="fw-semibold text-dark">$15.000 ARS</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 small">
+<span>
+                  Iluminación nocturna LED: <span class="badge bg-success-subtle text-success ms-1">Bonificada</span>
+</span>
+<span class="fw-semibold text-success">$0 ARS</span>
+</li>
+<li class="list-group-item d-flex justify-content-between align-items-center px-0 py-2 small text-success fw-bold">
+<span>
+<i class="bi bi-check-circle-fill me-1"></i> Descuento Socio Club (10%):
+                </span>
+<span>-$1.500 ARS</span>
+</li>
+</ul>
+<!-- Total Destacado -->
+<div class="alert alert-success d-flex justify-content-between align-items-center mb-0 p-3">
+<div>
+<small class="text-muted d-block">Total Alquiler: <strong>$13.500 ARS</strong></small>
+<span class="fw-bold text-success-emphasis">Seña a abonar hoy (50%):</span>
+</div>
+<div class="text-end">
+<span class="fs-4 fw-bold text-success">$6.750 ARS</span>
+</div>
+</div>
+</div>
+<!-- Caja de Política de Cancelación -->
+<div class="card-footer bg-light p-3 border-top">
+<div class="d-flex align-items-start text-muted small mb-2">
+<i class="bi bi-clock-history text-secondary me-2 fs-5 mt-0"></i>
+<span><strong>Cancelación gratuita:</strong> Puedes reprogramar o solicitar el reembolso total de la seña hasta 6 horas antes del turno desde tu panel de reservas.</span>
+</div>
+<div class="text-center pt-2">
+<a class="text-decoration-none small text-success fw-semibold" href="#">
+<i class="bi bi-pencil-square me-1"></i> ¿Deseas cambiar de cancha u horario? Modificar
+              </a>
+</div>
+</div>
+</div>
+<!-- Asistencia al Reservante -->
+<div class="card shadow-sm border mt-3 p-3">
+<div class="d-flex align-items-center justify-content-between">
+<div class="d-flex align-items-center">
+<div class="rounded-circle bg-success-subtle text-success p-2 me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+<i class="bi bi-headset fs-5"></i>
+</div>
+<div>
+<span class="fw-bold text-dark d-block small">¿Dudas con la reserva?</span>
+<small class="text-muted">Mesa de ayuda: +54 11 4455-8899</small>
+</div>
+</div>
+<a class="btn btn-outline-success btn-sm fw-semibold" href="#">Chatear</a>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- 7. FOOTER BOOTSTRAP 5 CLÁSICO -->
+<footer class="bg-dark text-white py-4 mt-5">
+<div class="container">
+<div class="row align-items-center g-3">
+<div class="col-md-6 text-center text-md-start">
+<a class="text-white text-decoration-none fw-bold fs-5 d-inline-flex align-items-center me-2" href="#">
+<i class="bi bi-dribbble text-success me-2 fs-4"></i>
+<span>CanchasApp</span>
+</a>
+<span class="text-secondary d-none d-md-inline">|</span>
+<small class="text-secondary ms-md-2 d-block d-md-inline mt-1 mt-md-0">
+            © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+          </small>
+</div>
+<div class="col-md-6 text-center text-md-end">
+<ul class="list-inline mb-0 small">
+<li class="list-inline-item"><a class="text-secondary text-decoration-none hover-white" href="#">Términos de Servicio</a></li>
+<li class="list-inline-item ms-2"><a class="text-secondary text-decoration-none" href="#">Política de Privacidad</a></li>
+<li class="list-inline-item ms-2"><a class="text-secondary text-decoration-none" href="#">Reglamento Interno</a></li>
+<li class="list-inline-item ms-2"><a class="text-secondary text-decoration-none" href="#">Contacto</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+<!-- Bootstrap 5.3 Bundle with Popper -->
+<script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

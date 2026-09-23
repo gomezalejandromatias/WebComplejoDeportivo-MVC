@@ -1,6 +1,8 @@
-﻿namespace WebComplejoDeportivo_MCV.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace WebComplejoDeportivo_MCV.Models
 {
-    public class Usuario
+    public class Usuario : IdentityUser
     {
         public int Id { get; set; }
 

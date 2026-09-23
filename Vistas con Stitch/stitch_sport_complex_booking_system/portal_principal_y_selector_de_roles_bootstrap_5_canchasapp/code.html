@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html class="h-100" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal de Acceso por Roles - CanchasApp</title>
+<!-- Bootstrap 5.3 CSS -->
+<link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" rel="stylesheet"/>
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<style>
+    .card-img-top-container {
+      position: relative;
+      height: 190px;
+      overflow: hidden;
+    }
+    .card-img-top-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .card:hover .card-img-top-container img {
+      transform: scale(1.04);
+    }
+    .card-overlay-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 8px;
+      padding: 4px 8px;
+      display: inline-flex;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+    .card-img-title-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 12px 16px;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+      color: #fff;
+    }
+  </style>
+</head>
+<body class="d-flex flex-column h-100 bg-body-tertiary">
+<!-- Navbar Bootstrap 5 Oficial -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-success shadow-sm">
+<div class="container">
+<a class="navbar-brand d-flex align-items-center gap-2 fw-bold" href="#">
+<i class="bi bi-dribbble fs-4"></i>
+<span>CanchasApp</span>
+</a>
+<button aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarContent" data-bs-toggle="collapse" type="button">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarContent">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+<li class="nav-item">
+<a aria-current="page" class="nav-link active fw-semibold" href="#">
+<i class="bi bi-house-door-fill me-1"></i> Inicio
+            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+<i class="bi bi-grid-3x3-gap me-1"></i> Canchas
+            </a>
+</li>
+<li class="nav-item">
+<a class="nav-link" href="#">
+<i class="bi bi-calendar2-check me-1"></i> Mis Reservas
+            </a>
+</li>
+</ul>
+<!-- Perfil Activo & Sesión -->
+<div class="d-flex align-items-center gap-3">
+<div class="d-flex align-items-center bg-white bg-opacity-10 border border-white border-opacity-25 rounded-pill px-3 py-1 text-white">
+<span class="badge rounded-circle bg-light text-success fw-bold p-2 me-2">AD</span>
+<div class="d-flex flex-column lh-sm text-start pe-2">
+<span class="small fw-bold">Alejandro Díaz</span>
+<span class="text-white-50" style="font-size: 0.75rem;">Rol: SuperAdmin &amp; Socio</span>
+</div>
+</div>
+<button class="btn btn-outline-light btn-sm rounded-circle p-2" title="Cerrar Sesión" type="button">
+<i class="bi bi-box-arrow-right"></i>
+</button>
+</div>
+</div>
+</div>
+</nav>
+<!-- Hero / Header Banner Superior -->
+<section class="bg-light py-4 border-bottom mb-4">
+<div class="container">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3">
+<div>
+<div class="mb-2">
+<span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1 rounded-pill">
+<i class="bi bi-patch-check-fill me-1"></i> Portal Hub de Control · Temporada Activa 2025
+            </span>
+</div>
+<h1 class="h2 fw-bold text-dark mb-1">Portal Principal - Complejo Deportivo CanchasApp</h1>
+<p class="text-secondary mb-0">
+            Selecciona tu módulo de acceso según tu rol en el complejo deportivo. Cada espacio cuenta con flujos de autenticación optimizados y permisos granulares.
+          </p>
+</div>
+<div class="align-self-start align-self-md-auto">
+<div class="card shadow-sm border-0 py-2 px-3 bg-white">
+<div class="d-flex align-items-center gap-2">
+<span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
+<span class="small text-secondary fw-semibold">Conexión Segura ASP.NET Core</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Main Container Layout: Grilla de módulos -->
+<main class="container mb-5 flex-shrink-0">
+<div class="row g-4 justify-content-center">
+<!-- TARJETA 1: Módulo Clientes y Socios -->
+<div class="col-12 col-md-6 col-lg-4">
+<div class="card h-100 shadow-sm border-success d-flex flex-column">
+<div class="card-img-top-container">
+<img alt="Cancha de Fútbol y Pádel" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7gr4bGDQbHnZYRbjETkK5eEv9FHcOszIsUxXa_7m43Ade9aZa7PZ7nMdxis44yQDBA-EsdB1sJtdI1VG3fHwH7Ou3yJOpRw4L9LB942ndlHWJuRFDbkIeYy2yBAdpNdITA9ZrBIFnWaGJOpvA9No0EqXTY8qHJN6tkWoe6J-NZZoF3kDz3U3IaX0SMFK_ewVYClbHDH2vMlAUb-LVnZsPvG_ZMjVR5H0PBaKOWiKkcHDhpSm_m3bJ"/>
+<div class="card-overlay-badge text-success">
+<i class="bi bi-dribbble fs-5"></i>
+</div>
+<div class="card-img-title-overlay">
+<small class="text-uppercase tracking-wider text-light opacity-75 fw-bold d-block" style="font-size: 0.7rem;">Atención Directa</small>
+<h2 class="h5 fw-bold mb-0 text-white">Módulo Cliente &amp; Socios</h2>
+</div>
+</div>
+<div class="card-body d-flex flex-column">
+<p class="card-text text-secondary mb-3">
+              Consulta disponibilidad de canchas en tiempo real, reserva turnos online, paga con Mercado Pago y accede a tu historial de reservas.
+            </p>
+<!-- Badges de Acceso -->
+<div class="d-flex flex-wrap gap-1 mb-3">
+<span class="badge bg-secondary-subtle text-secondary-emphasis">Fútbol 5/7/11</span>
+<span class="badge bg-secondary-subtle text-secondary-emphasis">Pádel</span>
+<span class="badge bg-success">Descuento Socio</span>
+<span class="badge bg-info text-dark">Online 24/7</span>
+</div>
+<!-- Features -->
+<ul class="list-unstyled border-top pt-2 mb-4 small text-secondary">
+<li class="mb-2 d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-success fs-6"></i>
+<span>Pasarela Mercado Pago integrada (QR / Tarjetas)</span>
+</li>
+<li class="d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-success fs-6"></i>
+<span>Confirmación inmediata por WhatsApp</span>
+</li>
+</ul>
+<div class="mt-auto">
+<a class="btn btn-success w-100 d-flex align-items-center justify-center gap-2 shadow-sm py-2" href="#">
+<span>Ingresar como Cliente / Reservar Cancha</span>
+<i class="bi bi-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA 2: Módulo Administrador & Dueño -->
+<div class="col-12 col-md-6 col-lg-4">
+<div class="card h-100 shadow-sm border-primary d-flex flex-column">
+<div class="card-img-top-container">
+<img alt="Panel de Gestión y Analíticas" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqYr0103IqTtyGl-FJjFp1fsz6KyZWS_SnVMryKF5PK_LgYxr1iIvh8nmaSAtH99at75_Co8JnIteb_glYsujVXeanOaxvG8edo_5LJz7lXVAacGboQBuk5nZqWqGugmAmDyvPrJLKug6gRHr2n5bhbIdSKFfD9IIciodio6K5-pVMWBKDwp9l8W__4sTE2dXMaZw9q3CVfOVICgM6KnJ3hDZ_n3uQklKeEmyIaXC5fddG-7p9GXLj"/>
+<div class="card-overlay-badge text-primary">
+<i class="bi bi-speedometer2 fs-5"></i>
+</div>
+<div class="card-img-title-overlay">
+<small class="text-uppercase tracking-wider text-light opacity-75 fw-bold d-block" style="font-size: 0.7rem;">Gestión Central</small>
+<h2 class="h5 fw-bold mb-0 text-white">Módulo Administrador &amp; Dueño</h2>
+</div>
+</div>
+<div class="card-body d-flex flex-column">
+<p class="card-text text-secondary mb-3">
+              Panel integral para dueños: reportes de recaudación diaria, métricas de ocupación, gestión de canchas, tarifas y administración de socios.
+            </p>
+<!-- Badges de Acceso -->
+<div class="d-flex flex-wrap gap-1 mb-3">
+<span class="badge bg-primary">Métricas KPIs</span>
+<span class="badge bg-secondary-subtle text-secondary-emphasis">Control de Pagos</span>
+<span class="badge bg-secondary-subtle text-secondary-emphasis">Gestión de Canchas</span>
+</div>
+<!-- Features -->
+<ul class="list-unstyled border-top pt-2 mb-4 small text-secondary">
+<li class="mb-2 d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-primary fs-6"></i>
+<span>Exportación de balances contables y caja</span>
+</li>
+<li class="d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-primary fs-6"></i>
+<span>Configuración de tarifas pico y promociones</span>
+</li>
+</ul>
+<div class="mt-auto">
+<a class="btn btn-primary w-100 d-flex align-items-center justify-center gap-2 shadow-sm py-2" href="#">
+<span>Ingresar al Panel de Administración</span>
+<i class="bi bi-shield-lock-fill"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- TARJETA 3: Módulo Empleado & Recepción -->
+<div class="col-12 col-md-6 col-lg-4">
+<div class="card h-100 shadow-sm border-secondary d-flex flex-column">
+<div class="card-img-top-container">
+<img alt="Mostrador de Atención y Recepción" class="card-img-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD10NIm9TLFae3EGu8ubhGMLKxOZTVvpxyiHgjPVGnv1VGvN5JqAAi9178D_PBFROpQoSEURT8t5pgcNFq6yjSIrZmUz5FqIGp7HFKcOWwzu8ovdEA19a-fZsy0sF7fpmHViWkTh1HXqJVvrRC9_eK09SW4JD8-eMnPIHVWSzxIA5FHpLh38UQ9p6MHpWYyUxuYtLGXShE6ncAGJQWy1sOb_183E6gNz7EE3ty9bGn5WCYgn_4NkrvX"/>
+<div class="card-overlay-badge text-secondary">
+<i class="bi bi-person-workspace fs-5"></i>
+</div>
+<div class="card-img-title-overlay">
+<small class="text-uppercase tracking-wider text-light opacity-75 fw-bold d-block" style="font-size: 0.7rem;">Mostrador Operativo</small>
+<h2 class="h5 fw-bold mb-0 text-white">Módulo Empleado &amp; Recepción</h2>
+</div>
+</div>
+<div class="card-body d-flex flex-column">
+<p class="card-text text-secondary mb-3">
+              Mesa de entradas: cobro de señas y saldos en efectivo en mostrador, asignación rápida de turnos presenciales y encendido de iluminación.
+            </p>
+<!-- Badges de Acceso -->
+<div class="d-flex flex-wrap gap-1 mb-3">
+<span class="badge bg-secondary">Turno Mañana/Tarde</span>
+<span class="badge bg-warning text-dark">Cobro en Caja</span>
+<span class="badge bg-secondary-subtle text-secondary-emphasis">Check-in Equipos</span>
+</div>
+<!-- Features -->
+<ul class="list-unstyled border-top pt-2 mb-4 small text-secondary">
+<li class="mb-2 d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-success fs-6"></i>
+<span>Arqueo y cierre de turno de caja rápido</span>
+</li>
+<li class="d-flex align-items-center gap-2">
+<i class="bi bi-check-circle-fill text-success fs-6"></i>
+<span>Comando de torres lumínicas para partidos</span>
+</li>
+</ul>
+<div class="mt-auto">
+<a class="btn btn-outline-success w-100 d-flex align-items-center justify-center gap-2 py-2" href="#">
+<span>Abrir Mesa de Recepción</span>
+<i class="bi bi-cash-coin"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card de Estado de Seguridad RBAC Inferior -->
+<div class="card border-0 bg-light mt-4 shadow-sm">
+<div class="card-body p-4">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center border-bottom pb-3 mb-3 gap-2">
+<div class="d-flex align-items-center gap-3">
+<div class="bg-success-subtle text-success rounded-3 p-2 d-inline-flex align-items-center justify-content-center">
+<i class="bi bi-shield-check fs-4"></i>
+</div>
+<div>
+<h3 class="h5 fw-bold mb-0">Estado de Seguridad y Control de Acceso (RBAC)</h3>
+<p class="text-secondary small mb-0">Arquitectura basada en ASP.NET Core Identity · JSON Web Tokens activos</p>
+</div>
+</div>
+<div>
+<span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">
+<i class="bi bi-circle-fill me-1" style="font-size: 0.5rem;"></i> Servidor Principal: <strong>Online (99.98% SLA)</strong>
+</span>
+</div>
+</div>
+<!-- Badges de Roles Activos en ASP.NET Core Identity -->
+<div class="row g-3">
+<div class="col-6 col-md-3">
+<div class="bg-white p-3 rounded border border-light-subtle h-100">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="badge bg-primary">Rol: Admin</span>
+<i class="bi bi-check2-circle text-primary"></i>
+</div>
+<p class="small text-secondary mb-0">Permisos totales de infraestructura y tesorería.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="bg-white p-3 rounded border border-light-subtle h-100">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="badge bg-secondary">Rol: Empleado</span>
+<i class="bi bi-check2-circle text-secondary"></i>
+</div>
+<p class="small text-secondary mb-0">Mesa de caja, reserva presencial y control de cancha.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="bg-white p-3 rounded border border-light-subtle h-100">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="badge bg-success">Rol: Socio</span>
+<i class="bi bi-check2-circle text-success"></i>
+</div>
+<p class="small text-secondary mb-0">Tarifas diferenciales bonificadas y prioridad horaria.</p>
+</div>
+</div>
+<div class="col-6 col-md-3">
+<div class="bg-white p-3 rounded border border-light-subtle h-100">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="badge bg-info text-dark">Rol: Cliente</span>
+<i class="bi bi-check2-circle text-info"></i>
+</div>
+<p class="small text-secondary mb-0">Turnos públicos mediante pasarelas de pago digitales.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Bootstrap Oficial -->
+<footer class="bg-dark text-white py-4 mt-auto">
+<div class="container">
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+<div class="d-flex flex-column flex-sm-row align-items-center gap-2 text-center text-sm-start">
+<span class="fw-bold fs-5 text-success">CanchasApp</span>
+<span class="text-white-50 d-none d-sm-inline">|</span>
+<span class="text-white-50 small">© 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.</span>
+</div>
+<ul class="nav list-unstyled d-flex flex-wrap justify-content-center gap-3 mb-0 small">
+<li><a class="text-white-50 text-decoration-none hover-white" href="#">Términos de Servicio</a></li>
+<li><a class="text-white-50 text-decoration-none hover-white" href="#">Política de Privacidad</a></li>
+<li><a class="text-white-50 text-decoration-none hover-white" href="#">Reglamento Interno</a></li>
+<li><a class="text-white-50 text-decoration-none hover-white" href="#">Contacto y Ubicación</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<!-- Bootstrap 5 Bundle JS -->
+<script crossorigin="anonymous" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>

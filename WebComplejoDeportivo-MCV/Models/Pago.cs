@@ -1,4 +1,8 @@
-﻿namespace WebComplejoDeportivo_MCV.Models
+﻿
+using WebComplejoDeportivo_MCV.Models.Enum;
+
+namespace WebComplejoDeportivo_MCV.Models
+
 {
     public abstract class Pago
     {

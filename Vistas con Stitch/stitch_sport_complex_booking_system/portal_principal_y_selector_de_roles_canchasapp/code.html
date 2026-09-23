@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background text-on-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal de Acceso por Roles - CanchasApp</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#198754",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#d9dadb",
+            "on-surface": "#191c1d",
+            "on-primary-container": "#ffffff",
+            "surface-tint": "#006d41",
+            "inverse-on-surface": "#f0f1f2",
+            "primary-fixed": "#93f7ba",
+            "surface-bright": "#f8f9fa",
+            "on-surface-variant": "#3e4941",
+            "outline": "#6e7a70",
+            "secondary-fixed": "#b0f1c7",
+            "on-primary-fixed": "#002110",
+            "tertiary": "#0056cc",
+            "inverse-surface": "#2e3132",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "inverse-primary": "#77da9f",
+            "surface-variant": "#e1e3e4",
+            "secondary": "#2d6a48",
+            "secondary-container": "#b0f1c7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0a6dfc",
+            "on-tertiary-container": "#ffffff",
+            "surface-container-highest": "#e1e3e4",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "primary-fixed-dim": "#77da9f",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-fixed-variant": "#0f5132",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#33704e",
+            "primary": "#006c40",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container-low": "#f3f4f5",
+            "on-tertiary-fixed-variant": "#00419e",
+            "tertiary-fixed": "#dae2ff",
+            "error": "#ba1a1a",
+            "on-background": "#191c1d",
+            "on-tertiary-fixed": "#001946",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#002111",
+            "background": "#f8f9fa",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xxl": "3rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "slot-time": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-hero": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="min-h-full flex flex-col font-body-md text-body-md bg-background text-on-surface antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar from Shared Components JSON -->
+<header class="bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none sticky top-0 z-50">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<!-- Brand & Left Nav -->
+<div class="flex items-center space-x-space-lg">
+<a class="flex items-center space-x-space-xs text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed tracking-tight" href="#">
+<span class="material-symbols-outlined fill-icon text-primary text-headline-md" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center space-x-space-md ml-space-lg">
+<a class="text-primary dark:text-primary-fixed font-title-md text-title-md border-b-2 border-primary dark:border-primary-fixed pb-1 transition-colors duration-150 ease-in-out" href="#">
+            Inicio
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-space-sm py-space-xs rounded transition-colors duration-150 ease-in-out" href="#">
+            Canchas
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-space-sm py-space-xs rounded transition-colors duration-150 ease-in-out" href="#">
+            Mis Reservas
+          </a>
+</nav>
+</div>
+<!-- Right Trailing Profile & Actions -->
+<div class="flex items-center space-x-space-md">
+<!-- Active User Badge / Context Switcher -->
+<div class="hidden sm:flex items-center bg-surface-container-low border border-outline-variant rounded-lg px-space-md py-space-xs space-x-space-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-md text-label-md">
+            AD
+          </div>
+<div class="flex flex-col text-left">
+<span class="text-label-sm font-label-sm text-on-surface leading-tight">Alejandro Díaz</span>
+<span class="text-label-sm font-label-sm text-secondary leading-tight">Rol: SuperAdmin &amp; Socio</span>
+</div>
+<span class="material-symbols-outlined text-outline text-body-sm" data-icon="expand_more">expand_more</span>
+</div>
+<button class="text-on-surface-variant hover:text-error transition-colors p-space-xs rounded hover:bg-surface-container-high" title="Cerrar Sesión" type="button">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Container Layout -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-gutter py-space-xl">
+<!-- Hero Header: Safe, authoritative and structured collegiate aesthetic -->
+<div class="border-b border-outline-variant pb-space-lg mb-space-xl text-center md:text-left flex flex-col md:flex-row md:items-end md:justify-between gap-space-md">
+<div>
+<div class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-full bg-secondary-container text-on-secondary-container text-label-sm font-label-sm mb-space-sm">
+<span class="material-symbols-outlined fill-icon text-slot-time" data-icon="verified_user">verified_user</span>
+<span>Portal Hub de Control · Temporada Activa 2025</span>
+</div>
+<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">
+          Bienvenido a CanchasApp - Sistema de Gestión Deportiva
+        </h1>
+<p class="text-body-lg font-body-lg text-on-surface-variant mt-space-xs max-w-3xl">
+          Selecciona tu módulo de acceso según tu rol en el complejo deportivo. Cada espacio cuenta con flujos de autenticación optimizados y permisos granulares.
+        </p>
+</div>
+<!-- Quick Session Indicator -->
+<div class="flex items-center space-x-space-xs bg-surface-container-lowest border border-outline-variant px-space-md py-space-sm rounded-lg shadow-sm self-start md:self-auto">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Conexión Segura ASP.NET Core</span>
+</div>
+</div>
+<!-- 3 High-Impact Bento Cards Grid conforming to bootstrap 12-col col-md-4 -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-stretch mb-space-xxl">
+<!-- CARD 1: Módulo Cliente & Socios -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200 hover:border-primary-container">
+<div>
+<!-- Visual Card Header with context photo -->
+<div class="h-44 w-full overflow-hidden rounded-t-lg relative bg-surface-container">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="A modern green soccer turf pitch with white boundary lines illuminated under bright daylight, with crisp goal nets and institutional stadium seating in the background, captured in high quality sports photography." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA7gr4bGDQbHnZYRbjETkK5eEv9FHcOszIsUxXa_7m43Ade9aZa7PZ7nMdxis44yQDBA-EsdB1sJtdI1VG3fHwH7Ou3yJOpRw4L9LB942ndlHWJuRFDbkIeYy2yBAdpNdITA9ZrBIFnWaGJOpvA9No0EqXTY8qHJN6tkWoe6J-NZZoF3kDz3U3IaX0SMFK_ewVYClbHDH2vMlAUb-LVnZsPvG_ZMjVR5H0PBaKOWiKkcHDhpSm_m3bJ')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute top-space-md left-space-md bg-surface-container-lowest/90 backdrop-blur-sm p-space-xs rounded-lg border border-outline-variant shadow-sm text-primary">
+<span class="material-symbols-outlined text-headline-sm" data-icon="sports_soccer">sports_soccer</span>
+</div>
+<div class="absolute bottom-space-md left-space-md right-space-md text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-wider text-secondary-fixed">Atención Directa</span>
+<h2 class="text-headline-sm font-headline-sm font-bold leading-snug text-surface-container-lowest">Módulo Cliente &amp; Socios</h2>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg">
+<p class="text-body-md font-body-md text-on-surface-variant mb-space-md leading-relaxed">
+              Consulta disponibilidad de canchas en tiempo real, reserva turnos online, paga con Mercado Pago y accede a tu historial de reservas.
+            </p>
+<!-- Badges de Acceso -->
+<div class="flex flex-wrap gap-space-xs pt-space-xs mb-space-md">
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Fútbol 5/7/11
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Pádel
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-container text-on-secondary-fixed-variant font-semibold">
+                Descuento Socio
+              </span>
+</div>
+<ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant border-t border-surface-container py-space-sm">
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Pasarela Mercado Pago integrada (QR / Tarjetas)</span>
+</li>
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Confirmación inmediata por WhatsApp</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Card Footer & Action CTA -->
+<div class="p-space-lg pt-0 border-t border-surface-container mt-auto">
+<a class="w-full mt-space-md inline-flex items-center justify-center gap-space-xs bg-primary-container text-on-primary-container hover:bg-primary font-label-md text-label-md py-space-sm px-space-md rounded shadow-sm transition-colors duration-150 text-center" href="#">
+<span>Ingresar como Cliente / Reservar Cancha</span>
+<span class="material-symbols-outlined text-slot-time" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- CARD 2: Módulo Administrador & Dueño -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200 hover:border-tertiary">
+<div>
+<!-- Visual Card Header with context photo -->
+<div class="h-44 w-full overflow-hidden rounded-t-lg relative bg-surface-container">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="An executive analytics workstation showing clear financial dashboards, booking statistics, and operational revenue charts on modern monitors in a crisp sports club office setting with natural sunlight." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqYr0103IqTtyGl-FJjFp1fsz6KyZWS_SnVMryKF5PK_LgYxr1iIvh8nmaSAtH99at75_Co8JnIteb_glYsujVXeanOaxvG8edo_5LJz7lXVAacGboQBuk5nZqWqGugmAmDyvPrJLKug6gRHr2n5bhbIdSKFfD9IIciodio6K5-pVMWBKDwp9l8W__4sTE2dXMaZw9q3CVfOVICgM6KnJ3hDZ_n3uQklKeEmyIaXC5fddG-7p9GXLj')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute top-space-md left-space-md bg-surface-container-lowest/90 backdrop-blur-sm p-space-xs rounded-lg border border-outline-variant shadow-sm text-tertiary">
+<span class="material-symbols-outlined text-headline-sm" data-icon="dashboard">dashboard</span>
+</div>
+<div class="absolute bottom-space-md left-space-md right-space-md text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-wider text-tertiary-fixed">Gestión Central</span>
+<h2 class="text-headline-sm font-headline-sm font-bold leading-snug text-surface-container-lowest">Módulo Administrador &amp; Dueño</h2>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg">
+<p class="text-body-md font-body-md text-on-surface-variant mb-space-md leading-relaxed">
+              Panel integral para dueños: reportes de recaudación diaria, métricas de ocupación, gestión de canchas, tarifas y administración de socios.
+            </p>
+<!-- Badges de Acceso -->
+<div class="flex flex-wrap gap-space-xs pt-space-xs mb-space-md">
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed text-on-tertiary-fixed-variant font-semibold">
+                Métricas KPIs
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Control de Pagos
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Gestión de Canchas
+              </span>
+</div>
+<ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant border-t border-surface-container py-space-sm">
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Exportación de balances contables y caja</span>
+</li>
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-tertiary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Configuración de tarifas pico y promociones</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Card Footer & Action CTA -->
+<div class="p-space-lg pt-0 border-t border-surface-container mt-auto">
+<a class="w-full mt-space-md inline-flex items-center justify-center gap-space-xs bg-tertiary text-on-tertiary hover:bg-on-tertiary-fixed-variant font-label-md text-label-md py-space-sm px-space-md rounded shadow-sm transition-colors duration-150 text-center" href="#">
+<span>Ingresar al Panel de Administración</span>
+<span class="material-symbols-outlined text-slot-time" data-icon="admin_panel_settings">admin_panel_settings</span>
+</a>
+</div>
+</div>
+<!-- CARD 3: Módulo Empleado & Recepción -->
+<div class="group bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col justify-between shadow-sm hover:shadow-md transition-all duration-200 hover:border-secondary">
+<div>
+<!-- Visual Card Header with context photo -->
+<div class="h-44 w-full overflow-hidden rounded-t-lg relative bg-surface-container">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-300 group-hover:scale-105" data-alt="A clean, illuminated front desk reception of an athletic community center with scheduling monitors, key racks, sports balls, and a professional terminal setup for customer check-in." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD10NIm9TLFae3EGu8ubhGMLKxOZTVvpxyiHgjPVGnv1VGvN5JqAAi9178D_PBFROpQoSEURT8t5pgcNFq6yjSIrZmUz5FqIGp7HFKcOWwzu8ovdEA19a-fZsy0sF7fpmHViWkTh1HXqJVvrRC9_eK09SW4JD8-eMnPIHVWSzxIA5FHpLh38UQ9p6MHpWYyUxuYtLGXShE6ncAGJQWy1sOb_183E6gNz7EE3ty9bGn5WCYgn_4NkrvX')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute top-space-md left-space-md bg-surface-container-lowest/90 backdrop-blur-sm p-space-xs rounded-lg border border-outline-variant shadow-sm text-secondary">
+<span class="material-symbols-outlined text-headline-sm" data-icon="sports">sports</span>
+</div>
+<div class="absolute bottom-space-md left-space-md right-space-md text-surface-container-lowest">
+<span class="text-label-sm font-label-sm uppercase tracking-wider text-secondary-fixed">Mostrador Operativo</span>
+<h2 class="text-headline-sm font-headline-sm font-bold leading-snug text-surface-container-lowest">Módulo Empleado &amp; Recepción</h2>
+</div>
+</div>
+<!-- Card Body Content -->
+<div class="p-space-lg">
+<p class="text-body-md font-body-md text-on-surface-variant mb-space-md leading-relaxed">
+              Mesa de entradas: cobro de señas y saldos en efectivo en mostrador, asignación rápida de turnos presenciales y encendido de iluminación.
+            </p>
+<!-- Badges de Acceso -->
+<div class="flex flex-wrap gap-space-xs pt-space-xs mb-space-md">
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Turno Mañana/Tarde
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-secondary-fixed text-on-secondary-fixed-variant font-semibold">
+                Cobro en Caja
+              </span>
+<span class="inline-flex items-center px-space-sm py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container border border-outline-variant text-on-surface">
+                Check-in de Equipos
+              </span>
+</div>
+<ul class="space-y-space-xs text-body-sm font-body-sm text-on-surface-variant border-t border-surface-container py-space-sm">
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Arqueo y cierre de turno de caja rápido</span>
+</li>
+<li class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-secondary text-slot-time" data-icon="check_circle">check_circle</span>
+<span>Comando de torres lumínicas para partidos</span>
+</li>
+</ul>
+</div>
+</div>
+<!-- Card Footer & Action CTA -->
+<div class="p-space-lg pt-0 border-t border-surface-container mt-auto">
+<a class="w-full mt-space-md inline-flex items-center justify-center gap-space-xs bg-surface-container-lowest border-2 border-primary-container text-primary hover:bg-primary-container hover:text-on-primary-container font-label-md text-label-md py-space-sm px-space-md rounded shadow-sm transition-colors duration-150 text-center" href="#">
+<span>Abrir Mesa de Recepción</span>
+<span class="material-symbols-outlined text-slot-time" data-icon="point_of_sale">point_of_sale</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Security & Architecture Section: ASP.NET Core Identity status -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-lg shadow-sm">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-md border-b border-surface-container pb-space-md">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary text-headline-sm" data-icon="lock">lock</span>
+<div>
+<h3 class="text-title-md font-title-md text-on-surface">Estado de Seguridad y Control de Acceso (RBAC)</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Arquitectura basada en ASP.NET Core Identity · JSON Web Tokens activos</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm text-label-sm font-label-sm">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="text-on-surface-variant">Servidor Principal: <strong class="text-on-surface">Online (99.98% SLA)</strong></span>
+</div>
+</div>
+<!-- Identity Roles Matrix -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md mt-space-md pt-space-xs">
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface">Rol: Admin</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Permisos totales de infraestructura y tesorería.</p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface">Rol: Empleado</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Mesa de caja, reserva presencial y control de cancha.</p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface">Rol: Socio</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Tarifas diferenciales bonificadas y prioridad horaria.</p>
+</div>
+<div class="p-space-sm rounded bg-surface-container-low border border-outline-variant/60">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm text-on-surface">Rol: Cliente</span>
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant">Turnos públicos mediante pasarelas de pago digitales.</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer from Shared Components JSON -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline mt-auto">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-space-sm text-center sm:text-left">
+<span class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed">CanchasApp</span>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant dark:text-outline-variant">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Links from Shared Components JSON -->
+<nav class="flex flex-wrap justify-center items-center gap-x-space-lg gap-y-space-xs">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Términos de Servicio
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Política de Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Reglamento Interno
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Contacto y Ubicación
+        </a>
+</nav>
+</div>
+</footer>
+</body></html>

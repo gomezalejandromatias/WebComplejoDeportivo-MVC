@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Iniciar Sesión - CanchasApp</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container-Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-container": "#198754",
+            "surface-container": "#edeeef",
+            "surface-container-high": "#e7e8e9",
+            "surface-container-lowest": "#ffffff",
+            "surface-dim": "#d9dadb",
+            "on-surface": "#191c1d",
+            "on-primary-container": "#ffffff",
+            "surface-tint": "#006d41",
+            "inverse-on-surface": "#f0f1f2",
+            "primary-fixed": "#93f7ba",
+            "surface-bright": "#f8f9fa",
+            "on-surface-variant": "#3e4941",
+            "outline": "#6e7a70",
+            "secondary-fixed": "#b0f1c7",
+            "on-primary-fixed": "#002110",
+            "tertiary": "#0056cc",
+            "inverse-surface": "#2e3132",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "inverse-primary": "#77da9f",
+            "surface-variant": "#e1e3e4",
+            "secondary": "#2d6a48",
+            "secondary-container": "#b0f1c7",
+            "on-error": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-container": "#0a6dfc",
+            "on-tertiary-container": "#ffffff",
+            "surface-container-highest": "#e1e3e4",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "primary-fixed-dim": "#77da9f",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-fixed-variant": "#0f5132",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#33704e",
+            "primary": "#006c40",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container-low": "#f3f4f5",
+            "on-tertiary-fixed-variant": "#00419e",
+            "tertiary-fixed": "#dae2ff",
+            "error": "#ba1a1a",
+            "on-background": "#191c1d",
+            "on-tertiary-fixed": "#001946",
+            "on-primary": "#ffffff",
+            "on-secondary-fixed": "#002111",
+            "background": "#f8f9fa",
+            "on-error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "gutter-sm": "0.75rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin-mobile": "1rem",
+            "space-md": "1rem",
+            "space-xxl": "3rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Inter"],
+            "label-md": ["Inter"],
+            "slot-time": ["Inter"],
+            "headline-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "body-lg": ["Inter"],
+            "label-sm": ["Inter"],
+            "display-hero": ["Inter"],
+            "body-md": ["Inter"],
+            "headline-lg": ["Inter"]
+          },
+          "fontSize": {
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-full flex flex-col justify-between bg-surface text-on-surface font-body-md text-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar (Shared Component) -->
+<header class="w-full bg-surface dark:bg-surface-container-low shadow-sm dark:shadow-none border-b border-outline-variant dark:border-outline">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<!-- Brand & Left Navigation Links -->
+<div class="flex items-center space-x-space-xl">
+<a class="flex items-center space-x-space-xs text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed tracking-tight" href="#">
+<span class="material-symbols-outlined text-primary-container leading-none" data-icon="sports_soccer" style="font-variation-settings: 'FILL' 1;">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-space-lg">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-space-xs py-1 rounded transition-colors duration-150" href="#">Inicio</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-space-xs py-1 rounded transition-colors duration-150" href="#">Canchas</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest px-space-xs py-1 rounded transition-colors duration-150" href="#">Mis Reservas</a>
+</nav>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center space-x-space-sm">
+<a class="text-primary dark:text-primary-fixed font-title-md text-title-md border-b-2 border-primary dark:border-primary-fixed pb-1 px-space-xs transition-colors duration-150 ease-in-out" href="#">
+          Iniciar Sesión
+        </a>
+<a class="inline-flex items-center justify-center bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md px-4 py-2 rounded-lg transition-colors duration-150 shadow-sm" href="#">
+          Registrarse
+        </a>
+</div>
+</div>
+</header>
+<!-- Main Login Canvas -->
+<main class="flex-grow flex items-center justify-center py-space-xl px-gutter-sm sm:px-gutter">
+<div class="w-full max-w-lg">
+<!-- System Notification Context / Operational Banner -->
+<div class="mb-space-md bg-secondary-container/40 border border-secondary-container rounded-lg p-space-sm flex items-center gap-space-sm text-on-secondary-container">
+<span class="material-symbols-outlined text-secondary" data-icon="shield">shield</span>
+<span class="font-body-sm text-body-sm">Acceso institucional seguro mediante <strong>ASP.NET Core Identity</strong></span>
+</div>
+<!-- Main Form Card (Bootstrap card styled with Design System Level 1 Elevation) -->
+<div class="bg-surface-container-lowest border border-outline-variant/60 rounded-xl shadow-sm overflow-hidden">
+<!-- Card Header with Subtle Sports Indicator -->
+<div class="border-b border-surface-container-high px-6 pt-6 pb-5">
+<div class="flex items-center justify-between">
+<div class="inline-flex items-center gap-2 bg-surface-container-low px-2.5 py-1 rounded-full text-secondary font-label-sm text-label-sm border border-outline-variant/40">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+              Servicio de Autenticación
+            </div>
+<span class="material-symbols-outlined text-outline" data-icon="lock">lock</span>
+</div>
+<h1 class="mt-3 font-headline-md text-headline-md text-on-surface">Iniciar Sesión</h1>
+<p class="mt-1 font-body-sm text-body-sm text-on-surface-variant">
+            Accedé a tu cuenta para gestionar turnos y reservas en CanchasApp
+          </p>
+</div>
+<!-- Card Body -->
+<div class="p-6 space-y-space-lg">
+<!-- Identity Form -->
+<form action="#" class="space-y-space-md" id="loginForm" method="POST">
+<!-- Email / Username Field -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="Input_Email">
+                Correo Electrónico o Usuario
+              </label>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<input class="block w-full pl-10 pr-3 py-2.5 bg-surface-container-lowest border border-outline-variant/80 rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:ring-2 focus:ring-primary-container/25 focus:border-primary-container transition-colors duration-150" id="Input_Email" name="Input.Email" placeholder="ejemplo@correo.com" required="" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="block font-label-md text-label-md text-on-surface" for="Input_Password">
+                  Contraseña
+                </label>
+<a class="font-label-sm text-label-sm text-primary hover:text-surface-tint underline transition-colors duration-150" href="#">
+                  ¿Olvidaste tu contraseña?
+                </a>
+</div>
+<div class="relative rounded-lg shadow-sm">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="key">key</span>
+</div>
+<input class="block w-full pl-10 pr-10 py-2.5 bg-surface-container-lowest border border-outline-variant/80 rounded-lg font-body-md text-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:ring-2 focus:ring-primary-container/25 focus:border-primary-container transition-colors duration-150" id="Input_Password" name="Input.Password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 pr-3 flex items-center text-outline hover:text-on-surface-variant transition-colors" onclick="togglePasswordVisibility()" type="button">
+<span class="material-symbols-outlined text-base" data-icon="visibility" id="passwordToggleIcon">visibility</span>
+</button>
+</div>
+</div>
+<!-- Remember Me & Persistence -->
+<div class="flex items-center">
+<input class="h-4 w-4 rounded border-outline-variant text-primary-container focus:ring-primary-container/25 focus:ring-offset-0 transition-colors" id="Input_RememberMe" name="Input.RememberMe" type="checkbox"/>
+<label class="ml-2.5 block font-body-sm text-body-sm text-on-surface-variant cursor-pointer select-none" for="Input_RememberMe">
+                Recordarme en este equipo
+              </label>
+</div>
+<!-- Primary Submission CTA (.btn-success) -->
+<button class="w-full flex justify-center items-center gap-2 py-3 px-4 rounded-lg bg-primary-container hover:bg-primary active:bg-secondary text-on-primary-container font-label-md text-label-md font-semibold tracking-wide shadow-sm hover:shadow transition-all duration-150" type="submit">
+<span class="material-symbols-outlined text-lg" data-icon="login">login</span>
+<span>Ingresar al Sistema</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="relative my-4">
+<div aria-hidden="true" class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-surface-container-high"></div>
+</div>
+<div class="relative flex justify-center">
+<span class="bg-surface-container-lowest px-3 font-label-sm text-label-sm text-outline">
+                Entorno Académico &amp; Pruebas
+              </span>
+</div>
+</div>
+<!-- Academic Demo / Role Simulation Section -->
+<div class="bg-surface-container-low/70 border border-outline-variant/50 rounded-lg p-3.5 space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="badge">badge</span>
+                Cuentas Demo para Testing de Roles
+              </span>
+<span class="font-slot-time text-slot-time bg-surface-container-highest px-2 py-0.5 rounded text-outline">v2.5 Identity</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-1">
+<button class="flex flex-col items-center justify-center p-2 rounded bg-surface-container-lowest border border-outline-variant hover:border-primary-container hover:bg-secondary-container/20 transition-all text-center group" onclick="fillRole('jugador@canchasapp.com', 'Jugador2025!', 'Cliente / Jugador')" type="button">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm text-on-surface mt-1">Cliente / Jugador</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2 rounded bg-surface-container-lowest border border-outline-variant hover:border-primary-container hover:bg-secondary-container/20 transition-all text-center group" onclick="fillRole('recepcion@canchasapp.com', 'Recepcion2025!', 'Empleado de Recepción')" type="button">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="desk">desk</span>
+<span class="font-label-sm text-label-sm text-on-surface mt-1">Empleado de Recepción</span>
+</button>
+<button class="flex flex-col items-center justify-center p-2 rounded bg-surface-container-lowest border border-outline-variant hover:border-primary-container hover:bg-secondary-container/20 transition-all text-center group" onclick="fillRole('admin@canchasapp.com', 'AdminSuper2025!', 'Administrador / Dueño')" type="button">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-label-sm text-label-sm text-on-surface mt-1">Administrador / Dueño</span>
+</button>
+</div>
+<p class="hidden text-center font-label-sm text-label-sm text-primary font-medium pt-1" id="roleFeedback"></p>
+</div>
+</div>
+<!-- Card Footer -->
+<div class="bg-surface-container-low/40 border-t border-surface-container-high px-6 py-4 text-center">
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            ¿No tenés una cuenta? 
+            <a class="font-label-md text-label-md text-primary hover:text-surface-tint font-semibold underline transition-colors duration-150" href="#">
+              Registrate aquí
+            </a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="w-full bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col md:flex-row items-center gap-2 md:gap-4 text-center md:text-left">
+<span class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed">CanchasApp</span>
+<span class="hidden md:inline-block text-outline">•</span>
+<p class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Navigation & Regulatory Links -->
+<nav class="flex flex-wrap justify-center items-center gap-x-space-md gap-y-2">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Términos de Servicio</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Política de Privacidad</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Reglamento Interno</a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">Contacto y Ubicación</a>
+</nav>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+    function togglePasswordVisibility() {
+      const passwordInput = document.getElementById('Input_Password');
+      const icon = document.getElementById('passwordToggleIcon');
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        passwordInput.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    function fillRole(email, password, roleName) {
+      const emailField = document.getElementById('Input_Email');
+      const passwordField = document.getElementById('Input_Password');
+      const feedback = document.getElementById('roleFeedback');
+
+      emailField.value = email;
+      passwordField.value = password;
+
+      feedback.textContent = `Credenciales cargadas para: ${roleName}`;
+      feedback.classList.remove('hidden');
+
+      emailField.classList.add('ring-2', 'ring-primary-container');
+      setTimeout(() => {
+        emailField.classList.remove('ring-2', 'ring-primary-container');
+      }, 1000);
+    }
+  </script>
+</body></html>

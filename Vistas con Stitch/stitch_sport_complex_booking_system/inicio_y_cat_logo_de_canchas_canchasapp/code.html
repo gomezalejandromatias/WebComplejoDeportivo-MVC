@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background text-on-surface" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CanchasApp - Complejo Deportivo y Reserva de Canchas</title>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with forms & container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config JSON -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#0f5132",
+            "primary-fixed-dim": "#77da9f",
+            "on-surface-variant": "#3e4941",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#dae2ff",
+            "surface-container-low": "#f3f4f5",
+            "on-primary-container": "#ffffff",
+            "on-tertiary-fixed": "#001946",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container": "#edeeef",
+            "inverse-primary": "#77da9f",
+            "inverse-on-surface": "#f0f1f2",
+            "on-primary-fixed": "#002110",
+            "surface-dim": "#d9dadb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#e7e8e9",
+            "on-tertiary-container": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "tertiary": "#0056cc",
+            "on-error": "#ffffff",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-container": "#33704e",
+            "surface-tint": "#006d41",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed": "#93f7ba",
+            "on-secondary-fixed": "#002111",
+            "secondary-container": "#b0f1c7",
+            "surface-variant": "#e1e3e4",
+            "tertiary-container": "#0a6dfc",
+            "on-background": "#191c1d",
+            "background": "#f8f9fa",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "surface-bright": "#f8f9fa",
+            "secondary-fixed": "#b0f1c7",
+            "primary-container": "#198754",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#00419e",
+            "primary": "#006c40",
+            "outline": "#6e7a70",
+            "secondary": "#2d6a48"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xxl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "display-hero": ["Inter"],
+            "slot-time": ["Inter"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md bg-background text-on-surface">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface border-b border-outline-variant shadow-sm w-full sticky top-0 z-40">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<div class="flex items-center gap-space-xl">
+<a class="text-headline-sm font-headline-sm font-bold text-primary flex items-center gap-space-xs" href="#">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<nav class="hidden md:flex items-center gap-space-lg">
+<a class="text-primary font-title-md text-title-md border-b-2 border-primary pb-1 transition-colors duration-150 ease-in-out" href="#">Inicio</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:bg-surface-container-low transition-colors duration-150 px-space-xs py-1 rounded" href="#catalogo">Canchas</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary hover:bg-surface-container-low transition-colors duration-150 px-space-xs py-1 rounded" href="#">Mis Reservas</a>
+</nav>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="hidden sm:inline-flex px-space-md py-space-xs border border-primary text-primary hover:bg-surface-container-low rounded font-label-md text-label-md transition-colors duration-150 ease-in-out" type="button">
+          Iniciar Sesión
+        </button>
+<button class="px-space-md py-space-xs bg-primary-container text-on-primary-container hover:bg-primary rounded font-label-md text-label-md transition-colors duration-150 ease-in-out shadow-sm" type="button">
+          Registrarse
+        </button>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative bg-surface-container-lowest border-b border-outline-variant py-space-xxl">
+<div class="w-full max-w-7xl mx-auto px-gutter">
+<div class="max-w-3xl mb-space-xl">
+<span class="inline-flex items-center gap-1.5 px-space-sm py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant font-label-sm text-label-sm uppercase font-bold tracking-wide mb-space-sm">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+          Sistema Oficial de Reserva de Canchas
+        </span>
+<h1 class="font-display-hero text-display-hero text-on-surface tracking-tight leading-tight mb-space-sm">
+          Reserva tu cancha al instante en el mejor complejo deportivo
+        </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+          Accede a disponibilidad en tiempo real para canchas de Fútbol 5, 7, 11 y Pádel con césped sintético profesional de última generación, iluminación HD y vestuarios de primer nivel.
+        </p>
+</div>
+<!-- Quick Search / Booking Engine Bar (Bootstrap 5 inline filter convention) -->
+<div class="bg-surface border border-outline-variant rounded-xl p-space-md shadow-sm">
+<form class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-space-md items-end">
+<!-- Deporte / Tipo -->
+<div class="lg:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1" for="tipoCancha">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="sports_soccer">sports_soccer</span>
+              Deporte / Tipo
+            </label>
+<select class="w-full h-11 px-3 border border-outline rounded font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition" id="tipoCancha">
+<option value="todos">Todos los deportes</option>
+<option value="f5">Fútbol 5 (Sintético / Techada)</option>
+<option value="f7">Fútbol 7 (Césped Pro)</option>
+<option value="f11">Fútbol 11 (Profesional)</option>
+<option value="padel">Pádel Panorámico</option>
+</select>
+</div>
+<!-- Fecha -->
+<div class="lg:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1" for="fechaReserva">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="calendar_today">calendar_today</span>
+              Fecha del Partido
+            </label>
+<input class="w-full h-11 px-3 border border-outline rounded font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition" id="fechaReserva" type="date" value="2025-05-18"/>
+</div>
+<!-- Horario Preferido -->
+<div class="lg:col-span-3 flex flex-col gap-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1" for="horarioTurno">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="schedule">schedule</span>
+              Horario Preferido
+            </label>
+<select class="w-full h-11 px-3 border border-outline rounded font-body-md text-body-md text-on-surface bg-surface-container-lowest focus:ring-2 focus:ring-primary focus:border-primary transition" id="horarioTurno">
+<option value="cualquiera">Cualquier turno</option>
+<option value="manana">Mañana (08:00 - 14:00)</option>
+<option value="tarde">Tarde (14:00 - 19:00)</option>
+<option value="noche">Noche (19:00 - 00:00)</option>
+</select>
+</div>
+<!-- Botón de Búsqueda -->
+<div class="lg:col-span-3">
+<button class="w-full h-11 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-2 shadow transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="search">search</span>
+              Buscar Canchas Disponibles
+            </button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Main Content: Two-Column Layout (col-lg-3 sidebar + col-lg-9 catalog) -->
+<main class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex-grow" id="catalogo">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Left Sidebar: Advanced Filters (col-lg-3) -->
+<aside class="lg:col-span-3">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md shadow-sm sticky top-20">
+<div class="flex items-center justify-between pb-space-sm border-b border-outline-variant mb-space-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="tune">tune</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Filtros</h2>
+</div>
+<button class="font-label-sm text-label-sm text-primary hover:underline" type="reset">Limpiar</button>
+</div>
+<!-- Superficie -->
+<div class="mb-space-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-space-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="layers">layers</span>
+              Tipo de Superficie
+            </h3>
+<div class="space-y-2 mt-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Césped Sintético Monofilamento</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Caucho &amp; Césped 60mm</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Parquet Deportivo Flotante</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Césped Híbrido FIFA Quality</span>
+</label>
+</div>
+</div>
+<hr class="border-outline-variant my-space-md"/>
+<!-- Características del Complejo -->
+<div class="mb-space-md">
+<h3 class="font-title-md text-title-md text-on-surface mb-space-xs flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="checklist">checklist</span>
+              Características
+            </h3>
+<div class="space-y-2 mt-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Cancha Techada / Tinglado</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Iluminación LED Profesional</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Vestuarios con Duchas Calientes</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Parrilla / Quincho Post-partido</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-primary focus:ring-primary h-4 w-4" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-on-surface">Grada para Espectadores</span>
+</label>
+</div>
+</div>
+<hr class="border-outline-variant my-space-md"/>
+<!-- Rango de Precio -->
+<div>
+<div class="flex items-center justify-between mb-space-xs">
+<h3 class="font-title-md text-title-md text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-on-surface-variant" data-icon="payments">payments</span>
+                Precio por Hora
+              </h3>
+<span class="font-label-sm text-label-sm text-primary font-bold">Hasta $25.000 ARS</span>
+</div>
+<input class="w-full accent-primary cursor-pointer mt-2" max="30000" min="8000" step="1000" type="range" value="25000"/>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant mt-1">
+<span>$8.000</span>
+<span>$30.000</span>
+</div>
+</div>
+<button class="w-full mt-space-lg py-2 px-3 bg-surface-container-low hover:bg-surface-container text-on-surface-variant border border-outline rounded font-label-md text-label-md transition" type="button">
+            Aplicar Filtros
+          </button>
+</div>
+</aside>
+<!-- Right Main Column: Courts Catalog (col-lg-9) -->
+<section class="lg:col-span-9">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap- space-sm mb-space-md">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Canchas Disponibles</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mostrando 6 campos de juego verificados con turnos para hoy</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ordenar por:</span>
+<select class="px-2 py-1 text-sm border border-outline rounded bg-surface-container-lowest text-on-surface focus:ring-1 focus:ring-primary">
+<option>Relevancia</option>
+<option>Precio: menor a mayor</option>
+<option>Precio: mayor a menor</option>
+<option>Capacidad</option>
+</select>
+</div>
+</div>
+<!-- Grid of Court Cards (Bootstrap 5 Cards layout: col-md-6 / col-lg-4) -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-space-md">
+<!-- Card 1: Fútbol 5 Techada -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High quality athletic photography of a modern indoor soccer court with pristine green synthetic turf and painted white boundary lines under bright warehouse style halogen stadium lighting, with high vaulted industrial ceiling trusses and safety netting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBytHtqFv86bTXGhbQvBloQa7UUJMRQ8CV3rNNa4rbxkTf1QMM__j3-vSNC3Wvc3RANQ3vOzhfpbRiEaSQmFTsf650ue_GGdnkAJG0BhV4JVG-i-K503xB7Ad0I_qV6Y97F_wvNSUiiaHESa2Fc-s8veWtsEfv5RsrFplK5pVc2W1Dh1f9iPwbR3PYlba3S_5IuE0jnciBBrqYelJWt2dCKtAFbg7mrwK9saG1rTJJLjJF6sT6LD4bi"/>
+<span class="absolute top-3 left-3 bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Fútbol 5 Techada
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cancha 1: La Bombonerita</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Ideal para partidos dinámicos, césped sintético con caucho de alta densidad y red perimetral.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>30m x 18m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>10 Jugadores (5v5)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="roofing">roofing</span>
+<span>100% Techada</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="wb_sunny">wb_sunny</span>
+<span>LED 800 Lux</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$12.000</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">3 turnos libres</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+<!-- Card 2: Fútbol 7 Césped Pro -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An expansive outdoor soccer field with vibrant emerald artificial turf and crisp white lines bathed in evening floodlight illumination against an open dusk sky with modern spectator bleachers visible on the side." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBO-U3_SJfd5eQ6fs0p9BdW6TfrOjhMHWpuNDC-14FTAVMPCOOVNUtH7pfitcx6snkObXufFEBajBcSUxmVXuAjiRMU90xJJpGcTXG-3vT8xvwU-E52plIlq0qcMi4Um6b1MJ6S2zen7GYKeyRPBtCdHjIMaeWjemJ0K1FvWCwK8LLclj5yL9uB8JAJSLBIDoEv9SXAXRL5rlIBT-1q8AkB1BtxFq5pmDA4c2T3jpU8i-ReknorzWZR"/>
+<span class="absolute top-3 left-3 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Fútbol 7 Césped Pro
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cancha 2: El Monumental</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Espacio amplio para 14 jugadores con sistema de drenaje rápido y torres de luz direccionales.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>50m x 30m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>14 Jugadores (7v7)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="wb_sunny">wb_sunny</span>
+<span>Torres LED HD</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="grass">grass</span>
+<span>Sintético 50mm</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$15.000</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">5 turnos libres</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+<!-- Card 3: Fútbol 11 Profesional -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Full size collegiate soccer stadium pitch with professional standard turf, regulation goals with pristine white nets, professional track boundary, grandstands and luminous night illumination towers under a clear dark sky." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIAHinvTaJFmrsMs3Zzsakx4tUDW-i5w-n6Hf3gavXwhcgLjYK_5Bie4qOyXq3YVfc9Zd4J-DUPSg51SbCErx9yhhPjkdno1Ln6zdnzov72e9cnvB55p_Yx7ajysfr_ye47XUVvCCW7yNTI2FfFoi_CtFf-eR5LfFSuoFUZM51Y2ySFgHsBOHkmPMiRR-wwGgnIOMTEY_NvBrMrFtLuN4InY0nFO_X8zG1kFPpx9jjK2zXcBPY3ZJE"/>
+<span class="absolute top-3 left-3 bg-tertiary text-on-tertiary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Fútbol 11 Profesional
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cancha 3: Maracaná Pro</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Medidas oficiales reglamentarias apta para torneos federados, árbitros y bancos de suplentes.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>100m x 64m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>22 Jugadores (11v11)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="chair">chair</span>
+<span>Bancos y Gradas</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="military_tech">military_tech</span>
+<span>FIFA Approved</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$22.000</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">2 turnos libres</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+<!-- Card 4: Pádel Cristal Panorámico -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Modern indoor padel court with blue synthetic turf, thick transparent tempered glass perimeter walls and metallic structural posts under crisp indoor sports center lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQ35bUf0wy16KbqhGWi91kLkEb7-6tJxrh_1eS_KRQE4E1Df5hH5Py4aCjVHzxaPicbQ545ZInkv4dtTPdphAuY4f9Pt4U0F_ZEBY6Olxac-OJK4kCq_ttDcS_3OetpZOBBkGEiTLOYFSjm6-NWxFvfmJlkZTr7nS4dljGanVHk_Ng6a2b-Kn5jWCBXPuqwKH-d8l-SeZ4N2Cq_LQQwJ4SMeZWmAkP52Ks4gdh6oorFIn2bs0oyoHS"/>
+<span class="absolute top-3 left-3 bg-primary-container text-on-primary-container font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Pádel Panorámico
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Pádel 1: Crystal Court</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Vidrio templado panorámico de 12mm y alfombra azul texturada WPT de mínimo rebote residual.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>20m x 10m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>4 Jugadores (Dobles)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="sports_tennis">sports_tennis</span>
+<span>Césped Azul WPT</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="wb_incandescent">wb_incandescent</span>
+<span>LED Anti-reflejo</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$10.000</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">4 turnos libres</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+<!-- Card 5: Fútbol 5 Indoor Parquet -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="High gloss polished hardwood indoor sports court for futsal with multicolored official lines for basketball and soccer, with bright clean architectural lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW9QvmQPRJIT__AqNCvOnsHiRF31ppuDSMKIN8emVpGmTgZ08OVbNMIHoYW2z2UU3JSsDI1LXu8HpsW3jy_oqO7n82Bi04Td8j-y_kuzleigfEhv7GoxdCFR1smtow6ptwpf_YwLE5xk1HdWta3jAZRsbuWIzzaq6sdJD4p8rDSAXWlLSe-Bqjvi15E_TXrx8RMxDuWcD2n7Pp_dtrEtUh4r9vphkGYB_0eEiBxBBsuJD4LuIRKL4H"/>
+<span class="absolute top-3 left-3 bg-on-secondary-fixed-variant text-on-primary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Futsal Parquet Pro
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cancha 4: Estadio Cerrado</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Piso flotante amortiguado reglamentario para Futsal rápido y básquetbol con tableros electrónicos.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>36m x 20m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>10 Jugadores (5v5)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="domain">domain</span>
+<span>Climatizado</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="timer">timer</span>
+<span>Tablero Digital</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$13.500</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">1 turno libre</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+<!-- Card 6: Fútbol 7 Premium Outdoor -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden flex flex-col shadow-sm hover:shadow-md transition-all duration-200">
+<div class="relative h-44 w-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="Outdoor athletic community soccer field with fresh green artificial grass and clear netting enclosure surrounded by green trees during late afternoon golden hour lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_ZzeW5Hgj6eByF4M-_5cjdOZvXjo3okKiCX8KKPtYG2zIxaS8bQ4YMPuwGYhX90XoE45ESr9FYiB9rs1sWuVpFFTfzn0C8Ir_-Sk-RAJ2e0JDGkBl1cKeZSdx-t6EQ-ruC_1g5oH3fy1Y_1XMEzb29a2Ts7EGLer4lq4XgiTvx8fTOadqbplhjRStPTKjfq7FCnAx7QhYDIT-KkyCgFsIdspElDWwuHRfWXuVkJCCYjxcu0Le0LsT"/>
+<span class="absolute top-3 left-3 bg-secondary text-on-secondary font-label-sm text-label-sm px-2.5 py-1 rounded-full shadow-sm font-semibold">
+                Fútbol 7 Césped Pro
+              </span>
+<span class="absolute top-3 right-3 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="circle" style="font-variation-settings: 'FILL' 1;">circle</span>
+                Disponible Hoy
+              </span>
+</div>
+<div class="p-space-md flex flex-col flex-grow justify-between">
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-space-xs">Cancha 5: El Campín</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-space-sm">Excelente rebote, red perimetral alta y acceso directo a vestuarios y zona de quinchos.</p>
+<div class="grid grid-cols-2 gap-y-2 text-xs text-on-surface-variant mb-space-md pb-space-sm border-b border-outline-variant">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="straighten">straighten</span>
+<span>48m x 28m</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="groups">groups</span>
+<span>14 Jugadores (7v7)</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="outdoor_grill">outdoor_grill</span>
+<span>Acceso a Quincho</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-primary" data-icon="wb_sunny">wb_sunny</span>
+<span>LED 1000 Lux</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-baseline justify-between mb-space-sm">
+<div>
+<span class="font-headline-sm text-headline-sm font-bold text-primary">$14.000</span>
+<span class="text-xs text-on-surface-variant"> / hora</span>
+</div>
+<span class="text-xs text-secondary font-medium">6 turnos libres</span>
+</div>
+<button class="w-full py-2 px-3 bg-primary-container hover:bg-primary text-on-primary-container font-label-md text-label-md rounded flex items-center justify-center gap-1.5 shadow-sm transition" type="button">
+<span class="material-symbols-outlined text-base" data-icon="event_available">event_available</span>
+                  Ver Disponibilidad y Reservar
+                </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Pagination or Table Footer Note -->
+<div class="mt-space-lg flex items-center justify-between border-t border-outline-variant pt-space-md">
+<p class="font-body-sm text-body-sm text-on-surface-variant">Mostrando 6 de 12 canchas operativas</p>
+<div class="flex items-center gap-1">
+<button class="px-3 py-1 text-sm border border-outline rounded bg-surface-container-lowest text-on-surface disabled:opacity-50" disabled="">Anterior</button>
+<button class="px-3 py-1 text-sm border border-primary bg-primary text-on-primary rounded">1</button>
+<button class="px-3 py-1 text-sm border border-outline rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-low">2</button>
+<button class="px-3 py-1 text-sm border border-outline rounded bg-surface-container-lowest text-on-surface hover:bg-surface-container-low">Siguiente</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Facility Benefits Section -->
+<section class="bg-surface-container-low border-t border-outline-variant py-space-xxl">
+<div class="w-full max-w-7xl mx-auto px-gutter">
+<div class="text-center max-w-2xl mx-auto mb-space-xl">
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Servicios y Beneficios del Complejo</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Instalaciones profesionales pensadas para tu comodidad antes, durante y después de cada partido.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-md">
+<div class="bg-surface-container-lowest p-space-lg rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="local_parking">local_parking</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Estacionamiento Vigilado</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Capacidad para más de 120 vehículos con personal de seguridad y cámaras CCTV 24hs.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_bar">sports_bar</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Buffet &amp; Sports Bar</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Tercer tiempo con pantallas gigantes, bebidas frías, cafetería y menú de minutas.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="highlight">highlight</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Iluminación Nocturna HD</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Torres con tecnología LED sin sombras ni encandilamiento para una visibilidad perfecta.</p>
+</div>
+<div class="bg-surface-container-lowest p-space-lg rounded-lg border border-outline-variant text-center flex flex-col items-center">
+<div class="w-12 h-12 rounded-full bg-secondary-container text-primary flex items-center justify-center mb-space-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="emoji_events">emoji_events</span>
+</div>
+<h3 class="font-title-md text-title-md text-on-surface mb-1">Torneos &amp; Ligas</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Competencias organizadas con planilla digital, árbitros matriculados y premios semanales.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<div class="flex flex-col md:flex-row items-center gap-space-md">
+<span class="text-title-md font-title-md font-bold text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-xl" data-icon="sports_soccer">sports_soccer</span>
+          CanchasApp
+        </span>
+<p class="text-on-surface-variant font-body-sm text-body-sm text-center md:text-left">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<nav class="flex flex-wrap items-center justify-center gap-space-md">
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-150" href="#">Términos de Servicio</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-150" href="#">Política de Privacidad</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-150" href="#">Reglamento Interno</a>
+<a class="text-on-surface-variant font-body-sm text-body-sm hover:text-primary transition-colors duration-150" href="#">Contacto y Ubicación</a>
+</nav>
+</div>
+</footer>
+</body></html>

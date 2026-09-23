@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Dashboard - CanchasApp</title><link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#0f5132",
+            "primary-fixed-dim": "#77da9f",
+            "on-surface-variant": "#3e4941",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#dae2ff",
+            "surface-container-low": "#f3f4f5",
+            "on-primary-container": "#ffffff",
+            "on-tertiary-fixed": "#001946",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container": "#edeeef",
+            "inverse-primary": "#77da9f",
+            "inverse-on-surface": "#f0f1f2",
+            "on-primary-fixed": "#002110",
+            "surface-dim": "#d9dadb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#e7e8e9",
+            "on-tertiary-container": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "tertiary": "#0056cc",
+            "on-error": "#ffffff",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-container": "#33704e",
+            "surface-tint": "#006d41",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed": "#93f7ba",
+            "on-secondary-fixed": "#002111",
+            "secondary-container": "#b0f1c7",
+            "surface-variant": "#e1e3e4",
+            "tertiary-container": "#0a6dfc",
+            "on-background": "#191c1d",
+            "background": "#f8f9fa",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "surface-bright": "#f8f9fa",
+            "secondary-fixed": "#b0f1c7",
+            "primary-container": "#198754",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#00419e",
+            "primary": "#006c40",
+            "outline": "#6e7a70",
+            "secondary": "#2d6a48"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xxl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "display-hero": ["Inter"],
+            "slot-time": ["Inter"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-light d-flex flex-column min-vh-100 text-body">
+<!-- TopNavBar (Shared Component JSON anchor) -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top border-bottom border-secondary-subtle shadow-sm py-2">
+<div class="container-fluid px-3 px-lg-4">
+<a class="navbar-brand d-flex items-center gap-2 fw-bold text-success" href="/Admin/Dashboard">
+<i class="bi bi-trophy-fill text-success fs-4"></i>
+<span class="text-white">Canchas<span class="text-success">App</span></span>
+<span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill fs-7 ms-1">ADMIN</span>
+</a>
+<div class="collapse navbar-collapse d-none d-lg-flex justify-content-between">
+<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3">
+<li class="nav-item"><a class="nav-link active fw-semibold text-white" href="/Admin/Dashboard"><i class="bi bi-speedometer2 me-1"></i> Dashboard</a></li>
+<li class="nav-item"><a class="nav-link text-white-50" href="/Admin/Reservas"><i class="bi bi-calendar3 me-1"></i> Reservas</a></li>
+<li class="nav-item"><a class="nav-link text-white-50" href="/Admin/Canchas"><i class="bi bi-grid-3x3-gap me-1"></i> Canchas</a></li>
+<li class="nav-item"><a class="nav-link text-white-50" href="/Admin/Caja"><i class="bi bi-cash-stack me-1"></i> Caja &amp; Cobros</a></li>
+<li class="nav-item"><a class="nav-link text-white-50" href="/Admin/Clientes"><i class="bi bi-people me-1"></i> Clientes</a></li>
+</ul>
+<div class="d-flex align-items-center gap-3">
+<span class="badge bg-dark border border-secondary text-light px-3 py-2 d-flex align-items-center gap-2">
+<span class="spinner-grow spinner-grow-sm text-success" role="status"></span>
+<span>Complejo Central: Turno Tarde/Noche</span>
+</span>
+<div class="d-flex align-items-center text-white gap-2 border-start border-secondary ps-3">
+<div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">AD</div>
+<div class="lh-sm text-start">
+<div class="fw-bold text-white small">Alejandro Díaz</div>
+<div class="text-success small" style="font-size: 0.75rem;">SuperAdmin</div>
+</div>
+<a class="btn btn-sm btn-outline-secondary text-white-50 ms-2" href="/Account/Logout" title="Cerrar sesión"><i class="bi bi-box-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="container-fluid py-4 px-3 px-lg-4 flex-grow-1">
+<!-- Header Section with Quick Actions -->
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4 pb-3 border-bottom">
+<div>
+<h1 class="h3 fw-bold mb-1 text-dark">Panel de Administración</h1>
+<p class="text-muted mb-0 small"><i class="bi bi-geo-alt-fill text-success me-1"></i>Gestión operativa y reservas en tiempo real • Complejo Deportivo Central</p>
+</div>
+<div class="d-flex flex-wrap gap-2">
+<button class="btn btn-outline-secondary btn-sm shadow-sm" type="button">
+<i class="bi bi-file-earmark-excel text-success me-1"></i> Exportar Excel
+      </button>
+<button class="btn btn-outline-primary btn-sm shadow-sm" type="button">
+<i class="bi bi-safe2 me-1"></i> Cierre de Caja / Arqueo
+      </button>
+<button class="btn btn-success btn-sm shadow-sm fw-semibold" type="button">
+<i class="bi bi-plus-circle-fill me-1"></i> Nueva Reserva Manual
+      </button>
+</div>
+</div>
+<!-- Row of 4 Metric KPI Cards -->
+<div class="row g-3 mb-4">
+<!-- KPI 1: Ingresos de Hoy -->
+<div class="col-12 col-sm-6 col-xl-3">
+<div class="card border-0 shadow-sm rounded-3 border-start border-success border-4 h-100">
+<div class="card-body p-3">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<span class="text-muted small fw-semibold text-uppercase">Ingresos de Hoy</span>
+<div class="rounded p-2 bg-success-subtle text-success"><i class="bi bi-currency-dollar fs-5"></i></div>
+</div>
+<h3 class="fw-bold mb-1 text-dark">$142.500 <span class="fs-6 fw-normal text-muted">ARS</span></h3>
+<div class="small text-muted d-flex justify-content-between pt-2 border-top mt-2">
+<span>Acumulado mes:</span>
+<span class="fw-semibold text-dark">$1.840.000 ARS</span>
+</div>
+</div>
+</div>
+</div>
+<!-- KPI 2: Ocupación del Día % -->
+<div class="col-12 col-sm-6 col-xl-3">
+<div class="card border-0 shadow-sm rounded-3 border-start border-primary border-4 h-100">
+<div class="card-body p-3">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<span class="text-muted small fw-semibold text-uppercase">Ocupación del Día</span>
+<div class="rounded p-2 bg-primary-subtle text-primary"><i class="bi bi-pie-chart-fill fs-5"></i></div>
+</div>
+<h3 class="fw-bold mb-1 text-dark">85%</h3>
+<div class="progress my-2" style="height: 6px;">
+<div aria-valuemax="100" aria-valuemin="0" aria-valuenow="85" class="progress-bar bg-primary" role="progressbar" style="width: 85%"></div>
+</div>
+<div class="small text-muted d-flex justify-content-between">
+<span>6 de 7 canchas en uso</span>
+<span class="text-primary fw-semibold">Alta demanda</span>
+</div>
+</div>
+</div>
+</div>
+<!-- KPI 3: Reservas Confirmadas -->
+<div class="col-12 col-sm-6 col-xl-3">
+<div class="card border-0 shadow-sm rounded-3 border-start border-info border-4 h-100">
+<div class="card-body p-3">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<span class="text-muted small fw-semibold text-uppercase">Reservas Confirmadas</span>
+<div class="rounded p-2 bg-info-subtle text-info"><i class="bi bi-calendar-check-fill fs-5"></i></div>
+</div>
+<h3 class="fw-bold mb-1 text-dark">18 <span class="badge bg-success-subtle text-success fs-7 fw-semibold"><i class="bi bi-arrow-up"></i> +12%</span></h3>
+<div class="small text-muted d-flex justify-content-between pt-2 border-top mt-2">
+<span>Próximo turno libre:</span>
+<span class="fw-semibold text-success">18:00 hs</span>
+</div>
+</div>
+</div>
+</div>
+<!-- KPI 4: Clientes Nuevos -->
+<div class="col-12 col-sm-6 col-xl-3">
+<div class="card border-0 shadow-sm rounded-3 border-start border-warning border-4 h-100">
+<div class="card-body p-3">
+<div class="d-flex justify-content-between align-items-center mb-2">
+<span class="text-muted small fw-semibold text-uppercase">Clientes Nuevos / Socios</span>
+<div class="rounded p-2 bg-warning-subtle text-warning"><i class="bi bi-person-check-fill fs-5"></i></div>
+</div>
+<h3 class="fw-bold mb-1 text-dark">124 <span class="badge bg-warning-subtle text-warning fs-7 fw-semibold">+4 hoy</span></h3>
+<div class="small text-muted d-flex justify-content-between pt-2 border-top mt-2">
+<span>Cuotas al día:</span>
+<span class="fw-semibold text-success">98% regular</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Central Content: Table + Live Courts Status -->
+<div class="row g-4">
+<!-- Left / Center: Reservations Table Card -->
+<div class="col-12 col-lg-8 col-xl-9">
+<div class="card border-0 shadow-sm rounded-3 mb-4">
+<div class="card-header bg-white py-3 border-bottom d-flex flex-wrap justify-content-between align-items-center gap-2">
+<div class="d-flex align-items-center gap-2">
+<i class="bi bi-table text-success fs-5"></i>
+<h5 class="card-title mb-0 fw-bold">Reservas del Día / Próximos Turnos</h5>
+</div>
+<div class="d-flex align-items-center gap-2">
+<div class="input-group input-group-sm" style="max-width: 220px;">
+<span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
+<input class="form-control" placeholder="Buscar reserva o cliente..." type="text"/>
+</div>
+<button class="btn btn-sm btn-outline-secondary" title="Refrescar tabla"><i class="bi bi-arrow-repeat"></i></button>
+</div>
+</div>
+<div class="table-responsive">
+<table class="table table-hover align-middle mb-0">
+<thead class="table-light text-uppercase small text-muted">
+<tr>
+<th class="ps-3" scope="col">ID Reserva</th>
+<th scope="col">Cliente</th>
+<th scope="col">Cancha</th>
+<th scope="col">Horario</th>
+<th scope="col">Seña / Estado</th>
+<th class="text-end pe-3" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="small">
+<!-- Reserva 1 -->
+<tr>
+<td class="ps-3 fw-bold text-dark">#RES-8921</td>
+<td>
+<div class="fw-bold text-dark">Gonzalo Martínez</div>
+<div class="text-muted fs-7"><i class="bi bi-telephone me-1"></i>+54 9 11 4432-8812</div>
+</td>
+<td>
+<span class="badge bg-success-subtle text-success me-1">F5</span>
+<span class="fw-semibold">Cancha 1 (Techada)</span>
+</td>
+<td>
+<div class="fw-bold text-success">19:00 - 20:00 hs</div>
+<div class="text-muted fs-7">Hoy, 24 Oct</div>
+</td>
+<td>
+<span class="badge bg-success rounded-pill px-2 py-1">Confirmado 100%</span>
+<div class="text-muted fs-7 mt-1">$16.000 (Mercado Pago)</div>
+</td>
+<td class="text-end pe-3">
+<div class="btn-group btn-group-sm">
+<button class="btn btn-outline-secondary" title="Ver detalle"><i class="bi bi-eye"></i></button>
+<button class="btn btn-outline-secondary" title="Editar"><i class="bi bi-pencil"></i></button>
+<button class="btn btn-outline-danger" title="Cancelar"><i class="bi bi-x-circle"></i></button>
+</div>
+</td>
+</tr>
+<!-- Reserva 2 -->
+<tr>
+<td class="ps-3 fw-bold text-dark">#RES-8922</td>
+<td>
+<div class="fw-bold text-dark">Mariana Gómez</div>
+<div class="text-muted fs-7"><i class="bi bi-telephone me-1"></i>+54 9 11 9871-3320</div>
+</td>
+<td>
+<span class="badge bg-primary-subtle text-primary me-1">F7</span>
+<span class="fw-semibold">Cancha 3 (Césped)</span>
+</td>
+<td>
+<div class="fw-bold text-dark">20:00 - 21:00 hs</div>
+<div class="text-muted fs-7">Hoy, 24 Oct</div>
+</td>
+<td>
+<span class="badge bg-warning text-dark rounded-pill px-2 py-1">Pendiente Seña</span>
+<div class="text-muted fs-7 mt-1">Resta: $12.000 ARS</div>
+</td>
+<td class="text-end pe-3">
+<div class="btn-group btn-group-sm">
+<button class="btn btn-success btn-sm fw-semibold" title="Cobrar Saldo"><i class="bi bi-cash-coin me-1"></i>Cobrar</button>
+<button class="btn btn-outline-secondary" title="Ver detalle"><i class="bi bi-eye"></i></button>
+<button class="btn btn-outline-danger" title="Cancelar"><i class="bi bi-x-circle"></i></button>
+</div>
+</td>
+</tr>
+<!-- Reserva 3 -->
+<tr>
+<td class="ps-3 fw-bold text-dark">#RES-8923</td>
+<td>
+<div class="fw-bold text-dark">Club Los Amigos (Federico)</div>
+<div class="text-muted fs-7"><i class="bi bi-telephone me-1"></i>+54 9 11 6543-2109</div>
+</td>
+<td>
+<span class="badge bg-success-subtle text-success me-1">F5</span>
+<span class="fw-semibold">Cancha 2 (Clásica)</span>
+</td>
+<td>
+<div class="fw-bold text-dark">21:00 - 22:00 hs</div>
+<div class="text-muted fs-7">Hoy, 24 Oct</div>
+</td>
+<td>
+<span class="badge bg-success rounded-pill px-2 py-1">Confirmado</span>
+<div class="text-muted fs-7 mt-1">$16.000 Efectivo</div>
+</td>
+<td class="text-end pe-3">
+<div class="btn-group btn-group-sm">
+<button class="btn btn-outline-secondary" title="Imprimir Comprobante"><i class="bi bi-printer"></i></button>
+<button class="btn btn-outline-secondary" title="Ver detalle"><i class="bi bi-eye"></i></button>
+<button class="btn btn-outline-danger" title="Cancelar"><i class="bi bi-x-circle"></i></button>
+</div>
+</td>
+</tr>
+<!-- Reserva 4 -->
+<tr class="table-light">
+<td class="ps-3 fw-bold text-muted">#RES-8919</td>
+<td>
+<div class="text-muted text-decoration-line-through">Esteban Quirós</div>
+<div class="text-muted fs-7">+54 9 11 2299-1002</div>
+</td>
+<td>
+<span class="badge bg-secondary me-1">F5</span>
+<span class="text-muted text-decoration-line-through">Cancha 4 (Descubierta)</span>
+</td>
+<td>
+<div class="text-muted">18:00 - 19:00 hs</div>
+</td>
+<td>
+<span class="badge bg-danger rounded-pill px-2 py-1">Cancelada</span>
+<div class="text-muted fs-7 mt-1">Venció tiempo seña</div>
+</td>
+<td class="text-end pe-3">
+<button class="btn btn-sm btn-outline-secondary py-0 px-2" title="Ver Historial">Log</button>
+</td>
+</tr>
+<!-- Reserva 5 -->
+<tr>
+<td class="ps-3 fw-bold text-dark">#RES-8924</td>
+<td>
+<div class="fw-bold text-dark">Luciana Rossi</div>
+<div class="text-muted fs-7"><i class="bi bi-telephone me-1"></i>+54 9 11 7711-4455</div>
+</td>
+<td>
+<span class="badge bg-dark text-white me-1">PÁDEL</span>
+<span class="fw-semibold">Pista 1 (Panorámica)</span>
+</td>
+<td>
+<div class="fw-bold text-success">22:00 - 23:30 hs</div>
+<div class="text-muted fs-7">Hoy, 24 Oct</div>
+</td>
+<td>
+<span class="badge bg-success rounded-pill px-2 py-1">Confirmado 100%</span>
+<div class="text-muted fs-7 mt-1">$20.000 Débito</div>
+</td>
+<td class="text-end pe-3">
+<div class="btn-group btn-group-sm">
+<button class="btn btn-outline-secondary" title="Ver detalle"><i class="bi bi-eye"></i></button>
+<button class="btn btn-outline-secondary" title="Editar"><i class="bi bi-pencil"></i></button>
+<button class="btn btn-outline-danger" title="Cancelar"><i class="bi bi-x-circle"></i></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="card-footer bg-white py-3 border-top d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
+<span class="small text-muted">Mostrando 5 de 18 turnos para hoy</span>
+<nav aria-label="Paginación reservas">
+<ul class="pagination pagination-sm mb-0">
+<li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+<li class="page-item active"><a class="page-link bg-success border-success" href="#">1</a></li>
+<li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+<li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+<li class="page-item"><a class="page-link text-dark" href="#">Siguiente</a></li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<!-- Right: Real-time Court Status Sidebar -->
+<div class="col-12 col-lg-4 col-xl-3">
+<div class="card border-0 shadow-sm rounded-3">
+<div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+<div class="d-flex align-items-center gap-2">
+<i class="bi bi-broadcast text-danger fs-5"></i>
+<h6 class="card-title mb-0 fw-bold">Estado de Canchas</h6>
+</div>
+<span class="badge bg-success-subtle text-success small"><i class="bi bi-circle-fill fs-7 me-1"></i>En Vivo</span>
+</div>
+<div class="list-group list-group-flush">
+<!-- Cancha 1 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 1 (F5 Techada)</span>
+<span class="badge bg-danger rounded-pill">Ocupada</span>
+</div>
+<div class="text-muted small mb-2">Turno: 19:00 - 20:00 hs • G. Martínez</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb-fill text-warning me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input checked="" class="form-check-input" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Cancha 2 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 2 (F5 Clásica)</span>
+<span class="badge bg-success rounded-pill">Disponible</span>
+</div>
+<div class="text-muted small mb-2">Libre hasta las 21:00 hs</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb text-muted me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input class="form-check-input" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Cancha 3 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 3 (F7 Sintético)</span>
+<span class="badge bg-danger rounded-pill">Ocupada</span>
+</div>
+<div class="text-muted small mb-2">Torneo Universitario (hasta 20:30 hs)</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb-fill text-warning me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input checked="" class="form-check-input" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Cancha 4 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 4 (F5 Descubierta)</span>
+<span class="badge bg-secondary rounded-pill">Mantenimiento</span>
+</div>
+<div class="text-muted small mb-2">Reparación de red perimetral</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb text-muted me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input class="form-check-input" disabled="" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Cancha 5 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 5 (F5 Pro)</span>
+<span class="badge bg-success rounded-pill">Disponible</span>
+</div>
+<div class="text-muted small mb-2">Listo para asignar próximo turno</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb text-muted me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input class="form-check-input" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+<!-- Cancha 6 -->
+<div class="list-group-item p-3">
+<div class="d-flex justify-content-between align-items-center mb-1">
+<span class="fw-bold text-dark">Cancha 6 (Pádel Blindex)</span>
+<span class="badge bg-danger rounded-pill">Ocupada</span>
+</div>
+<div class="text-muted small mb-2">Turno: 22:00 - 23:30 hs • L. Rossi</div>
+<div class="d-flex justify-content-between align-items-center bg-light p-2 rounded">
+<span class="small text-secondary"><i class="bi bi-lightbulb-fill text-warning me-1"></i>Iluminación</span>
+<div class="form-check form-switch mb-0">
+<input checked="" class="form-check-input" role="switch" type="checkbox"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer (Shared Component JSON anchor) -->
+<footer class="bg-white border-top py-3 mt-auto">
+<div class="container-fluid px-3 px-lg-4 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 small text-muted">
+<div>
+<strong class="text-success">CanchasApp</strong> • © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+    </div>
+<ul class="list-inline mb-0">
+<li class="list-inline-item"><a class="text-decoration-none text-muted" href="/Terminos">Términos</a></li>
+<li class="list-inline-item">•</li>
+<li class="list-inline-item"><a class="text-decoration-none text-muted" href="/Privacidad">Privacidad</a></li>
+<li class="list-inline-item">•</li>
+<li class="list-inline-item"><a class="text-decoration-none text-muted" href="/Reglamento">Reglamento</a></li>
+<li class="list-inline-item">•</li>
+<li class="list-inline-item"><a class="text-decoration-none text-muted" href="/Contacto">Soporte Técnico</a></li>
+</ul>
+</div>
+</footer>
+</body></html>

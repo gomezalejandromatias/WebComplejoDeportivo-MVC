@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mis Reservas - CanchasApp</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface": "#191c1d",
+            "on-secondary-fixed-variant": "#0f5132",
+            "primary-fixed-dim": "#77da9f",
+            "on-surface-variant": "#3e4941",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed": "#dae2ff",
+            "surface-container-low": "#f3f4f5",
+            "on-primary-container": "#ffffff",
+            "on-tertiary-fixed": "#001946",
+            "error-container": "#ffdad6",
+            "outline-variant": "#bdcabe",
+            "on-primary-fixed-variant": "#00522f",
+            "surface-container": "#edeeef",
+            "inverse-primary": "#77da9f",
+            "inverse-on-surface": "#f0f1f2",
+            "on-primary-fixed": "#002110",
+            "surface-dim": "#d9dadb",
+            "on-secondary": "#ffffff",
+            "surface-container-high": "#e7e8e9",
+            "on-tertiary-container": "#ffffff",
+            "inverse-surface": "#2e3132",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "tertiary": "#0056cc",
+            "on-error": "#ffffff",
+            "surface": "#f8f9fa",
+            "secondary-fixed-dim": "#95d4ac",
+            "on-secondary-container": "#33704e",
+            "surface-tint": "#006d41",
+            "surface-container-highest": "#e1e3e4",
+            "primary-fixed": "#93f7ba",
+            "on-secondary-fixed": "#002111",
+            "secondary-container": "#b0f1c7",
+            "surface-variant": "#e1e3e4",
+            "tertiary-container": "#0a6dfc",
+            "on-background": "#191c1d",
+            "background": "#f8f9fa",
+            "tertiary-fixed-dim": "#b1c5ff",
+            "surface-bright": "#f8f9fa",
+            "secondary-fixed": "#b0f1c7",
+            "primary-container": "#198754",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#00419e",
+            "primary": "#006c40",
+            "outline": "#6e7a70",
+            "secondary": "#2d6a48"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xxl": "3rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "margin": "1.5rem",
+            "gutter": "1.5rem",
+            "gutter-sm": "0.75rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "headline-lg": ["Inter"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-md": ["Inter"],
+            "title-md": ["Inter"],
+            "headline-sm": ["Inter"],
+            "headline-lg-mobile": ["Inter"],
+            "display-hero": ["Inter"],
+            "slot-time": ["Inter"],
+            "body-sm": ["Inter"]
+          },
+          "fontSize": {
+            "body-lg": ["1.125rem", { "lineHeight": "1.75rem", "fontWeight": "400" }],
+            "headline-lg": ["2rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "700" }],
+            "label-md": ["0.875rem", { "lineHeight": "1.25rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.04em", "fontWeight": "600" }],
+            "headline-md": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "400" }],
+            "title-md": ["1rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-sm": ["1.25rem", { "lineHeight": "1.75rem", "letterSpacing": "-0.005em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["1.5rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display-hero": ["2.5rem", { "lineHeight": "3rem", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "slot-time": ["0.8125rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "body-sm": ["0.875rem", { "lineHeight": "1.25rem", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md text-on-surface bg-background antialiased">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface dark:bg-surface-container-low border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none sticky top-0 z-50">
+<div class="w-full max-w-7xl mx-auto px-gutter flex justify-between items-center h-16">
+<!-- Brand & Left Section -->
+<div class="flex items-center gap-space-lg">
+<a class="text-headline-sm font-headline-sm font-bold text-primary dark:text-primary-fixed flex items-center gap-1.5 focus:outline-none" href="/">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="sports_soccer">sports_soccer</span>
+<span>CanchasApp</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 py-1 px-2 rounded" href="#">
+            Inicio
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed hover:bg-surface-container-low dark:hover:bg-surface-container-highest transition-colors duration-150 py-1 px-2 rounded" href="#">
+            Canchas
+          </a>
+<!-- Mis Reservas: Active State per Shared JSON -->
+<a class="text-primary dark:text-primary-fixed font-title-md text-title-md border-b-2 border-primary dark:border-primary-fixed pb-1" href="#">
+            Mis Reservas
+          </a>
+</nav>
+</div>
+<!-- Right User Session / Actions Cluster -->
+<div class="flex items-center gap-space-md">
+<!-- Logged In User Pill badge / Razor view model binding -->
+<div class="hidden sm:flex items-center gap-space-sm pl-space-sm pr-space-md py-1 bg-surface-container rounded-full border border-outline-variant">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-label-sm text-label-sm">
+            JP
+          </div>
+<div class="flex flex-col text-left">
+<span class="font-label-sm text-label-sm text-on-surface leading-tight">Hola, Juan Pérez</span>
+<span class="font-slot-time text-slot-time text-primary leading-none">Socio Activo #429</span>
+</div>
+</div>
+<button class="btn-nueva-reserva hidden sm:inline-flex items-center gap-1 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-3.5 py-1.5 rounded shadow-sm transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-base" data-icon="add_circle">add_circle</span>
+<span>Nueva Reserva</span>
+</button>
+<button aria-label="Abrir menú" class="md:hidden p-2 text-on-surface-variant hover:text-primary focus:outline-none" type="button">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Razor Layout Canvas -->
+<main class="flex-1 w-full max-w-7xl mx-auto px-gutter py-space-lg">
+<!-- Breadcrumb ASP.NET MVC -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 mb-space-md text-body-sm font-body-sm text-on-surface-variant">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="/">
+<span class="material-symbols-outlined text-sm" data-icon="home">home</span>
+        Inicio
+      </a>
+<span class="material-symbols-outlined text-xs text-outline-variant" data-icon="chevron_right">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="/Cuenta">Mi Cuenta</a>
+<span class="material-symbols-outlined text-xs text-outline-variant" data-icon="chevron_right">chevron_right</span>
+<span aria-current="page" class="font-label-sm text-label-sm text-primary">Mis Reservas</span>
+</nav>
+<!-- Page Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-space-lg mb-space-lg border-b border-outline-variant gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">
+          Mis Reservas y Turnos
+        </h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+          Bienvenido de vuelta, Juan. Administrá tus partidos programados, descargá tickets fiscales y consultá tu historial de juego.
+        </p>
+</div>
+<div class="flex items-center gap-space-sm flex-shrink-0">
+<a class="inline-flex items-center gap-1.5 bg-surface-container-lowest border border-outline-variant text-on-surface-variant hover:text-primary font-label-md text-label-md px-3.5 py-2 rounded transition-colors duration-150 shadow-sm" href="#historial-tabla">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>Ver Historial</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md px-4 py-2 rounded shadow transition-colors duration-150" href="/Canchas">
+<span class="material-symbols-outlined text-xl" data-icon="event_available">event_available</span>
+<span>Hacer una Nueva Reserva</span>
+</a>
+</div>
+</div>
+<!-- Summary KPI Cards (Bento Metric Strip) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-space-md mb-space-xl">
+<!-- Card: Próximas Reservas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md shadow-sm flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Turnos Activos</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary leading-none">2</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">turnos agendados</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="calendar_today">calendar_today</span>
+            Próximo: Viernes 24 Oct - 19:00 hs
+          </p>
+</div>
+<div class="w-12 h-12 rounded bg-secondary-container text-on-secondary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="sports_soccer">sports_soccer</span>
+</div>
+</div>
+<!-- Card: Historial Completadas -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md shadow-sm flex items-start justify-between">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider block mb-1">Partidos Jugados</span>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-on-surface leading-none">14</span>
+<span class="font-label-md text-label-md text-on-surface-variant">partidos completados</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="verified">verified</span>
+            100% tasa de asistencia impecable
+          </p>
+</div>
+<div class="w-12 h-12 rounded bg-surface-container text-on-surface-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="emoji_events">emoji_events</span>
+</div>
+</div>
+<!-- Card: Descuento Socio Aplicado -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-md shadow-sm flex items-start justify-between sm:col-span-2 lg:col-span-1">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Beneficio Socio</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[11px] font-semibold bg-secondary-container text-on-secondary-fixed-variant">Nivel Oro</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary-container leading-none">10% OFF</span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">Club Activo</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="savings">savings</span>
+            Ahorro total acumulado: $8.400 ARS
+          </p>
+</div>
+<div class="w-12 h-12 rounded bg-primary-fixed text-on-primary-fixed-variant flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-icon="loyalty">loyalty</span>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs / Filters -->
+<div class="border-b border-outline-variant mb-space-lg flex items-center justify-between flex-wrap gap-4">
+<div class="flex space-x-2 sm:space-x-4 overflow-x-auto pb-px" role="tablist">
+<button aria-selected="true" class="font-label-md text-label-md text-primary border-b-2 border-primary pb-3 px-2 flex items-center gap-2 focus:outline-none whitespace-nowrap" role="tab">
+<span class="material-symbols-outlined text-lg" data-icon="pending_actions">pending_actions</span>
+<span>Próximas Reservas (Activas)</span>
+<span class="bg-primary text-on-primary rounded-full px-2 py-0.5 text-xs font-bold">2</span>
+</button>
+<button aria-selected="false" class="font-label-md text-label-md text-on-surface-variant hover:text-primary pb-3 px-2 flex items-center gap-2 transition-colors focus:outline-none whitespace-nowrap" role="tab">
+<span class="material-symbols-outlined text-lg" data-icon="history">history</span>
+<span>Historial Pasado</span>
+<span class="bg-surface-container-high text-on-surface-variant rounded-full px-2 py-0.5 text-xs">14</span>
+</button>
+<button aria-selected="false" class="font-label-md text-label-md text-on-surface-variant hover:text-primary pb-3 px-2 flex items-center gap-2 transition-colors focus:outline-none whitespace-nowrap" role="tab">
+<span class="material-symbols-outlined text-lg" data-icon="cancel">cancel</span>
+<span>Canceladas</span>
+<span class="bg-surface-container-high text-on-surface-variant rounded-full px-2 py-0.5 text-xs">0</span>
+</button>
+</div>
+<div class="flex items-center gap-2 pb-2">
+<span class="font-slot-time text-slot-time text-on-surface-variant">Filtrar por deporte:</span>
+<select class="form-select text-body-sm font-body-sm bg-surface-container-lowest border border-outline-variant rounded px-2.5 py-1 text-on-surface focus:border-primary focus:ring-1 focus:ring-primary">
+<option>Todos los deportes</option>
+<option>Fútbol 7 Techada</option>
+<option>Fútbol 5 Sintético</option>
+<option>Pádel Cristal</option>
+</select>
+</div>
+</div>
+<!-- Active Reservations Section (Bootstrap Card Architecture) -->
+<div class="space-y-space-lg mb-space-xxl">
+<!-- CARD 1: Próximo Partido Destacado (Totalmente Pagada) -->
+<article class="bg-surface-container-lowest border-2 border-primary-container rounded-lg overflow-hidden shadow-sm transition-all hover:shadow-md">
+<!-- Top Banner Header for Imminent reservation -->
+<div class="bg-primary-container px-space-md py-2 text-on-primary-container flex flex-wrap items-center justify-between gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="alarm">alarm</span>
+<span class="font-label-md text-label-md uppercase tracking-wider font-bold">¡Tu próximo turno comienza en 3 días!</span>
+</div>
+<span class="font-label-sm text-label-sm bg-on-primary-container/20 px-2.5 py-0.5 rounded text-white border border-white/20">
+            Código: #RES-84920
+          </span>
+</div>
+<div class="p-space-lg grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Image Column & Surface Badge -->
+<div class="lg:col-span-4 relative rounded overflow-hidden aspect-video lg:aspect-auto h-48 lg:h-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An expansive indoor soccer field featuring pristine green artificial turf, crisp white boundary lines, professional industrial floodlights suspended from modern steel roof trusses, and sleek stadium glass sideboards under clean high-key athletic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBP48erf6fpkcp9L4yM0Uo4qjzzYHQf6aAFflSjuERuBPQKLBqZy1r0POkvHHI8vHRQlYN9GXJf1TjkFsngOj7QfFpaLWM8-q8B6fUAAvihUcXW38V6YXIzKQEzwcM_9ZPY9hjFzThRl94rz9-Cs6tN-jV0SIHdfdeAHC4cc71YJ9HcMQrVC0Wg0hEd_JqKA2JKHT3Bmg0r6qXMspPuaniHa7w-EDbAjcoz3XSH491hm6rHxuVSdbk3"/>
+<span class="absolute top-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded shadow-sm flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="roofing">roofing</span>
+              Fútbol 7 Techada
+            </span>
+</div>
+<!-- Central Details Column -->
+<div class="lg:col-span-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container text-on-primary">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                  Confirmada y Pagada
+                </span>
+<span class="font-slot-time text-slot-time text-on-surface-variant">Sintético Pro 60mm</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                Cancha 1: La Bombonerita
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="pin_drop">pin_drop</span>
+                Sede Central: Av. Libertador 4450, Sector Pistas Cubiertas
+              </p>
+<!-- Date, Time and Duration Grid -->
+<div class="grid grid-cols-2 gap-3 mt-space-md bg-surface-container-low p-space-sm rounded border border-outline-variant">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Fecha del Partido</span>
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary" data-icon="calendar_month">calendar_month</span>
+                    Viernes 24 de Octubre
+                  </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Horario de Juego</span>
+<span class="font-label-md text-label-md text-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary" data-icon="schedule">schedule</span>
+                    19:00 hs (60 min)
+                  </span>
+</div>
+</div>
+<!-- Payment details summary -->
+<div class="mt-3 text-body-sm font-body-sm flex items-center justify-between text-on-surface-variant border-t border-dashed border-outline-variant pt-2">
+<span>Monto abonado (100%):</span>
+<span class="font-title-md text-title-md text-on-surface font-bold">$13.500 ARS <span class="font-body-sm text-xs text-on-surface-variant font-normal">(Mercado Pago)</span></span>
+</div>
+</div>
+<!-- Cancellation Warning Policy Alert -->
+<div class="mt-4 p-2.5 rounded bg-surface-container text-on-surface-variant text-xs flex items-start gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-sm text-outline mt-0.5 flex-shrink-0" data-icon="info">info</span>
+<p>
+<strong>Política de Cancelación:</strong> Podés cancelar o reprogramar sin penalidad hasta 6 horas antes del inicio (Viernes 13:00 hs).
+              </p>
+</div>
+</div>
+<!-- Right Action Buttons Column -->
+<div class="lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant pt-space-md lg:pt-0 lg:pl-space-lg gap-2">
+<div class="space-y-2">
+<span class="font-slot-time text-slot-time text-on-surface-variant block uppercase tracking-wide">Acciones del Turno</span>
+<!-- Action: Descargar Comprobante PDF -->
+<button class="w-full inline-flex items-center justify-center gap-2 bg-surface-container-lowest border border-outline-variant hover:border-primary text-on-surface hover:text-primary font-label-md text-label-md py-2 px-3 rounded shadow-sm transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg text-primary" data-icon="download">download</span>
+<span>Descargar Comprobante</span>
+</button>
+<!-- Action: Compartir con equipo WhatsApp -->
+<button class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-[#075E54] font-label-md text-label-md py-2 px-3 rounded transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+<span>Compartir en WhatsApp</span>
+</button>
+</div>
+<!-- Destructive/Modify Action -->
+<div class="pt-2 border-t border-outline-variant">
+<button class="w-full inline-flex items-center justify-center gap-1.5 text-error hover:bg-error-container/40 font-label-sm text-label-sm py-1.5 px-3 rounded transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="edit_calendar">edit_calendar</span>
+<span>Cancelar o Modificar Turno</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 2: Turno con Pago Parcial (Seña Abonada 50%) -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-all">
+<div class="p-space-lg grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- Image Column & Badge -->
+<div class="lg:col-span-4 relative rounded overflow-hidden aspect-video lg:aspect-auto h-48 lg:h-full bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An outdoor 5-a-side football court with clean dark green synthetic grass, crisp painted boundary lines, durable white steel goalposts, and a perimeter security fence surrounded by quiet park trees under soft overcast natural daytime lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwqHaizZ8UJX9-8i3L8PSycUZcYxB6XBZ4khLgn1xl0APtJgzU34FpHTORo3SLO6M4x_j321NINWhh5xHf5sFWSSNLy5eCFJnEhsyUQfWY_vDBCNxNjOzH4nGsYBxalWHJnuCvi5reSl7A-zQMRngj2fvABBKxbbfXHBbwLc4IjZ98mH2WMa8UWl6V2brIJIm0At23AZxLIl0ZsuTaSqCgLXLsbimc7kGYbrt6fMPGBBgkDIZS0FxX"/>
+<span class="absolute top-2 left-2 bg-surface-container-lowest/90 backdrop-blur-sm text-on-surface font-label-sm text-label-sm px-2 py-0.5 rounded shadow-sm flex items-center gap-1 border border-outline-variant">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="outdoor_grill">outdoor_grill</span>
+              Fútbol 5 Descubierta
+            </span>
+</div>
+<!-- Central Details Column -->
+<div class="lg:col-span-5 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<!-- Badge Amarillo Alerta Seña -->
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#ffc107] text-[#212529]">
+<span class="material-symbols-outlined text-xs" data-icon="hourglass_top">hourglass_top</span>
+                  Seña Abonada (50%)
+                </span>
+<span class="font-slot-time text-slot-time text-on-surface-variant">Código: #RES-85104</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight">
+                Cancha 3 (Fútbol 5 Rápido)
+              </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1 mt-0.5">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="pin_drop">pin_drop</span>
+                Sede Central: Av. Libertador 4450, Pista Exterior Sur
+              </p>
+<!-- Schedule Meta Grid -->
+<div class="grid grid-cols-2 gap-3 mt-space-md bg-surface-container-low p-space-sm rounded border border-outline-variant">
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Fecha del Partido</span>
+<span class="font-label-md text-label-md text-on-surface font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary" data-icon="calendar_month">calendar_month</span>
+                    Martes 28 de Octubre
+                  </span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-on-surface-variant block">Horario de Juego</span>
+<span class="font-label-md text-label-md text-primary font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-base text-primary" data-icon="schedule">schedule</span>
+                    21:00 hs (60 min)
+                  </span>
+</div>
+</div>
+<!-- Pending Balance Notice -->
+<div class="mt-3 p-2 rounded bg-amber-50 border border-amber-200 text-amber-900 text-xs flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-amber-700" data-icon="payments">payments</span>
+<span>Saldo restante: <strong>$6.000 ARS</strong></span>
+</div>
+<span class="font-medium text-amber-800">Abonar en recepción al ingresar</span>
+</div>
+</div>
+<!-- Cancellation Warning Policy Alert -->
+<div class="mt-4 p-2.5 rounded bg-surface-container text-on-surface-variant text-xs flex items-start gap-2 border border-outline-variant">
+<span class="material-symbols-outlined text-sm text-outline mt-0.5 flex-shrink-0" data-icon="info">info</span>
+<p>
+<strong>Política de Seña:</strong> Turno garantizado. En caso de no presentarse, la seña de $6.000 ARS no es reembolsable.
+              </p>
+</div>
+</div>
+<!-- Right Action Buttons Column -->
+<div class="lg:col-span-3 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant pt-space-md lg:pt-0 lg:pl-space-lg gap-2">
+<div class="space-y-2">
+<span class="font-slot-time text-slot-time text-on-surface-variant block uppercase tracking-wide">Acciones del Turno</span>
+<!-- Pay Balance Online -->
+<button class="w-full inline-flex items-center justify-center gap-2 bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md py-2 px-3 rounded shadow transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="credit_card">credit_card</span>
+<span>Pagar Saldo Online</span>
+</button>
+<!-- Action: Descargar Comprobante -->
+<button class="w-full inline-flex items-center justify-center gap-2 bg-surface-container-lowest border border-outline-variant hover:border-primary text-on-surface font-label-md text-label-md py-2 px-3 rounded transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg text-outline" data-icon="receipt">receipt</span>
+<span>Comprobante de Seña</span>
+</button>
+<!-- Action: Compartir con equipo WhatsApp -->
+<button class="w-full inline-flex items-center justify-center gap-2 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-[#075E54] font-label-md text-label-md py-2 px-3 rounded transition-colors duration-150" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="share">share</span>
+<span>Compartir con el Equipo</span>
+</button>
+</div>
+<!-- Destructive/Modify Action -->
+<div class="pt-2 border-t border-outline-variant">
+<button class="w-full inline-flex items-center justify-center gap-1.5 text-outline hover:text-error font-label-sm text-label-sm py-1.5 px-3 rounded transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="cancel">cancel</span>
+<span>Cancelar Solicitud</span>
+</button>
+</div>
+</div>
+</div>
+</article>
+</div>
+<!-- Historial Pasado (Data Table Bootstrap 5 Layout) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-lg p-space-lg shadow-sm" id="historial-tabla">
+<div class="flex flex-col sm:flex-row items-start sm:items-center justify-between pb-space-md mb-space-md border-b border-outline-variant gap-2">
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="event_note">event_note</span>
+            Historial de Partidos Jugados
+          </h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+            Registro histórico de tus turnos completados y comprobantes de facturación.
+          </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 text-on-surface-variant hover:text-primary font-label-sm text-label-sm px-2.5 py-1.5 rounded border border-outline-variant hover:bg-surface-container transition-colors" type="button">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+<span>Exportar Excel</span>
+</button>
+</div>
+</div>
+<!-- Responsive Table Container conforming to Bootstrap table-striped specs -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-[#495057] font-label-md text-label-md uppercase tracking-wider border-b border-outline-variant">
+<th class="py-3 px-4" scope="col">Fecha y Hora</th>
+<th class="py-3 px-4" scope="col">Cancha / Instalación</th>
+<th class="py-3 px-4" scope="col">Deporte</th>
+<th class="py-3 px-4" scope="col">Estado / Asistencia</th>
+<th class="py-3 px-4 text-right" scope="col">Total Pagado</th>
+<th class="py-3 px-4 text-right" scope="col">Acción Rápida</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant font-body-sm text-body-sm text-on-surface">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+                17 Oct 2025 <span class="text-on-surface-variant font-normal">· 20:00 hs</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Cancha 1: La Bombonerita</div>
+<div class="text-xs text-on-surface-variant">Turno #RES-79412</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded text-xs bg-surface-container text-on-surface font-medium">Fútbol 7 Techada</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+                  Jugado / Completado
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-medium whitespace-nowrap">
+                $13.500 ARS
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold hover:underline" href="/Canchas/Reservar?canchaId=1">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+<span>Volver a reservar</span>
+</a>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+                10 Oct 2025 <span class="text-on-surface-variant font-normal">· 19:00 hs</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Cancha 2: Central Pádel Cristal</div>
+<div class="text-xs text-on-surface-variant">Turno #RES-76329</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded text-xs bg-surface-container text-on-surface font-medium">Pádel Dobles</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+                  Jugado / Completado
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-medium whitespace-nowrap">
+                $11.000 ARS
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold hover:underline" href="/Canchas/Reservar?canchaId=2">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+<span>Volver a reservar</span>
+</a>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+                03 Oct 2025 <span class="text-on-surface-variant font-normal">· 21:00 hs</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Cancha 3 (Fútbol 5)</div>
+<div class="text-xs text-on-surface-variant">Turno #RES-73210</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded text-xs bg-surface-container text-on-surface font-medium">Fútbol 5 Césped</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+                  Jugado / Completado
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-medium whitespace-nowrap">
+                $12.000 ARS
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold hover:underline" href="/Canchas/Reservar?canchaId=3">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+<span>Volver a reservar</span>
+</a>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-container-low transition-colors">
+<td class="py-3.5 px-4 font-semibold whitespace-nowrap">
+                26 Sep 2025 <span class="text-on-surface-variant font-normal">· 18:00 hs</span>
+</td>
+<td class="py-3.5 px-4">
+<div class="font-semibold text-on-surface">Cancha 1: La Bombonerita</div>
+<div class="text-xs text-on-surface-variant">Turno #RES-69814</div>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="px-2 py-0.5 rounded text-xs bg-surface-container text-on-surface font-medium">Fútbol 7 Techada</span>
+</td>
+<td class="py-3.5 px-4 whitespace-nowrap">
+<span class="inline-flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+                  Jugado / Completado
+                </span>
+</td>
+<td class="py-3.5 px-4 text-right font-medium whitespace-nowrap">
+                $13.500 ARS
+              </td>
+<td class="py-3.5 px-4 text-right whitespace-nowrap">
+<a class="inline-flex items-center gap-1 font-label-sm text-label-sm text-primary hover:text-primary-container font-semibold hover:underline" href="/Canchas/Reservar?canchaId=1">
+<span class="material-symbols-outlined text-sm" data-icon="replay">replay</span>
+<span>Volver a reservar</span>
+</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="flex items-center justify-between pt-space-md mt-space-md border-t border-outline-variant">
+<span class="font-body-sm text-body-sm text-on-surface-variant">
+          Mostrando <strong>1-4</strong> de <strong>14</strong> partidos anteriores
+        </span>
+<div class="inline-flex rounded shadow-sm" role="group">
+<button class="px-3 py-1.5 text-xs font-semibold text-outline-variant bg-surface-container-lowest border border-outline-variant rounded-l cursor-not-allowed" disabled="" type="button">
+            Anterior
+          </button>
+<button class="px-3 py-1.5 text-xs font-semibold text-on-primary bg-primary border-t border-b border-primary" type="button">
+            1
+          </button>
+<button class="px-3 py-1.5 text-xs font-semibold text-on-surface bg-surface-container-lowest border-t border-b border-r border-outline-variant hover:bg-surface-container" type="button">
+            2
+          </button>
+<button class="px-3 py-1.5 text-xs font-semibold text-on-surface bg-surface-container-lowest border border-outline-variant rounded-r hover:bg-surface-container" type="button">
+            Siguiente
+          </button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-low border-t border-outline-variant dark:border-outline">
+<div class="w-full max-w-7xl mx-auto px-gutter py-space-xl flex flex-col md:flex-row justify-between items-center gap-space-md">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 text-center sm:text-left">
+<span class="text-title-md font-title-md font-bold text-primary dark:text-primary-fixed flex items-center gap-1">
+<span class="material-symbols-outlined text-lg" data-icon="sports_soccer">sports_soccer</span>
+          CanchasApp
+        </span>
+<span class="hidden sm:inline text-outline-variant">|</span>
+<p class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm">
+          © 2025 Complejo Deportivo CanchasApp. Todos los derechos reservados.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-2">
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Términos de Servicio
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Política de Privacidad
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Reglamento Interno
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant font-body-sm text-body-sm hover:text-primary dark:hover:text-primary-fixed transition-colors duration-150" href="#">
+          Contacto y Ubicación
+        </a>
+</div>
+</div>
+</footer>
+</body></html>
