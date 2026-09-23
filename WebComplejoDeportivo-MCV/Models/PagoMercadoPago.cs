@@ -1,15 +1,19 @@
-﻿using WebComplejoDeportivo_MCV.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations;
+using WebComplejoDeportivo_MCV.Models.Enum;
 namespace WebComplejoDeportivo_MCV.Models
 {
     public class PagoMercadoPago : Pago
     {
-        // Identificador entregado por Mercado Pago.
+        // Identificador entregado por Mercado Pago
+        [MaxLength(150)]
         public string? IdPagoProveedor { get; set; }
 
-        // Enlace que utilizará el cliente para pagar.
+        // Enlace que utilizará el cliente para pagar
+        [MaxLength(500)]
         public string? LinkPago { get; set; }
 
-        // Estado informado por Mercado Pago.
+        // Estado informado por Mercado Pago
+        [MaxLength(50)]
         public string? EstadoProveedor { get; set; }
 
 
@@ -22,8 +26,6 @@ namespace WebComplejoDeportivo_MCV.Models
                 return ResultadoPago.Rechazado;
             }
 
-            // El pago se inicia, pero todavía debe ser
-            // confirmado por Mercado Pago.
             Estado = EstadoPago.Pendiente;
             EstadoProveedor = "pending";
 

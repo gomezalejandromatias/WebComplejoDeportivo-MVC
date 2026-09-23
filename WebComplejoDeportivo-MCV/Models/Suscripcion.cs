@@ -1,14 +1,16 @@
-﻿using WebComplejoDeportivo_MCV.Models.Enum;
+﻿using Microsoft.EntityFrameworkCore;
+using WebComplejoDeportivo_MCV.Models.Enum;
 namespace WebComplejoDeportivo_MCV.Models
 {
     public class Suscripcion
     {
+        // PK
         public int Id { get; set; }
 
-        // Cliente que contrató la suscripción.
+        // FK → Cliente
         public int ClienteId { get; set; }
 
-        // Plan contratado.
+        // FK → Plan
         public int PlanId { get; set; }
 
         public DateTime FechaInicio { get; set; }
@@ -17,17 +19,17 @@ namespace WebComplejoDeportivo_MCV.Models
 
         public EstadoSuscripcion Estado { get; set; }
 
-        // Conserva el precio que se acordó al contratarlo.
+        // Precio acordado al momento de contratar
+        [Precision(12, 2)]
         public decimal PrecioContratado { get; set; }
 
         public bool RenovacionAutomatica { get; set; }
 
 
-        // Una suscripción pertenece a un cliente.
+        // Navegación → Cliente
         public Cliente Cliente { get; set; } = null!;
 
-
-        // Una suscripción corresponde a un plan.
+        // Navegación → Plan
         public Plan Plan { get; set; } = null!;
 
 

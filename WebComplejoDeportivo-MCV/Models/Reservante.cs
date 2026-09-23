@@ -1,25 +1,29 @@
-﻿namespace WebComplejoDeportivo_MCV.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebComplejoDeportivo_MCV.Models
 {
     public class Reservante
     {
+        // PK
         public int Id { get; set; }
 
-        // Usuario que ingresó, por ejemplo, mediante Google.
-        public int UsuarioId { get; set; }
+        // FK → Usuario
+        public string UsuarioId { get; set; } = string.Empty;
 
+        [Required]
+        [MaxLength(30)]
         public string Telefono { get; set; } = string.Empty;
 
-        // Permite registrar cuántas veces reservó y no asistió.
+        // Cantidad de reservas a las que no asistió
         public int Inasistencias { get; set; }
 
         public bool Activo { get; set; }
 
 
-        // Cada reservante corresponde a un usuario del sistema.
+        // Navegación → Usuario
         public Usuario Usuario { get; set; } = null!;
 
-
-        // Un reservante puede realizar muchas reservas.
+        // Un reservante puede realizar muchas reservas
         public List<Reserva> Reservas { get; set; } = new();
 
 

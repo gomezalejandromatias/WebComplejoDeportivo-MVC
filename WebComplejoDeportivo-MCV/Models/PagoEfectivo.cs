@@ -1,17 +1,18 @@
-﻿using WebComplejoDeportivo_MCV.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations;
+using WebComplejoDeportivo_MCV.Models.Enum;
 namespace WebComplejoDeportivo_MCV.Models
 {
     public class PagoEfectivo : Pago
     {
-        // Usuario empleado o administrador que recibió el dinero.
-        public int? UsuarioCobradorId { get; set; }
+        // FK → Usuario que recibió el dinero
+        public string? UsuarioCobradorId { get; set; }
 
         public DateTime? FechaCobro { get; set; }
 
+        [MaxLength(500)]
         public string? Observacion { get; set; }
 
-
-        // Usuario que registró el cobro.
+        // Navegación → Usuario que registró el cobro
         public Usuario? UsuarioCobrador { get; set; }
 
 

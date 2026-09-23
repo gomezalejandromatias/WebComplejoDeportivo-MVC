@@ -1,16 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using WebComplejoDeportivo_MCV.Models.Enum;
 
 namespace WebComplejoDeportivo_MCV.Models
 {
     public class Reserva
     {
+        // PK
         public int Id { get; set; }
 
-        // Persona que realiza la reserva.
+        // FK → persona que realiza la reserva
         public int ReservanteId { get; set; }
 
-        // Cancha elegida.
+        // FK → cancha reservada
         public int CanchaId { get; set; }
 
         public DateOnly Fecha { get; set; }
@@ -19,26 +22,29 @@ namespace WebComplejoDeportivo_MCV.Models
 
         public TimeSpan HoraFin { get; set; }
 
-        // Conserva el precio acordado al reservar.
+        // Precio acordado al momento de reservar
+        [Precision(12, 2)]
         public decimal Precio { get; set; }
 
         public EstadoReserva Estado { get; set; }
 
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
+        [MaxLength(500)]
         public string? Observaciones { get; set; }
 
+        // Control de concurrencia
+        [Timestamp]
+        public byte[] RowVersion { get; set; } = null!;
 
-        // Cada reserva pertenece a un reservante.
+
+        // Navegación → Reservante
         public Reservante Reservante { get; set; } = null!;
 
-
-        // Cada reserva corresponde a una cancha.
+        // Navegación → Cancha
         public Cancha Cancha { get; set; } = null!;
 
-
-        // Una reserva puede tener varios pagos:
-        // por ejemplo, una seña y después el saldo.
+        // Una reserva puede tener varios pagos
         public List<Pago> Pagos { get; set; } = new();
 
 

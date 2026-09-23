@@ -3,26 +3,27 @@
     public class HorarioDisponible
     {
 
+        // PK
         public int Id { get; set; }
 
-        // Cancha a la que pertenece este horario.
+        // FK → Cancha
         public int CanchaId { get; set; }
 
-        // DayOfWeek es un enum incluido en C#.
+        // Enum de C#: lunes, martes, miércoles...
         public DayOfWeek DiaSemana { get; set; }
 
         public TimeSpan HoraDesde { get; set; }
 
         public TimeSpan HoraHasta { get; set; }
 
-        // Duración permitida para cada turno.
+        // Duración del turno en minutos
         public int DuracionMinutos { get; set; }
 
         public bool Activo { get; set; }
 
-
-        // Cada horario disponible pertenece a una cancha.
+        // Navegación → Cancha
         public Cancha Cancha { get; set; } = null!;
+
 
 
 

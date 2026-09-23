@@ -1,30 +1,38 @@
-﻿namespace WebComplejoDeportivo_MCV.Models
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebComplejoDeportivo_MCV.Models
 {
     public class TipoSocio
     {
 
+        // PK
         public int Id { get; set; }
 
-        // Cada complejo configura sus propios tipos de socio.
+        // FK → Complejo
         public int ComplejoId { get; set; }
 
-        // Ejemplos: Infantil, Activo, Familiar o Vitalicio.
+        // Ejemplos: Infantil, Activo, Familiar, Vitalicio
+        [Required]
+        [MaxLength(100)]
         public string Nombre { get; set; } = string.Empty;
 
+        [MaxLength(500)]
         public string? Descripcion { get; set; }
 
+        [Precision(12, 2)]
         public decimal CuotaMensual { get; set; }
 
+        [MaxLength(1000)]
         public string? Beneficios { get; set; }
 
         public bool Activo { get; set; }
 
 
-        // El tipo de socio pertenece a un complejo.
+        // Navegación → Complejo
         public Complejo Complejo { get; set; } = null!;
 
-
-        // Un mismo tipo puede asignarse a muchos socios.
+        // Un tipo puede estar asignado a muchos socios
         public List<Socio> Socios { get; set; } = new();
 
     }

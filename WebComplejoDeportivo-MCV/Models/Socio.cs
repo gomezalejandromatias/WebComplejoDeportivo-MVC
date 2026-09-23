@@ -1,21 +1,23 @@
-﻿using WebComplejoDeportivo_MCV.Models.Enum;
+﻿using System.ComponentModel.DataAnnotations;
+using WebComplejoDeportivo_MCV.Models.Enum;
 namespace WebComplejoDeportivo_MCV.Models
 {
     public class Socio
     {
-
+        // PK
         public int Id { get; set; }
 
-        // Complejo al que pertenece.
+        // FK → Complejo
         public int ComplejoId { get; set; }
 
-        // Categoría asignada: activo, infantil, familiar, etc.
+        // FK → TipoSocio
         public int TipoSocioId { get; set; }
 
-        // Es opcional porque podría registrarse un socio
-        // que todavía no ingresó al sistema con Google.
-        public int? UsuarioId { get; set; }
+        // FK opcional → Usuario
+        public string? UsuarioId { get; set; }
 
+        [Required]
+        [MaxLength(50)]
         public string NumeroSocio { get; set; } = string.Empty;
 
         public DateTime FechaAlta { get; set; } = DateTime.Now;
@@ -25,15 +27,13 @@ namespace WebComplejoDeportivo_MCV.Models
         public DateTime? FechaVencimiento { get; set; }
 
 
-        // Cada socio pertenece a un complejo.
+        // Navegación → Complejo
         public Complejo Complejo { get; set; } = null!;
 
-
-        // Cada socio posee un solo tipo.
+        // Navegación → TipoSocio
         public TipoSocio TipoSocio { get; set; } = null!;
 
-
-        // Puede no tener usuario mientras no ingrese a la web.
+        // Navegación opcional → Usuario
         public Usuario? Usuario { get; set; }
 
     }
