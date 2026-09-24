@@ -16,6 +16,20 @@ builder.Services.AddDbContext<ComplejoDbContext>(options =>
 
 var app = builder.Build();
 
+// Creamos un scope para poder obtener el DbContext
+using (var scope = app.Services.CreateScope())
+{
+    // Obtenemos el DbContext desde la inyección de dependencias
+    var context = scope.ServiceProvider
+                       .GetRequiredService<ComplejoDbContext>();
+
+    // Ejecutamos los datos iniciales
+    DbSeeder.Seed(context);
+}
+
+
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

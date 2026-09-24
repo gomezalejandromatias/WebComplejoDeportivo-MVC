@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using WebComplejoDeportivo_MCV.Models.Enum;
 namespace WebComplejoDeportivo_MCV.Models
 {
@@ -31,6 +32,8 @@ namespace WebComplejoDeportivo_MCV.Models
         public Complejo Complejo { get; set; } = null!;
 
         // Navegación → TipoSocio
+        [DeleteBehavior(DeleteBehavior.NoAction)]
+
         public TipoSocio TipoSocio { get; set; } = null!;
 
         // Navegación opcional → Usuario

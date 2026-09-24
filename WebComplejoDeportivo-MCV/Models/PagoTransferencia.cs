@@ -41,7 +41,7 @@ namespace WebComplejoDeportivo_MCV.Models
         }
 
 
-        public ResultadoPago ConfirmarTransferencia(int usuarioValidadorId)
+        public ResultadoPago ConfirmarTransferencia(string usuarioValidadorId)
         {
             UsuarioValidadorId = usuarioValidadorId;
             FechaValidacion = DateTime.Now;
