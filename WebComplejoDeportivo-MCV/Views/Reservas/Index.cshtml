@@ -1,0 +1,107 @@
+@model IEnumerable<WebComplejoDeportivo_MCV.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ReservanteId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanchaId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HoraFin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCreacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Observaciones)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RowVersion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reservante)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pagos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(model => item.ReservanteId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.CanchaId)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.HoraInicio)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.HoraFin)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Estado)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.FechaCreacion)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Observaciones)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.RowVersion)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Reservante)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Cancha)
+            </td>
+            <td>
+                @Html.DisplayFor(model => item.Pagos)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

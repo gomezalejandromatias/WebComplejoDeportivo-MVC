@@ -1,0 +1,201 @@
+@model WebComplejoDeportivo_MCV.Models.Reserva
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Reserva</h4>
+<hr />
+<!-- CANCHA -->
+<div class="row">
+
+    @foreach (var cancha in ViewBag.Canchas)
+    {
+        <div class="col-md-4 mb-4">
+
+            <div class="card h-100 shadow-sm">
+
+                <!-- FOTO -->
+                <img src="@cancha.FotoUrl"
+                     class="card-img-top"
+                     style="height: 200px; object-fit: cover;"
+                     alt="@cancha.Nombre">
+
+                <div class="card-body">
+
+                    <!-- NOMBRE -->
+                    <h5 class="card-title">
+                        @cancha.Nombre
+                    </h5>
+
+                    <!-- DESCRIPCIÓN -->
+                    <p class="card-text text-muted">
+                        @cancha.Descripcion
+                    </p>
+
+                    <!-- PRECIO -->
+                    <p class="fs-5 fw-bold">
+                        $@cancha.PrecioTurno
+                    </p>
+
+                    <!-- SELECCIONAR -->
+                    <input type="radio"
+                           asp-for="CanchaId"
+                           value="@cancha.Id"
+                           class="btn-check cancha-selector"
+                           id="cancha-@cancha.Id">
+
+                    <label class="btn btn-outline-primary w-100"
+                           for="cancha-@cancha.Id">
+                        Seleccionar cancha
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<!-- FECHA Y HORARIO -->
+<div class="card border-0 shadow-sm mt-4 rounded-4">
+
+    <div class="card-body p-4">
+
+        <!-- TÍTULO -->
+        <div class="mb-4">
+            <h4 class="fw-bold mb-1">
+                Elegí cuándo querés jugar
+            </h4>
+
+            <p class="text-muted mb-0">
+                Seleccioná primero una cancha para consultar su disponibilidad.
+            </p>
+        </div>
+
+
+        <!-- FECHA -->
+        <div class="mb-4">
+
+            <label asp-for="Fecha"
+                   class="form-label fw-bold">
+                Día de la reserva
+            </label>
+
+            <input asp-for="Fecha"
+                   type="date"
+                   id="fechaReserva"
+                   class="form-control form-control-lg"
+                   disabled />
+
+            <span asp-validation-for="Fecha"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+
+        <!-- HORARIOS -->
+        <div class="mb-4">
+
+            <label class="form-label fw-bold fs-5">
+                Horarios disponibles
+            </label>
+
+            <p class="text-muted" id="mensajeHorario">
+                Seleccioná una cancha y un día para ver los horarios disponibles.
+            </p>
+
+            <div id="horariosDisponibles"
+                 class="p-3 bg-light rounded-3">
+
+                <div class="row g-2">
+
+                    @for (int hora = 8; hora <= 23; hora++)
+                    {
+                        var horaInicio = $"{hora:D2}:00";
+
+                        var horaFin = hora == 23
+                            ? "00:00"
+                            : $"{hora + 1:D2}:00";
+
+                        <div class="col-6 col-md-3">
+
+                            <input type="radio"
+                                   class="btn-check horario"
+                                   name="HoraInicio"
+                                   id="hora-@hora"
+                                   value="@horaInicio"
+                                   disabled />
+
+                            <label class="btn btn-outline-success w-100 py-2"
+                                   for="hora-@hora">
+
+                                <strong>@horaInicio</strong>
+
+                                <small class="d-block">
+                                    a @horaFin
+                                </small>
+
+                            </label>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+            <span asp-validation-for="HoraInicio"
+                  class="text-danger">
+            </span>
+
+        </div>
+
+    </div> <!-- CIERRA card-body -->
+
+</div> <!-- CIERRA card -->
+
+
+
+
+
+
+<!--METODOS DE JAVA SCRIPT -->
+
+
+<script>
+
+    const canchas = document.querySelectorAll(".cancha-selector");
+    const fecha = document.getElementById("fechaReserva");
+    const horarios = document.querySelectorAll(".horario");
+
+
+    // 1 - Selecciona cancha → habilita fecha
+    canchas.forEach(cancha => {
+
+        cancha.addEventListener("change", function() {
+
+            fecha.disabled = false;
+
+        });
+
+    });
+
+
+    // 2 - Selecciona fecha → habilita horarios
+    fecha.addEventListener("change", function() {
+
+        horarios.forEach(horario => {
+
+            horario.disabled = false;
+
+        });
+
+    });
+
+</script>

@@ -6,73 +6,176 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
 
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioTurno)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FotoUrl)
-            </th>
+<div class="container mt-4">
 
-            <th>
-                @Html.DisplayNameFor(model => model.Complejo)
-            </th>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="mb-1">Mis canchas</h2>
+            <p class="text-muted mb-0">
+                Administrá las canchas de tu complejo.
+            </p>
+        </div>
 
-            <th>
-                @Html.DisplayNameFor(model => model.HorariosDisponibles)
-            </th>
+        <a asp-action="Create" class="btn btn-primary">
+            + Nueva cancha
+        </a>
+    </div>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
 
-                <td>
-                    @Html.DisplayFor(model => item.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.PrecioTurno)
-                </td>
-                <td>
-                    <img src="@item.FotoUrl"
-                         width="70"
-                         height="70"
-                         style="object-fit: cover; border-radius: 8px;" />
+    <div class="card shadow-sm border-0">
 
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Activa)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => item.Complejo)
-                </td>
+        <div class="card-body p-0">
 
-      
-           
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Borrar Cnacha</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <div class="table-responsive">
+
+                <table class="table table-hover align-middle mb-0">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th class="ps-4">Cancha</th>
+                            <th>Descripción</th>
+                            <th>Precio por turno</th>
+                            <th>Estado</th>
+                            <th class="text-center">Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <!-- CANCHA + FOTO -->
+                                <td class="ps-4">
+
+                                    <div class="d-flex align-items-center gap-3">
+
+                                        @if (!string.IsNullOrEmpty(item.FotoUrl))
+                                        {
+                                            <img src="@item.FotoUrl"
+                                                 width="75"
+                                                 height="75"
+                                                 class="rounded shadow-sm"
+                                                 style="object-fit:cover;"
+                                                 alt="Foto de @item.Nombre" />
+                                        }
+                                        else
+                                        {
+                                            <div class="bg-light rounded d-flex
+                                                justify-content-center
+                                                align-items-center"
+                                                 style="width:75px; height:75px;">
+                                                Sin foto
+                                            </div>
+                                        }
+
+                                        <div>
+                                            <strong class="fs-5">
+                                                @item.Nombre
+                                            </strong>
+
+                                            <div class="text-muted small">
+                                                @item.Complejo?.Nombre
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- DESCRIPCIÓN -->
+                                <td style="max-width:300px;">
+                                    @item.Descripcion
+                                </td>
+
+
+                                <!-- PRECIO -->
+                                <td>
+                                    <strong>
+                                        $@item.PrecioTurno.ToString("N0")
+                                    </strong>
+                                </td>
+
+
+                                <!-- ESTADO -->
+                                <td>
+
+                                    @if (item.Activa)
+                                    {
+                                        <span class="badge bg-success">
+                                            Activa
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            Inactiva
+                                        </span>
+                                    }
+
+                                </td>
+
+
+                                <!-- ACCIONES -->
+                                <td class="text-center">
+
+                                    <div class="d-flex flex-wrap
+                                        justify-content-center gap-2">
+
+                                        <a asp-action="Details"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-primary">
+                                            Detalle
+                                        </a>
+
+                                        <a asp-action="Edit"
+                                           asp-route-id="@item.Id"
+                                           class="btn btn-sm btn-outline-warning">
+                                            Editar
+                                        </a>
+
+
+                                        @if (item.Activa)
+                                        {
+                                            <a asp-action="Delete"
+                                               asp-route-id="@item.Id"
+                                               class="btn btn-sm btn-outline-danger">
+                                                Desactivar
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <form asp-action="Activar"
+                                                  asp-route-id="@item.Id"
+                                                  method="post"
+                                                  class="d-inline">
+
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-outline-success">
+                                                    Activar
+                                                </button>
+
+                                            </form>
+                                        }
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -6,101 +6,141 @@
 
 <h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>WebComplejoDeportivo_MCV.Models.Cancha</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ComplejoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ComplejoId)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoCanchaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoCanchaId)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioTurno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioTurno)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FotoUrl)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activa)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Complejo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Complejo)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoCancha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoCancha)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorariosDisponibles)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorariosDisponibles)
-        </dd>
-    </dl>
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservas)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Reservas)
-        </dd>
-    </dl>
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="Id" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+<div class="container mt-4">
+
+    <div class="card shadow border-0">
+
+        <!-- ENCABEZADO -->
+        <div class="card-header bg-danger text-white">
+            <h3 class="mb-0">Eliminar cancha</h3>
+        </div>
+
+        <div class="card-body">
+
+            <!-- ADVERTENCIA -->
+            <div class="alert alert-warning" role="alert">
+                <strong>¿Estás seguro de que querés desactivar esta cancha?</strong>
+                <br />
+                La cancha no será eliminada y seguirá visible para vos como administrador.
+                Mientras esté desactivada, los clientes no podrán verla ni realizar nuevas reservas.
+                Podés volver a habilitarla en cualquier momento presionando <strong>Activar</strong>.
+            </div>
+
+            <div class="row">
+
+                <!-- FOTO -->
+                <div class="col-md-5 text-center mb-3">
+
+                    @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                    {
+                        <img src="@Model.FotoUrl"
+                             class="img-fluid rounded shadow-sm"
+                             style="width:100%; max-height:300px; object-fit:cover;"
+                             alt="Foto de @Model.Nombre" />
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary">
+                            La cancha no tiene una imagen cargada.
+                        </div>
+                    }
+
+                </div>
+
+                <!-- DATOS -->
+                <div class="col-md-7">
+
+                    <h2 class="mb-3">
+                        @Model.Nombre
+                    </h2>
+
+                    <hr />
+
+                    <dl class="row">
+
+                        <dt class="col-sm-4">
+                            Tipo de cancha
+                        </dt>
+
+                        <dd class="col-sm-8">
+                            @Model.TipoCancha?.Nombre
+                        </dd>
+
+
+                        <dt class="col-sm-4">
+                            Descripción
+                        </dt>
+
+                        <dd class="col-sm-8">
+                            @Model.Descripcion
+                        </dd>
+
+
+                        <dt class="col-sm-4">
+                            Precio por turno
+                        </dt>
+
+                        <dd class="col-sm-8">
+                            <strong>
+                                $@Model.PrecioTurno.ToString("N0")
+                            </strong>
+                        </dd>
+
+
+                        <dt class="col-sm-4">
+                            Estado
+                        </dt>
+
+                        <dd class="col-sm-8">
+
+                            @if (Model.Activa)
+                            {
+                                <span class="badge bg-success">
+                                    Activa
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-secondary">
+                                    Inactiva
+                                </span>
+                            }
+
+                        </dd>
+
+                    </dl>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PIE -->
+        <div class="card-footer bg-white">
+
+            <form asp-action="DeleteConfirmed">
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="d-flex gap-2">
+
+                    <button type="submit"
+                            class="btn btn-danger">
+                        Desactivar cancha
+                    </button>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+                       Volver a la Lista de Canchas
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>

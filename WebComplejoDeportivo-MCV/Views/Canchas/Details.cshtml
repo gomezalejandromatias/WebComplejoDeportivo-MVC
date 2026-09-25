@@ -6,89 +6,111 @@
 
 <h1>Details</h1>
 
-<div>
-    <h4>Cancha</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ComplejoId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ComplejoId)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoCanchaId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoCanchaId)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Descripcion)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PrecioTurno)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PrecioTurno)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FotoUrl)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Activa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activa)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Complejo)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Complejo)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TipoCancha)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoCancha)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.HorariosDisponibles)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.HorariosDisponibles)
-        </dd>
-    </dl>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Reservas)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Reservas)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+<div class="container mt-4">
+
+    <div class="card shadow border-0">
+
+        <div class="card-header bg-dark text-white">
+            <h3 class="mb-0">Detalle de la cancha</h3>
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <!-- FOTO -->
+                <div class="col-md-5 text-center mb-3">
+
+                    @if (!string.IsNullOrEmpty(Model.FotoUrl))
+                    {
+                        <img src="@Model.FotoUrl"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height: 350px; width: 100%; object-fit: cover;"
+                             alt="Foto de @Model.Nombre" />
+                    }
+                    else
+                    {
+                        <div class="alert alert-secondary">
+                            La cancha no tiene una foto cargada.
+                        </div>
+                    }
+
+                </div>
+
+                <!-- INFORMACIÓN -->
+                <div class="col-md-7">
+
+                    <h2 class="mb-3">@Model.Nombre</h2>
+
+                    <hr />
+
+                    <dl class="row">
+
+                        <dt class="col-sm-4">
+                            Tipo de cancha
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.TipoCancha?.Nombre
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            Descripción
+                        </dt>
+                        <dd class="col-sm-8">
+                            @Model.Descripcion
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            Precio por turno
+                        </dt>
+                        <dd class="col-sm-8">
+                            <strong>
+                                $@Model.PrecioTurno.ToString("N0")
+                            </strong>
+                        </dd>
+
+                        <dt class="col-sm-4">
+                            Estado
+                        </dt>
+                        <dd class="col-sm-8">
+                            @if (Model.Activa)
+                            {
+                                <span class="badge bg-success">
+                                    Activa
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">
+                                    Inactiva
+                                </span>
+                            }
+                        </dd>
+
+                    </dl>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTONES -->
+        <div class="card-footer bg-white">
+
+            <a asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-warning">
+                Editar
+            </a>
+
+            <a asp-action="Index"
+               class="btn btn-secondary">
+                Volver a lista de canchas
+            </a>
+
+        </div>
+
+    </div>
+
 </div>

@@ -57,7 +57,7 @@ public class CanchasController : Controller
     Cancha cancha)
     {
         // TEMPORAL hasta implementar el usuario autenticado
-        cancha.ComplejoId = 3;
+        cancha.ComplejoId = 1;
 
         if (ModelState.IsValid)
         {
@@ -93,6 +93,8 @@ public class CanchasController : Controller
             _context.Add(cancha);
             await _context.SaveChangesAsync();
 
+            ViewBag.Canchas = cancha;
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -107,6 +109,8 @@ public class CanchasController : Controller
     // GET: CANCHAS/Edit/5
     public async Task<IActionResult> Edit(int? id)
     {
+        ViewBag.TiposCancha = _context.TiposCancha.ToList();
+
         if (id == null)
         {
             return NotFound();
@@ -181,12 +185,32 @@ public class CanchasController : Controller
         var cancha = await _context.Canchas.FindAsync(id);
         if (cancha != null)
         {
-            _context.Canchas.Remove(cancha);
+            cancha.Activa = false;
         }
 
         await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
+
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Activar(int id)
+    {
+        var cancha = await _context.Canchas.FindAsync(id);
+
+        if (cancha == null)
+        {
+            return NotFound();
+        }
+
+        cancha.Activa = true;
+
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction(nameof(Index));
+    }
+
 
     private bool CanchaExists(int? id)
     {
