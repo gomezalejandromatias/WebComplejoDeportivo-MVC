@@ -8,83 +8,221 @@
 
 <h4>Cancha</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="ComplejoId" class="control-label"></label>
-                <input asp-for="ComplejoId" class="form-control" />
-                <span asp-validation-for="ComplejoId" class="text-danger"></span>
-            </div>
+<div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
 
-            <div class="form-group">
-                <label asp-for="TipoCanchaId" class="control-label"></label>
-                <input asp-for="TipoCanchaId" class="form-control" />
-                <span asp-validation-for="TipoCanchaId" class="text-danger"></span>
-            </div>
+        <div class="card bg-dark text-light border-secondary shadow">
+            <div class="card-body p-4">
 
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
+                <h3 class="mb-4">Nueva cancha</h3>
 
-            <div class="form-group">
-                <label asp-for="Descripcion" class="control-label"></label>
-                <input asp-for="Descripcion" class="form-control" />
-                <span asp-validation-for="Descripcion" class="text-danger"></span>
-            </div>
+                <form asp-action="Create" method="post" enctype="multipart/form-data">
 
-            <div class="form-group">
-                <label asp-for="PrecioTurno" class="control-label"></label>
-                <input asp-for="PrecioTurno" class="form-control" />
-                <span asp-validation-for="PrecioTurno" class="text-danger"></span>
-            </div>
+                    @* Muestra errores generales del modelo *@
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3">
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="FotoUrl" class="control-label"></label>
-                <input asp-for="FotoUrl" class="form-control" />
-                <span asp-validation-for="FotoUrl" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Activa" class="control-label"></label>
-                <input asp-for="Activa" class="form-check-input" />
-                <span asp-validation-for="Activa" class="text-danger"></span>
-            </div>
+                    @* =====================================================
+                       NOMBRE
+                       Nombre con el que se mostrará la cancha.
+                       Ejemplo: "Cancha 1", "La Bombonera", etc.
+                       ===================================================== *@
+                    <div class="mb-3">
+                        <label asp-for="Nombre" class="form-label">
+                            Nombre de la cancha
+                        </label>
 
-            <div class="form-group">
-                <label asp-for="Complejo" class="control-label"></label>
-                <input asp-for="Complejo" class="form-control" />
-                <span asp-validation-for="Complejo" class="text-danger"></span>
-            </div>
+                        <input asp-for="Nombre"
+                               class="form-control"
+                               placeholder="Ej: Cancha 1" />
 
-            <div class="form-group">
-                <label asp-for="TipoCancha" class="control-label"></label>
-                <input asp-for="TipoCancha" class="form-control" />
-                <span asp-validation-for="TipoCancha" class="text-danger"></span>
-            </div>
+                        <span asp-validation-for="Nombre"
+                              class="text-danger">
+                        </span>
+                    </div>
 
-            <div class="form-group">
-                <label asp-for="HorariosDisponibles" class="control-label"></label>
-                <input asp-for="HorariosDisponibles" class="form-control" />
-                <span asp-validation-for="HorariosDisponibles" class="text-danger"></span>
-            </div>
 
-            <div class="form-group">
-                <label asp-for="Reservas" class="control-label"></label>
-                <input asp-for="Reservas" class="form-control" />
-                <span asp-validation-for="Reservas" class="text-danger"></span>
+                    @* =====================================================
+                       DESCRIPCIÓN
+                       Usamos textarea porque puede contener bastante texto.
+                       ===================================================== *@
+                    <div class="mb-3">
+                        <label asp-for="Descripcion" class="form-label">
+                            Descripción
+                        </label>
+
+                        <textarea asp-for="Descripcion"
+                                  class="form-control"
+                                  rows="3"
+                                  placeholder="Ej: Cancha de césped sintético, iluminada...">
+                        </textarea>
+
+                        <span asp-validation-for="Descripcion"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+
+                    @* =====================================================
+                       TIPO DE CANCHA
+                       NO escribimos TipoCanchaId manualmente.
+
+                       El usuario ve el Nombre del tipo de cancha,
+                       pero el formulario envía su Id.
+
+                       Ejemplo:
+                       Usuario ve: Fútbol 5
+                       Se envía: TipoCanchaId = 1
+                       ===================================================== *@
+                    <div class="mb-3">
+                        <label asp-for="TipoCanchaId" class="form-label">
+                            Tipo de cancha
+                        </label>
+
+                        <select asp-for="TipoCanchaId"
+                                class="form-select">
+
+                            <option value="">
+                                -- Seleccione un tipo de cancha --
+                            </option>
+
+                            @foreach (var item in ViewBag.TiposCancha)
+                            {
+                                <option value="@item.Id">
+                                    @item.Nombre
+                                </option>
+                            }
+
+                        </select>
+
+                        <span asp-validation-for="TipoCanchaId"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+
+                    @* =====================================================
+                       PRECIO
+                       Precio correspondiente a un turno de esta cancha.
+                       ===================================================== *@
+                    <div class="mb-3">
+                        <label asp-for="PrecioTurno" class="form-label">
+                            Precio por turno
+                        </label>
+
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+
+                            <input asp-for="PrecioTurno"
+                                   class="form-control"
+                                   placeholder="Ej: 25000" />
+                        </div>
+
+                        <span asp-validation-for="PrecioTurno"
+                              class="text-danger">
+                        </span>
+                    </div>
+
+
+                    @* =====================================================
+                       FOTO
+                       Le damos al usuario dos posibilidades visuales:
+
+                       1. Subir una imagen desde su dispositivo.
+                       2. Pegar directamente la URL de una imagen.
+
+                       IMPORTANTE:
+                       "FotoArchivo" deberá existir en el ViewModel/modelo
+                       si después queremos recibir realmente el archivo.
+                       ===================================================== *@
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Foto de la cancha
+                        </label>
+
+                        <div class="card bg-dark border-secondary">
+                            <div class="card-body">
+
+                                @* Subir archivo *@
+                                <label class="form-label">
+                                    Subir una foto
+                                </label>
+
+                                <input type="file"
+                                       name="FotoArchivo"
+                                       class="form-control mb-3"
+                                       accept="image/*" />
+
+
+                                <div class="text-center text-secondary mb-3">
+                                    — o —
+                                </div>
+
+
+                                @* Utilizar una URL *@
+                                <label asp-for="FotoUrl" class="form-label">
+                                    URL de la imagen
+                                </label>
+
+                                <input asp-for="FotoUrl"
+                                       class="form-control"
+                                       placeholder="https://ejemplo.com/cancha.jpg" />
+
+                                <span asp-validation-for="FotoUrl"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    @* =====================================================
+                       ACTIVA
+                       Determina si la cancha está disponible para operar.
+
+                       Marcada   -> Activa = true
+                       Desmarcada -> Activa = false
+                       ===================================================== *@
+                    <div class="form-check form-switch mb-4">
+
+                        <input asp-for="Activa"
+                               class="form-check-input" />
+
+                        <label asp-for="Activa"
+                               class="form-check-label">
+                            Cancha activa
+                        </label>
+
+                    </div>
+
+
+                    @* =====================================================
+                       BOTONES
+                       ===================================================== *@
+                    <div class="d-flex gap-2">
+
+                        <button type="submit"
+                                class="btn btn-primary">
+                            Crear cancha
+                        </button>
+
+                        <a asp-action="Index"
+                           class="btn btn-outline-light">
+                            Cancelar
+                        </a>
+
+                    </div>
+
+                </form>
+
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>

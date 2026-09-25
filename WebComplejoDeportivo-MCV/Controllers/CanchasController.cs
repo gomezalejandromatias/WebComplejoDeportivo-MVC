@@ -42,6 +42,8 @@ public class CanchasController : Controller
     // GET: CANCHAS/Create
     public IActionResult Create()
     {
+        ViewBag.TiposCancha =  _context.TiposCancha.ToList();
+
         return View();
     }
 
@@ -50,14 +52,55 @@ public class CanchasController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,ComplejoId,TipoCanchaId,Nombre,Descripcion,PrecioTurno,FotoUrl,Activa,Complejo,TipoCancha,HorariosDisponibles,Reservas")] Cancha cancha)
+    public async Task<IActionResult> Create(
+        [Bind("TipoCanchaId,Nombre,Descripcion,PrecioTurno,FotoUrl,Activa,FotoArchivo")]
+    Cancha cancha)
     {
+        // TEMPORAL hasta implementar el usuario autenticado
+        cancha.ComplejoId = 3;
+
         if (ModelState.IsValid)
         {
+            // Si el usuario eligió una foto de su PC
+            if (cancha.FotoArchivo != null)
+            {
+                // Obtenemos la extensión original (.jpg, .png, etc.)
+                string extension = Path.GetExtension(cancha.FotoArchivo.FileName);
+
+                // Creamos un nombre único para evitar fotos con el mismo nombre
+                string nombreArchivo = Guid.NewGuid().ToString() + extension;
+
+                // Ruta física donde vamos a guardar la imagen
+                string rutaCompleta = Path.Combine(
+                    Directory.GetCurrentDirectory(),
+                    "wwwroot",
+                    "imagenes",
+                    "canchas",
+                    nombreArchivo
+                );
+
+                // Guardamos físicamente el archivo
+                using (var stream = new FileStream(rutaCompleta, FileMode.Create))
+                {
+                    await cancha.FotoArchivo.CopyToAsync(stream);
+                }
+
+                // Guardamos en FotoUrl la dirección de la imagen
+                cancha.FotoUrl = "/imagenes/canchas/" + nombreArchivo;
+            }
+
+            // Guardamos la cancha en SQL
             _context.Add(cancha);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
+
+        // IMPORTANTE:
+        // Si hubo un error de validación, tenemos que volver
+        // a cargar la lista porque la vista usa ViewBag.TiposCancha.
+        ViewBag.TiposCancha = _context.TiposCancha.ToList();
+
         return View(cancha);
     }
 

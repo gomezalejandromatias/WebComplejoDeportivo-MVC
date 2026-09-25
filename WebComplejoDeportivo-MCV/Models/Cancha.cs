@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebComplejoDeportivo_MCV.Models
 {
@@ -31,13 +32,18 @@ namespace WebComplejoDeportivo_MCV.Models
         public bool Activa { get; set; }
 
         // Navegaciones
-        public Complejo Complejo { get; set; } = null!;
+        public Complejo? Complejo { get; set; } = null!;
 
-        public TipoCancha TipoCancha { get; set; } = null!;
+        public TipoCancha? TipoCancha { get; set; } = null!;
 
         public List<HorarioDisponible> HorariosDisponibles { get; set; } = new();
 
         public List<Reserva> Reservas { get; set; } = new();
+
+        // Esta NO se guarda en SQL.
+        // Solamente recibe temporalmente el archivo del formulario.
+        [NotMapped]
+        public IFormFile? FotoArchivo { get; set; }
 
 
     }
