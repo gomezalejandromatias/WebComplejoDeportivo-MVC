@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using WebComplejoDeportivo_MCV.Models.Enum;
@@ -31,7 +32,7 @@ namespace WebComplejoDeportivo_MCV.Models
         public DateTime FechaCreacion { get; set; } = DateTime.Now;
 
         [MaxLength(500)]
-        public string? Observaciones { get; set; }
+        public string? Observaciones { get; set; } = "";
 
         // Control de concurrencia
         [Timestamp]

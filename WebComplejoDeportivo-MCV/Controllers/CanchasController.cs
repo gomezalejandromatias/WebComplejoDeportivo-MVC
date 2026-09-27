@@ -44,6 +44,8 @@ public class CanchasController : Controller
     {
         ViewBag.TiposCancha =  _context.TiposCancha.ToList();
 
+       
+
         return View();
     }
 

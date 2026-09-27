@@ -44,6 +44,7 @@
                     <input type="radio"
                            asp-for="CanchaId"
                            value="@cancha.Id"
+                           data-precio="@cancha.PrecioTurno"
                            class="btn-check cancha-selector"
                            id="cancha-@cancha.Id">
 
@@ -130,6 +131,7 @@
                                    name="HoraInicio"
                                    id="hora-@hora"
                                    value="@horaInicio"
+                                   data-hora-fin="@horaFin"
                                    disabled />
 
                             <label class="btn btn-outline-success w-100 py-2"
@@ -148,6 +150,11 @@
 
                 </div>
 
+                <!-- Este es el que manda HoraFin al Controller -->
+                <input type="hidden"
+                       name="HoraFin"
+                       id="horaFin" />
+
             </div>
 
             <span asp-validation-for="HoraInicio"
@@ -160,13 +167,171 @@
 
 </div> <!-- CIERRA card -->
 
+<!-- MONTO DE LA RESERVA -->
+<div class="card border-0 shadow-sm mt-4 rounded-4">
+
+    <div class="card-body p-4">
+
+        <h4 class="fw-bold mb-1">
+            Monto de la reserva
+        </h4>
+
+        <p class="text-muted mb-4">
+            Elegí cuánto querés abonar.
+        </p>
+
+        <div class="row g-3">
+
+            <!-- 50% -->
+            <div class="col-md-6">
+
+                <input type="radio"
+                       class="btn-check monto-reserva"
+                       name="PorcentajePago"
+                       id="pago50"
+                       value="50"
+                       disabled>
+
+                <label class="btn btn-outline-primary w-100 p-4"
+                       for="pago50">
+
+                    <div class="fw-bold fs-5">
+                        Seña 50%
+                    </div>
+
+                    <div class="fs-3 fw-bold mt-2"
+                         id="precioMitad">
+                        $0
+                    </div>
+
+                    <small class="text-muted">
+                        Pagás la mitad del turno
+                    </small>
+
+                </label>
+
+            </div>
 
 
+            <!-- 100% -->
+            <div class="col-md-6">
+
+                <input type="radio"
+                       class="btn-check monto-reserva"
+                       name="PorcentajePago"
+                       id="pagoTotal"
+                       value="100"
+                       disabled>
+
+                <label class="btn btn-outline-success w-100 p-4"
+                       for="pagoTotal">
+
+                    <div class="fw-bold fs-5">
+                        Pago total
+                    </div>
+
+                    <div class="fs-3 fw-bold mt-2"
+                         id="precioTotal">
+                        $0
+                    </div>
+
+                    <small class="text-muted">
+                        Pagás el turno completo
+                    </small>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MÉTODO DE PAGO -->
+<div class="card border-0 shadow-sm mt-4 rounded-4">
+
+    <div class="card-body p-4">
+
+        <h4 class="fw-bold mb-1">
+            Método de pago
+        </h4>
+
+        <p class="text-muted mb-4">
+            Elegí cómo querés realizar el pago de la reserva.
+        </p>
+
+        <div class="row g-3">
+
+            <!-- TRANSFERENCIA -->
+            <div class="col-md-6">
+
+                <input type="radio"
+                       class="btn-check metodo-pago"
+                       name="MetodoPago"
+                       id="pagoTransferencia"
+                       value="Transferencia"
+                       disabled>
+
+                <label class="btn btn-outline-primary w-100 p-4"
+                       for="pagoTransferencia">
+
+                    <div class="fw-bold fs-5">
+                        Transferencia
+                    </div>
+
+                    <div class="mt-2">
+                        Transferencia bancaria
+                    </div>
+
+                    <small class="text-muted d-block mt-2">
+                        Realizá el pago desde tu banco o billetera.
+                    </small>
+
+                </label>
+
+            </div>
+
+
+            <!-- TARJETA / PAGO ONLINE -->
+            <div class="col-md-6">
+
+                <input type="radio"
+                       class="btn-check metodo-pago"
+                       name="MetodoPago"
+                       id="pagoTarjeta"
+                       value="Tarjeta"
+                       disabled>
+
+                <label class="btn btn-outline-success w-100 p-4"
+                       for="pagoTarjeta">
+
+                    <div class="fw-bold fs-5">
+                        Tarjeta
+                    </div>
+
+                    <div class="mt-2">
+                        Pago online
+                    </div>
+
+                    <small class="text-muted d-block mt-2">
+                        Pagá de forma online para confirmar la reserva.
+                    </small>
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 
 
 
 <!--METODOS DE JAVA SCRIPT -->
-
 
 <script>
 
@@ -174,13 +339,33 @@
     const fecha = document.getElementById("fechaReserva");
     const horarios = document.querySelectorAll(".horario");
 
+    // MONTOS
+    const montosReserva = document.querySelectorAll(".monto-reserva");
+    const precioMitad = document.getElementById("precioMitad");
+    const precioTotal = document.getElementById("precioTotal");
 
-    // 1 - Selecciona cancha → habilita fecha
+    // MÉTODOS DE PAGO
+    const metodosPago = document.querySelectorAll(".metodo-pago");
+
+
+    // 1 - Selecciona cancha → habilita fecha + calcula precios
     canchas.forEach(cancha => {
 
         cancha.addEventListener("change", function() {
 
+            // Habilita fecha
             fecha.disabled = false;
+
+            // Obtiene el precio de la cancha seleccionada
+            const precio = parseFloat(this.dataset.precio);
+
+            // Muestra el 50%
+            precioMitad.textContent =
+                "$" + (precio / 2).toLocaleString("es-AR");
+
+            // Muestra el 100%
+            precioTotal.textContent =
+                "$" + precio.toLocaleString("es-AR");
 
         });
 
@@ -193,6 +378,43 @@
         horarios.forEach(horario => {
 
             horario.disabled = false;
+
+        });
+
+    });
+
+
+    // 3 - Selecciona horario → guarda HoraFin + habilita monto
+    horarios.forEach(radio => {
+
+        radio.addEventListener("change", function() {
+
+            // Guarda HoraFin
+            document.getElementById("horaFin").value =
+                this.dataset.horaFin;
+
+            // Habilita 50% y 100%
+            montosReserva.forEach(monto => {
+
+                monto.disabled = false;
+
+            });
+
+        });
+
+    });
+
+
+    // 4 - Selecciona monto → habilita métodos de pago
+    montosReserva.forEach(monto => {
+
+        monto.addEventListener("change", function() {
+
+            metodosPago.forEach(metodo => {
+
+                metodo.disabled = false;
+
+            });
 
         });
 

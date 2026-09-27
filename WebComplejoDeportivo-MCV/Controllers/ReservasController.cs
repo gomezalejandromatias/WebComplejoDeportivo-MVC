@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebComplejoDeportivo_MCV.Models;
 using WebComplejoDeportivo_MCV.Data;
+using WebComplejoDeportivo_MCV.Models.Enum;
 
 public class ReservasController : Controller
 {
@@ -42,6 +43,8 @@ public class ReservasController : Controller
     {   
          ViewBag.Canchas = _context.Canchas.ToList();
 
+    
+
         return View();
     }
 
@@ -50,14 +53,70 @@ public class ReservasController : Controller
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create([Bind("Id,ReservanteId,CanchaId,Fecha,HoraInicio,HoraFin,Precio,Estado,FechaCreacion,Observaciones,RowVersion,Reservante,Cancha,Pagos")] Reserva reserva)
+    public async Task<IActionResult> Create([Bind("CanchaId,Fecha,HoraInicio,HoraFin")] Reserva reserva,int PorcentajePago,string MetodoPago)
     {
+        var cancha = await _context.Canchas.FindAsync(reserva.CanchaId);
+
+        if (cancha == null) 
+        {
+
+            return NotFound();
+        
+        
+        }
+
+        reserva.Precio = cancha.PrecioTurno;
+        reserva.Estado = EstadoReserva.Pendiente;
+
+        
+        
+
+        Pago pago = new PagoEfectivo();
+        pago.Estado = EstadoPago.Pendiente;
+
+
+        if (PorcentajePago == 50) 
+        {
+            pago = new PagoTransferencia();
+            pago.Importe = reserva.Precio / 2;
+        
+        
+        }
+        else if(PorcentajePago == 100)
+        {
+
+            pago = new PagoMercadoPago();
+            pago.Importe = reserva.Precio;
+
+
+
+
+        }
+
+
+        try
+        {
+            pago.Estado = EstadoPago.Confirmado;
+            reserva.Estado = EstadoReserva.Confirmada;
+            
+
+
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+
+
         if (ModelState.IsValid)
         {
             _context.Add(reserva);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
         return View(reserva);
     }
 
