@@ -1,4 +1,5 @@
-﻿using WebComplejoDeportivo_MCV.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using WebComplejoDeportivo_MCV.Models;
 
 namespace WebComplejoDeportivo_MCV.Data
 {
@@ -8,18 +9,15 @@ namespace WebComplejoDeportivo_MCV.Data
 
         public static void Seed(ComplejoDbContext complejoDbContext)
         {
-
-            // Verifica/crea la base de datos si fuera necesario
             complejoDbContext.Database.EnsureCreated();
 
-            // Si ya existen tipos de cancha, no vuelve a cargarlos
-            if (complejoDbContext.TiposCancha.Any())
-            {
-                return;
-            }
+            // ==========================
+            // TIPOS DE CANCHA
+            // ==========================
 
-            // Datos iniciales de tipos de cancha
-            var tiposCancha = new List<TipoCancha>
+            if (!complejoDbContext.TiposCancha.Any())
+            {
+                var tiposCancha = new List<TipoCancha>
         {
             new TipoCancha
             {
@@ -46,18 +44,46 @@ namespace WebComplejoDeportivo_MCV.Data
             }
         };
 
-            // Agrega todos los tipos al DbContext
-            complejoDbContext.TiposCancha.AddRange(tiposCancha);
+                complejoDbContext.TiposCancha.AddRange(tiposCancha);
+            }
 
-            // Guarda los datos en SQL Server
+
+            // ==========================
+            // ROLES
+            // ==========================
+
+            if (!complejoDbContext.Roles.Any())
+            {
+                var roles = new List<Rol>
+        {
+            new Rol
+            {
+                Nombre = "Admin",
+                Descripcion = "Administrador del complejo",
+                Activo = true
+            },
+
+            new Rol
+            {
+                Nombre = "Empleado",
+                Descripcion = "Empleado del complejo",
+                Activo = true
+            },
+
+            new Rol
+            {
+                Nombre = "Cliente",
+                Descripcion = "Cliente que realiza reservas",
+                Activo = true
+            }
+        };
+
+                complejoDbContext.Roles.AddRange(roles);
+            }
+
+
+            // GUARDA TODO JUNTO
             complejoDbContext.SaveChanges();
-
-
-
         }
-           
-
-
-
     }
 }

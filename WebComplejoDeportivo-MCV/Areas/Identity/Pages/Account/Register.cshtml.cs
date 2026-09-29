@@ -18,22 +18,23 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using WebComplejoDeportivo_MCV.Data;
+using WebComplejoDeportivo_MCV.Models;
 
 namespace WebComplejoDeportivo_MCV.Areas.Identity.Pages.Account;
 
 public class RegisterModel : PageModel
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IUserStore<ApplicationUser> _userStore;
-    private readonly IUserEmailStore<ApplicationUser> _emailStore;
+    private readonly SignInManager<Usuario> _signInManager;
+    private readonly UserManager<Usuario> _userManager;
+    private readonly IUserStore<Usuario> _userStore;
+    private readonly IUserEmailStore<Usuario> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
 
     public RegisterModel(
-        UserManager<ApplicationUser> userManager,
-        IUserStore<ApplicationUser> userStore,
-        SignInManager<ApplicationUser> signInManager,
+        UserManager<Usuario> userManager,
+        IUserStore<Usuario> userStore,
+        SignInManager<Usuario> signInManager,
         ILogger<RegisterModel> logger,
         IEmailSender emailSender)
     {
@@ -114,6 +115,8 @@ public class RegisterModel : PageModel
         {
             var user = CreateUser();
 
+            user.RolId = 3;
+
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
             var result = await _userManager.CreateAsync(user, Input.Password);
@@ -154,11 +157,11 @@ public class RegisterModel : PageModel
         return Page();
     }
 
-    private ApplicationUser CreateUser()
+    private Usuario CreateUser()
     {
         try
         {
-            return Activator.CreateInstance<ApplicationUser>();
+            return Activator.CreateInstance<Usuario>();
         }
         catch
         {
@@ -168,12 +171,12 @@ public class RegisterModel : PageModel
         }
     }
 
-    private IUserEmailStore<ApplicationUser> GetEmailStore()
+    private IUserEmailStore<Usuario> GetEmailStore()
     {
         if (!_userManager.SupportsUserEmail)
         {
             throw new NotSupportedException("The default UI requires a user store with email support.");
         }
-        return (IUserEmailStore<ApplicationUser>)_userStore;
+        return (IUserEmailStore<Usuario>)_userStore;
     }
 }
