@@ -60,24 +60,33 @@
 
                         </div>
 
-
                         <!-- CONTRASEÑA -->
-                        <div class="form-floating mb-3">
+                        <div class="form-floating mb-3 position-relative">
 
                             <input asp-for="Input.Password"
                                    class="form-control"
+                                   type="password"
+                                   id="passwordInput"
                                    autocomplete="new-password"
                                    aria-required="true"
-                                   placeholder="Contraseña" />
+                                   placeholder="Contraseña"
+                                   style="padding-right: 55px;" />
 
                             <label asp-for="Input.Password">
                                 Contraseña
                             </label>
 
-                            <span asp-validation-for="Input.Password"
-                                  class="text-danger">
-                            </span>
+                            <button type="button"
+                                    id="togglePassword"
+                                    class="btn position-absolute end-0 top-0 h-100"
+                                    style="z-index: 5; border: none;"
+                                    aria-label="Mostrar contraseña"
+                                    aria-pressed="false">
+                                <i class="bi bi-eye" id="eyeIcon"></i>
+                            </button>
 
+                            <span asp-validation-for="Input.Password"
+                                  class="text-danger"></span>
                         </div>
 
 
@@ -148,3 +157,25 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }
+
+
+<script>
+    const passwordInput = document.getElementById("passwordInput");
+    const togglePassword = document.getElementById("togglePassword");
+    const eyeIcon = document.getElementById("eyeIcon");
+
+    togglePassword.addEventListener("click", function() {
+        const visible = passwordInput.type === "text";
+
+        passwordInput.type = visible ? "password" : "text";
+
+        eyeIcon.classList.toggle("bi-eye", visible);
+        eyeIcon.classList.toggle("bi-eye-slash", !visible);
+
+        togglePassword.setAttribute("aria-pressed", String(!visible));
+        togglePassword.setAttribute(
+            "aria-label",
+            visible ? "Mostrar contraseña" : "Ocultar contraseña"
+        );
+    });
+</script>

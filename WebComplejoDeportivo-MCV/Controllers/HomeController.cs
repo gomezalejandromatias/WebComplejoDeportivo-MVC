@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using WebComplejoDeportivo_MCV.Models;
 
 namespace WebComplejoDeportivo_MCV.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public IActionResult Index()

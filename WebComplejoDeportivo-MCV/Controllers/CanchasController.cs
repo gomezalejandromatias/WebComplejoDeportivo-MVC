@@ -3,9 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebComplejoDeportivo_MCV.Models;
 using WebComplejoDeportivo_MCV.Data;
+using Microsoft.AspNetCore.Authorization;
+using WebComplejoDeportivo_MCV.Autenticacion;
 
+[Authorize]
+[Authorize (Roles= Roles.AdministradorEmpleado)]
 public class CanchasController : Controller
-{
+{ 
     private readonly ComplejoDbContext _context;
 
     public CanchasController(ComplejoDbContext context)

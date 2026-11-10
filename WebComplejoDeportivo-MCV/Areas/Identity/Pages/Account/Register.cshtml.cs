@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WebComplejoDeportivo_MCV.Data;
 using WebComplejoDeportivo_MCV.Models;
@@ -30,13 +31,14 @@ public class RegisterModel : PageModel
     private readonly IUserEmailStore<Usuario> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
+    private readonly ComplejoDbContext _complejoDbContext;
 
     public RegisterModel(
         UserManager<Usuario> userManager,
         IUserStore<Usuario> userStore,
         SignInManager<Usuario> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender,ComplejoDbContext complejoDbContext)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -44,6 +46,7 @@ public class RegisterModel : PageModel
         _signInManager = signInManager;
         _logger = logger;
         _emailSender = emailSender;
+        _complejoDbContext = complejoDbContext;
     }
 
     /// <summary>
@@ -115,7 +118,21 @@ public class RegisterModel : PageModel
         {
             var user = CreateUser();
 
-            user.RolId = 3;
+            var rolCliente = await _complejoDbContext.Roles.FirstOrDefaultAsync(r=> r.Nombre == "Cliente");
+
+            if (rolCliente == null) 
+            {
+                ModelState.AddModelError("", "No se encontró el rol Cliente.");
+                return Page();
+
+
+            }
+
+            user.RolId = rolCliente.Id;
+
+
+
+        
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
