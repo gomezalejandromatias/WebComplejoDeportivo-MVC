@@ -84,6 +84,13 @@ builder.Services.AddDefaultIdentity<Usuario>(options =>
     .AddEntityFrameworkStores<ComplejoDbContext>();
 
 
+
+builder.Services.AddAuthentication().AddGoogle(options =>
+{
+    options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
+    options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+}
+);
 // ==================== COOKIE DE IDENTITY ====================
 // Configura la cookie que mantiene al usuario logueado.
 

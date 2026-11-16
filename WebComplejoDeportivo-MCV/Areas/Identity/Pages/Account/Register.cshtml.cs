@@ -38,7 +38,7 @@ public class RegisterModel : PageModel
         IUserStore<Usuario> userStore,
         SignInManager<Usuario> signInManager,
         ILogger<RegisterModel> logger,
-        IEmailSender emailSender,ComplejoDbContext complejoDbContext)
+        IEmailSender emailSender, ComplejoDbContext complejoDbContext)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -118,9 +118,28 @@ public class RegisterModel : PageModel
         {
             var user = CreateUser();
 
-            var rolCliente = await _complejoDbContext.Roles.FirstOrDefaultAsync(r=> r.Nombre == "Cliente");
+            var rolCliente = await _complejoDbContext.Roles.FirstOrDefaultAsync(r => r.Nombre == "Cliente");
 
-            if (rolCliente == null) 
+            var usuario = await _complejoDbContext.Users.ToListAsync();
+
+            foreach (var item in usuario)
+            {
+
+                if (Input.Email == item.Email)
+                {
+
+                    ModelState.AddModelError("Input.Email", "Este correo ya está registrado.");
+
+                    return Page();
+
+
+
+                }
+
+            }
+
+
+            if (rolCliente == null)
             {
                 ModelState.AddModelError("", "No se encontró el rol Cliente.");
                 return Page();
@@ -132,7 +151,7 @@ public class RegisterModel : PageModel
 
 
 
-        
+
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

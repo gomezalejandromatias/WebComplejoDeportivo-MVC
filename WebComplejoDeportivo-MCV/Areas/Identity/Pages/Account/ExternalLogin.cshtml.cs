@@ -17,25 +17,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using WebComplejoDeportivo_MCV.Data;
+using Microsoft.EntityFrameworkCore;
+using WebComplejoDeportivo_MCV.Models;
 
 namespace WebComplejoDeportivo_MCV.Areas.Identity.Pages.Account;
 
 [AllowAnonymous]
 public class ExternalLoginModel : PageModel
 {
-    private readonly SignInManager<ApplicationUser> _signInManager;
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly IUserStore<ApplicationUser> _userStore;
-    private readonly IUserEmailStore<ApplicationUser> _emailStore;
+    private readonly SignInManager<Usuario> _signInManager;
+    private readonly UserManager<Usuario> _userManager;
+    private readonly IUserStore<Usuario> _userStore;
+    private readonly IUserEmailStore<Usuario> _emailStore;
     private readonly IEmailSender _emailSender;
     private readonly ILogger<ExternalLoginModel> _logger;
 
+    private readonly ComplejoDbContext _compeljodbcontext;
+
     public ExternalLoginModel(
-        SignInManager<ApplicationUser> signInManager,
-        UserManager<ApplicationUser> userManager,
-        IUserStore<ApplicationUser> userStore,
+        SignInManager<Usuario> signInManager,
+        UserManager<Usuario> userManager,
+        IUserStore<Usuario> userStore,
         ILogger<ExternalLoginModel> logger,
-        IEmailSender emailSender)
+        IEmailSender emailSender, ComplejoDbContext complejoDbContext)
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -43,6 +47,7 @@ public class ExternalLoginModel : PageModel
         _emailStore = GetEmailStore();
         _logger = logger;
         _emailSender = emailSender;
+        _compeljodbcontext = complejoDbContext;
     }
 
     /// <summary>
@@ -85,7 +90,7 @@ public class ExternalLoginModel : PageModel
         [EmailAddress]
         public string Email { get; set; } = default!;
     }
-        
+
     public IActionResult OnGet() => RedirectToPage("./Login");
 
     public IActionResult OnPost(string provider, string? returnUrl = null)
@@ -149,17 +154,39 @@ public class ExternalLoginModel : PageModel
             return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
         }
 
+
+
+
+
+     
+
+
+
         if (ModelState.IsValid)
         {
             var user = CreateUser();
+
+
+            var rolCliente = await _compeljodbcontext.Roles
+    .FirstOrDefaultAsync(r => r.Nombre == "Cliente");
+
+            if (rolCliente == null)
+            {
+                ModelState.AddModelError("", "No se encontró el rol Cliente.");
+                return Page();
+            }
+
+            user.RolId = rolCliente.Id;
+
 
             await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
             var result = await _userManager.CreateAsync(user);
+                result = await _userManager.AddLoginAsync(user, info);
+                var rol = await _compeljodbcontext.Roles.FirstAsync(u => u.Nombre == "Cliente");
             if (result.Succeeded)
             {
-                result = await _userManager.AddLoginAsync(user, info);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
@@ -197,11 +224,11 @@ public class ExternalLoginModel : PageModel
         return Page();
     }
 
-    private ApplicationUser CreateUser()
+    private Usuario CreateUser()
     {
         try
         {
-            return Activator.CreateInstance<ApplicationUser>();
+            return Activator.CreateInstance<Usuario>();
         }
         catch
         {
@@ -211,12 +238,12 @@ public class ExternalLoginModel : PageModel
         }
     }
 
-    private IUserEmailStore<ApplicationUser> GetEmailStore()
+    private IUserEmailStore<Usuario> GetEmailStore()
     {
         if (!_userManager.SupportsUserEmail)
         {
             throw new NotSupportedException("The default UI requires a user store with email support.");
         }
-        return (IUserEmailStore<ApplicationUser>)_userStore;
+        return (IUserEmailStore<Usuario>)_userStore;
     }
 }
