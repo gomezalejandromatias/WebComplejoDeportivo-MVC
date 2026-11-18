@@ -121,12 +121,16 @@ public class ExternalLoginModel : PageModel
         if (result.Succeeded)
         {
             _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity?.Name, info.LoginProvider);
-            return LocalRedirect(returnUrl);
+            return RedirectToAction("Index", "Home");
         }
         if (result.IsLockedOut)
         {
             return RedirectToPage("./Lockout");
         }
+
+
+
+
         else
         {
             // If the user does not have an account, then ask the user to create an account.
@@ -156,12 +160,6 @@ public class ExternalLoginModel : PageModel
 
 
 
-
-
-     
-
-
-
         if (ModelState.IsValid)
         {
             var user = CreateUser();
@@ -184,9 +182,8 @@ public class ExternalLoginModel : PageModel
 
             var result = await _userManager.CreateAsync(user);
                 result = await _userManager.AddLoginAsync(user, info);
-                var rol = await _compeljodbcontext.Roles.FirstAsync(u => u.Nombre == "Cliente");
-            if (result.Succeeded)
-            {
+              
+          
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
@@ -212,7 +209,7 @@ public class ExternalLoginModel : PageModel
                     await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
                     return LocalRedirect(returnUrl);
                 }
-            }
+            
             foreach (var error in result.Errors)
             {
                 ModelState.AddModelError(string.Empty, error.Description);

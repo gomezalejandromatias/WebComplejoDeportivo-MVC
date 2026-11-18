@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using WebComplejoDeportivo_MCV.Data;
 using WebComplejoDeportivo_MCV.Models;
+using System.Threading.Tasks.Dataflow;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace WebComplejoDeportivo_MCV.Areas.Identity.Pages.Account;
 
@@ -137,5 +139,20 @@ public class LoginModel : PageModel
 
         // If we got this far, something failed, redisplay form
         return Page();
+    }
+
+    public IActionResult OnPostExternalLogin(string provider ,string? returnUrl = null)
+    { 
+
+        var redirectUrl = Url.Page("./ExternalLogin" ,pageHandler:"Callback",values :new {returnUrl} );
+
+
+        var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+
+        return  new ChallengeResult(provider, properties);
+
+
+
+
     }
 }

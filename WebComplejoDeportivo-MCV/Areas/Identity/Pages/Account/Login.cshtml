@@ -122,49 +122,47 @@
                     </form>
 
                     <!-- INICIAR CON GOOGLE -->
-                    <div class="mt-4">
-                        <div class="text-center text-muted mb-3">
-                            O continuá con
-                        </div>
+                    <form asp-page="./Login"
+                          asp-page-handler="ExternalLogin"
+                          method="Post">
+                        <input type="hidden" name="provider" value="Google"  />
 
-                        <button type="button"
-                                class="btn btn-outline-dark w-100 py-2">
-                            <i class="bi bi-google me-2"></i>
+                        <button type="submit" class="btn btn-outline-dark w-100 py-2">
+                            <i class="bi bi-google me-2" ></i>
                             Continuar con Google
                         </button>
+                    </form>  
+
+
+
+
+
+                    <!-- REGISTRO -->
+                    <div class="text-center mt-4">
+
+                        <span class="text-muted">
+                            ¿Todavía no tenés una cuenta?
+                        </span>
+
+                        <a asp-page="./Register"
+                           asp-route-returnUrl="@Model.ReturnUrl"
+                           class="fw-semibold text-decoration-none">
+
+                            Registrate
+
+                        </a>
+
                     </div>
+
+           
 
                 </div>
 
             </div>
 
-
-            <!-- REGISTRO -->
-            <div class="text-center mt-4">
-
-                <span class="text-muted">
-                    ¿Todavía no tenés una cuenta?
-                </span>
-
-                <a asp-page="./Register"
-                   asp-route-returnUrl="@Model.ReturnUrl"
-                   class="fw-semibold text-decoration-none">
-
-                    Registrate
-
-                </a>
-
-            </div>
-
-           
-
         </div>
 
-    </div>
 
-</div>
-
-
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-}
+        @section Scripts {
+            <partial name="_ValidationScriptsPartial" />
+        }
