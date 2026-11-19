@@ -95,6 +95,13 @@
                                 Reservar cancha
                             </a>
                         </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-danger"
+                               asp-controller="Rols"
+                               asp-action="Create">
+                                Crear Usuarios
+                            </a>
+                        </li>
 
                         @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
                         {

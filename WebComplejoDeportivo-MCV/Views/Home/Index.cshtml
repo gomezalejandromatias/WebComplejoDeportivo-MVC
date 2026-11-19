@@ -2,7 +2,156 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+
+<div class="home-deportivo">
+
+    <section class="home-hero">
+
+        <div class="home-contenido">
+
+            <div class="home-etiqueta">
+                ⚡ TU PASIÓN, TU CANCHA
+            </div>
+
+            <h1 class="home-titulo">
+                EL PARTIDO<br />
+                EMPIEZA <span>ACÁ.</span>
+            </h1>
+
+            <p class="home-descripcion">
+                Encontrá tu cancha, elegí el horario
+                y preparate para jugar.
+
+                Una forma simple y rápida de organizar
+                tu próximo encuentro deportivo.
+            </p>
+
+            <a href="#como-funciona" class="home-boton">
+                Explorá nuestro sistema →
+            </a>
+
+        </div>
+
+        <div class="home-ilustracion">
+
+            <svg viewBox="0 0 450 340"
+                 xmlns="http://www.w3.org/2000/svg"
+                 role="img"
+                 aria-label="Ilustración de cancha de fútbol">
+
+                <defs>
+                    <linearGradient id="cesped" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#239c66" />
+                        <stop offset="100%" stop-color="#116443" />
+                    </linearGradient>
+                </defs>
+
+                <rect x="40" y="52" width="370" height="236"
+                      rx="16" fill="url(#cesped)" />
+
+                <g stroke="white" stroke-width="2.7"
+                   fill="none" opacity=".85">
+
+                    <rect x="57" y="69" width="336" height="202" />
+
+                    <line x1="225" y1="69" x2="225" y2="271" />
+
+                    <circle cx="225" cy="170" r="43" />
+
+                    <circle cx="225" cy="170" r="3" fill="white" />
+
+                    <rect x="57" y="115" width="60" height="110" />
+                    <rect x="333" y="115" width="60" height="110" />
+
+                    <rect x="57" y="142" width="22" height="56" />
+                    <rect x="371" y="142" width="22" height="56" />
+
+                    <circle cx="146" cy="170" r="3" fill="white" />
+                    <circle cx="304" cy="170" r="3" fill="white" />
+
+                </g>
+
+                <circle cx="253" cy="153" r="24" fill="white" />
+
+                <polygon points="253,141 266,150 261,164 245,164 240,150"
+                         fill="#17242b" />
+
+                <path d="M253 129 L253 141
+                M231 145 L240 150
+                M275 145 L266 150
+                M245 164 L239 175
+                M261 164 L267 175"
+                      stroke="#17242b"
+                      stroke-width="3" />
+
+                <g fill="#a7f3d0" opacity=".85">
+                    <circle cx="40" cy="35" r="5" />
+                    <circle cx="413" cy="70" r="4" />
+                    <circle cx="395" cy="308" r="6" />
+                    <circle cx="75" cy="310" r="3" />
+                </g>
+
+            </svg>
+
+        </div>
+
+    </section>
+
+    <section class="home-seccion" id="como-funciona">
+
+        <h2>Todo para tu próximo partido</h2>
+
+        <p class="home-subtitulo">
+            Organizá tu experiencia deportiva desde un solo lugar.
+        </p>
+
+        <div class="home-tarjetas">
+
+            <div class="home-tarjeta">
+                <div class="home-icono">⚽</div>
+
+                <h3>Encontrá tu cancha</h3>
+
+                <p>
+                    Explorá las canchas disponibles
+                    y elegí la opción ideal para jugar.
+                </p>
+            </div>
+
+            <div class="home-tarjeta">
+                <div class="home-icono">📅</div>
+
+                <h3>Elegí tu horario</h3>
+
+                <p>
+                    Consultá los horarios disponibles
+                    y organizá tu próximo encuentro.
+                </p>
+            </div>
+
+            <div class="home-tarjeta">
+                <div class="home-icono">🏆</div>
+
+                <h3>Disfrutá del deporte</h3>
+
+                <p>
+                    Reuní a tus amigos, prepará tu equipo
+                    y viví un gran partido.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="home-pie">
+            ⚡ Menos tiempo organizando. Más tiempo jugando.
+        </div>
+
+    </section>
+
 </div>

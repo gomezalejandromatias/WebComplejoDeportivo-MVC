@@ -89,6 +89,15 @@ builder.Services.AddAuthentication().AddGoogle(options =>
 {
     options.ClientId = builder.Configuration["Authentication:Google:ClientId"]!;
     options.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"]!;
+
+    options.Events.OnRedirectToAuthorizationEndpoint = context =>
+    {
+        context.Response.Redirect(
+            context.RedirectUri + "&prompt=select_account"
+        );
+
+        return Task.CompletedTask;
+    };
 }
 );
 // ==================== COOKIE DE IDENTITY ====================
