@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="utf-8" />
@@ -12,141 +12,185 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
+    <style>
+            /* Barra de navegación moderna */
+            .navbar-cancha {
+                background: linear-gradient(90deg, #0b0d10 0%, #14181f 100%);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+                padding: 0.75rem 0;
+            }
+
+                /* Logo / Marca */
+                .navbar-cancha .navbar-brand {
+                    font-size: 1.35rem;
+                    letter-spacing: 0.5px;
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    transition: transform 0.2s ease;
+                }
+
+                    .navbar-cancha .navbar-brand:hover {
+                        transform: scale(1.03);
+                    }
+
+            .marca-acento {
+                color: #22c55e; /* Verde césped deportivo */
+            }
+
+            /* Enlaces del menú */
+            .navbar-cancha .nav-link {
+                color: #cbd5e1 !important;
+                font-weight: 500;
+                padding: 0.5rem 0.85rem !important;
+                border-radius: 8px;
+                transition: all 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                white-space: nowrap;
+            }
+
+                .navbar-cancha .nav-link:hover {
+                    color: #ffffff !important;
+                    background-color: rgba(255, 255, 255, 0.07);
+                }
+
+            /* Botón principal de Reserva */
+            .btn-reservar-nav {
+                background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+                border: none;
+                color: #ffffff !important;
+                font-weight: 600;
+                padding: 0.5rem 1.25rem !important;
+                border-radius: 50px;
+                box-shadow: 0 4px 12px rgba(220, 38, 38, 0.35);
+                transition: all 0.25s ease;
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                white-space: nowrap;
+            }
+
+                .btn-reservar-nav:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 6px 16px rgba(220, 38, 38, 0.5);
+                    background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+                }
+
+            /* Ajuste para que el texto de usuario y Cerrar Sesión nunca se partan en 2 líneas */
+            .navbar-cancha form,
+            .navbar-cancha .navbar-nav .nav-item,
+            .navbar-cancha .navbar-nav .nav-link,
+            .navbar-cancha .navbar-nav button {
+                white-space: nowrap;
+            }
+    </style>
 </head>
 
-<body class="bg-dark text-light">
+<body class="bg-dark text-light d-flex flex-column min-vh-100">
 
     <!-- NAVBAR -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary">
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-cancha">
             <div class="container">
 
                 <!-- LOGO / NOMBRE -->
-                <a class="navbar-brand fw-bold"
+                <a class="navbar-brand fw-bold text-white"
                    asp-controller="Home"
                    asp-action="Index">
-                    ⚽ MI CANCHA
+                    <span class="fs-4">⚽</span>
+                    <span>MI <span class="marca-acento">CANCHA</span></span>
                 </a>
 
                 <!-- BOTÓN CELULAR -->
-                <button class="navbar-toggler"
+                <button class="navbar-toggler border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#menuPrincipal">
-
+                        data-bs-target="#menuPrincipal"
+                        aria-controls="menuPrincipal"
+                        aria-expanded="false"
+                        aria-label="Abrir menú">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-                <!-- MENÚ -->
+                <!-- MENÚ Y USUARIO -->
                 <div class="collapse navbar-collapse" id="menuPrincipal">
 
-                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-3 gap-1">
 
-                        @if (User.IsInRole("Aministrador") || User.IsInRole("Empleado"))
+                        @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
                         {
-
                             <li class="nav-item">
                                 <a class="nav-link"
                                    asp-controller="Home"
                                    asp-action="Index">
-                                    Caja/Liquidaciones
+                                    <i class="bi bi-cash-coin text-success"></i> Caja / Liquidaciones
                                 </a>
                             </li>
-
-
-
-                        }
-
-
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
-                        {
 
                             <li class="nav-item">
                                 <a class="nav-link"
                                    asp-controller="Reservas"
                                    asp-action="Index">
-                                    Reservas
+                                    <i class="bi bi-calendar-check text-info"></i> Reservas
                                 </a>
                             </li>
 
-
-                        }
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
-                        {
-
-                        
                             <li class="nav-item">
                                 <a class="nav-link"
                                    asp-controller="Socios"
                                    asp-action="Index">
-                                    Socios
+                                    <i class="bi bi-people text-warning"></i> Socios
                                 </a>
                             </li>
-
-
-                        }
-
-
-
-                        <li class="nav-item ms-lg-3">
-                            <a class="btn btn-danger"
-                               asp-controller="Reservas"
-                               asp-action="Create">
-                                Reservar cancha
-                            </a>
-                        </li>
-                        <li class="nav-item ms-lg-3">
-                            <a class="btn btn-danger"
-                               asp-controller="Rols"
-                               asp-action="Create">
-                                Crear Usuarios
-                            </a>
-                        </li>
-
-                        @if (User.IsInRole("Administrador") || User.IsInRole("Empleado"))
-                        {
 
                             <li class="nav-item">
                                 <a class="nav-link"
                                    asp-controller="Canchas"
                                    asp-action="Index">
-                                    Agregar Canchas (Tipos de Canchas del Predio)
+                                    <i class="bi bi-grid-1x2 text-primary"></i> Canchas
                                 </a>
                             </li>
-
                         }
 
                     </ul>
 
-                
+                    <!-- ACCIÓN PRINCIPAL Y LOGIN -->
+                    <div class="d-flex flex-column flex-lg-row align-items-lg-center gap-3 mt-2 mt-lg-0">
+                        <a class="btn btn-reservar-nav"
+                           asp-controller="Reservas"
+                           asp-action="Create">
+                            <i class="bi bi-calendar-plus"></i> Reservar cancha
+                        </a>
+
+                        <div class="border-start border-secondary ps-lg-3 d-none d-lg-block" style="height: 24px;"></div>
+
+                        <partial name="_LoginPartial" />
+                    </div>
+
                 </div>
             </div>
-            <partial name="_LoginPartial" />
         </nav>
     </header>
 
-
     <!-- CONTENIDO DE CADA VISTA -->
-    <main>
+    <main class="flex-grow-1">
         @RenderBody()
     </main>
-
 
     <!-- FOOTER -->
     <footer class="border-top border-secondary mt-5 py-4 bg-black text-secondary">
         <div class="container text-center">
-
-            <p class="mb-1">
+            <p class="mb-1 text-light fw-semibold">
                 ⚽ Mi Cancha
             </p>
-
             <small>
                 Sistema de gestión y reservas de complejos deportivos
             </small>
-
         </div>
     </footer>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
