@@ -1,0 +1,93 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model WebComplejoDeportivo_MCV.Models.ViewModels.CrearUsuarioViewModel
+
+
+
+<div class="usuario-container">
+    <div class="usuario-card">
+
+        <h2>Crear nuevo usuario</h2>
+        <p>Registrá un administrador o empleado del complejo.</p>
+
+        <form asp-action="CrearUsuario" method="post">
+
+            <div asp-validation-summary="ModelOnly"
+                 class="text-danger"></div>
+
+            <div class="usuario-campo">
+                <label asp-for="Nombre"></label>
+                <input asp-for="Nombre" />
+                <span asp-validation-for="Nombre"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="usuario-campo">
+                <label asp-for="Apellido"></label>
+                <input asp-for="Apellido" />
+                <span asp-validation-for="Apellido"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="usuario-campo">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="usuario-campo">
+                <label asp-for="Password">Contraseña</label>
+                <input asp-for="Password" />
+                <span asp-validation-for="Password"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="usuario-campo">
+                <label asp-for="RolId">Rol del usuario</label>
+                <select asp-for="RolId"
+                        asp-items="ViewBag.Roles">
+                    <option value="">Seleccionar rol</option>
+                </select>
+                <span asp-validation-for="RolId"
+                      class="text-danger"></span>
+            </div>
+
+            <div class="usuario-campo">
+                <label asp-for="ComplejoId">Complejo asignado</label>
+                <select asp-for="ComplejoId"
+                        asp-items="ViewBag.Complejos">
+                    <option value="">Seleccionar Complejo</option>
+                </select>
+            </div>
+
+            <div class="form-check">
+                <input asp-for="Activo"
+                       class="form-check-input" />
+                <label asp-for="Activo"
+                       class="form-check-label">
+                    Usuario activo
+                </label>
+            </div>
+
+            <div class="usuario-botones">
+                <button type="submit">Crear usuario</button>
+                <a asp-action="Index">Cancelar</a>
+            </div>
+
+            <div class="usuario-botones">
+                <button type="submit">Eliminar Usuario</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

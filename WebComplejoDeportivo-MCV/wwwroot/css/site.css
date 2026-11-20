@@ -446,3 +446,79 @@ footer {
     font-size: 1.1rem;
     margin-bottom: 40px;
 }
+
+/*===============VISTA DE CREAR USUARIO==============================
+    =================================================================
+*/
+
+
+.usuario-container {
+    max-width: 680px;
+    margin: 45px auto;
+    padding: 15px;
+}
+
+.usuario-card {
+    background: #191c23;
+    color: #f5f5f5;
+    border: 1px solid #30343d;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 12px 35px rgba(0,0,0,.18);
+}
+
+    .usuario-card h2 {
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+
+    .usuario-card p {
+        color: #aeb4c0;
+        margin-bottom: 28px;
+    }
+
+.usuario-campo {
+    margin-bottom: 20px;
+}
+
+    .usuario-campo label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+
+    .usuario-campo input,
+    .usuario-campo select {
+        width: 100%;
+        padding: 12px;
+        color: #fff;
+        background: #242832;
+        border: 1px solid #444954;
+        border-radius: 8px;
+    }
+
+        .usuario-campo select option {
+            background: #242832;
+        }
+
+.usuario-botones {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+    .usuario-botones button {
+        background: #d32f2f;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+    }
+
+    .usuario-botones a {
+        color: white;
+        padding: 12px 20px;
+        text-decoration: none;
+    }
+
